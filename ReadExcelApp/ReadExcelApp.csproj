@@ -1,0 +1,824 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{82BFBEC7-7355-4CCC-9C2B-1B8080E80A30}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ReadExcelApp</RootNamespace>
+    <AssemblyName>ReadExcelApp</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>C:\Users\ZBook\Desktop\Manzar\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>cdranalyzer.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>942A73056C2199AB0804676D9C98A6DB40EC06E0</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>ReadExcelApp_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AdvancedDataGridView, Version=1.2.26803.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DG.AdvancedDataGridView.1.2.26803.6\lib\net40\AdvancedDataGridView.dll</HintPath>
+    </Reference>
+    <Reference Include="AutomaticGraphLayout, Version=0.0.0.0, Culture=neutral, PublicKeyToken=6baa2c1345e83b6e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutomaticGraphLayout.1.1.12\lib\netstandard2.0\AutomaticGraphLayout.dll</HintPath>
+    </Reference>
+    <Reference Include="AutomaticGraphLayout.Drawing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=6baa2c1345e83b6e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutomaticGraphLayout.Drawing.1.1.12\lib\netstandard2.0\AutomaticGraphLayout.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.Licensing, Version=3.2.0.0, Culture=neutral, PublicKeyToken=f89b4760ba7dcb6b" />
+    <Reference Include="Bunifu.UI.WinForms.1.5.3">
+      <HintPath>E:\GTA 5\Compressed\BunifuCrack-main\Bunifu.UI.WinForms.1.5.3.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuButton">
+      <HintPath>E:\GTA 5\Compressed\BunifuCrack-main\Bunifu.UI.WinForms.BunifuButton.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuColorTransition">
+      <HintPath>E:\GTA 5\Compressed\BunifuCrack-main\Bunifu.UI.WinForms.BunifuColorTransition.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuDataGridView">
+      <HintPath>E:\GTA 5\Compressed\BunifuCrack-main\Bunifu.UI.WinForms.BunifuDataGridView.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuFormDock">
+      <HintPath>E:\GTA 5\Compressed\BunifuCrack-main\Bunifu.UI.WinForms.BunifuFormDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuGradientPanel">
+      <HintPath>E:\GTA 5\Compressed\BunifuCrack-main\Bunifu.UI.WinForms.BunifuGradientPanel.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuGroupBox">
+      <HintPath>E:\GTA 5\Compressed\BunifuCrack-main\Bunifu.UI.WinForms.BunifuGroupBox.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuPages">
+      <HintPath>E:\GTA 5\Compressed\BunifuCrack-main\Bunifu.UI.WinForms.BunifuPages.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuPanel">
+      <HintPath>E:\GTA 5\Compressed\BunifuCrack-main\Bunifu.UI.WinForms.BunifuPanel.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuRadioButton">
+      <HintPath>E:\GTA 5\Compressed\BunifuCrack-main\Bunifu.UI.WinForms.BunifuRadioButton.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuShadowPanel">
+      <HintPath>E:\GTA 5\Compressed\BunifuCrack-main\Bunifu.UI.WinForms.BunifuShadowPanel.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuTextbox">
+      <HintPath>E:\GTA 5\Compressed\BunifuCrack-main\Bunifu.UI.WinForms.BunifuTextbox.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuTransition">
+      <HintPath>E:\GTA 5\Compressed\BunifuCrack-main\Bunifu.UI.WinForms.BunifuTransition.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.123\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.6.0\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.Core, Version=2.0.3.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
+      <HintPath>..\packages\GMap.NET.Core.2.0.3\lib\net46\GMap.NET.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsForms, Version=2.0.2.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
+      <HintPath>..\packages\GMap.NET.WinForms.2.0.3\lib\net46\GMap.NET.WindowsForms.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsPresentation, Version=2.0.3.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
+      <HintPath>..\packages\GMap.NET.WinPresentation.2.0.3\lib\net46\GMap.NET.WindowsPresentation.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.WinForms, Version=0.9.7.1, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.WinForms.0.9.7.1\lib\net45\LiveCharts.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="LumenWorks.Framework.IO, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5ad3ea2f85776344, processorArchitecture=MSIL">
+      <HintPath>..\packages\LumenWorksCsvReader.4.0.0\lib\net461\LumenWorks.Framework.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Msagl.GraphViewerGdi, Version=0.0.0.0, Culture=neutral, PublicKeyToken=6baa2c1345e83b6e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutomaticGraphLayout.GraphViewerGDI.1.1.12\lib\net472\Microsoft.Msagl.GraphViewerGdi.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.3\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.115.5\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.115.5\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Design" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\AllRecordA_Num.cs" />
+    <Compile Include="Classes\APartySilentPurged.cs" />
+    <Compile Include="Classes\AppConfig.cs" />
+    <Compile Include="Classes\AppConnection.cs" />
+    <Compile Include="Classes\BTSIncidentDetails.cs" />
+    <Compile Include="Classes\BtsStandCDR.cs" />
+    <Compile Include="Classes\BTSSummary.cs" />
+    <Compile Include="Classes\B_NumCount.cs" />
+    <Compile Include="Classes\CaseGeneralPolice.cs" />
+    <Compile Include="CDRAnalyzerDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CDRAnalyzerDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CDRAnalyzerDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CDRAnalyzerDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\CDRSummaryDetail.cs" />
+    <Compile Include="Classes\DGVPrinter.cs" />
+    <Compile Include="Classes\HWID.cs" />
+    <Compile Include="Classes\ListtoDataTable.cs" />
+    <Compile Include="Classes\TimeLine.cs" />
+    <Compile Include="Classes\YearMonthDay.cs" />
+    <Compile Include="Classes\YearMonthNewBNum.cs" />
+    <Compile Include="Classes\YearMonths.cs" />
+    <Compile Include="Forms\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BTSAnalyzer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BTSAnalyzer.Designer.cs">
+      <DependentUpon>BTSAnalyzer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BtsCDRSummaryDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BtsCDRSummaryDetailsForm.Designer.cs">
+      <DependentUpon>BtsCDRSummaryDetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\BtsIncidentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BtsIncidentForm.Designer.cs">
+      <DependentUpon>BtsIncidentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CallsCountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CallsCountForm.Designer.cs">
+      <DependentUpon>CallsCountForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CallSecCountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CallSecCountForm.Designer.cs">
+      <DependentUpon>CallSecCountForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CDRAnalyzer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CDRAnalyzer.Designer.cs">
+      <DependentUpon>CDRAnalyzer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\CDRSummary.cs" />
+    <Compile Include="Classes\Common.cs" />
+    <Compile Include="Classes\CommonMethods.cs" />
+    <Compile Include="Forms\BasicConversationInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BasicConversationInfoForm.Designer.cs">
+      <DependentUpon>BasicConversationInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CDRFormatForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CDRFormatForm.Designer.cs">
+      <DependentUpon>CDRFormatForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CDRSummaryDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CDRSummaryDetailsForm.Designer.cs">
+      <DependentUpon>CDRSummaryDetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CDRSummaryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CDRSummaryForm.Designer.cs">
+      <DependentUpon>CDRSummaryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DLSearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DLSearchForm.Designer.cs">
+      <DependentUpon>DLSearchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\GMapForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GMapForm.Designer.cs">
+      <DependentUpon>GMapForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\IMEIForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\IMEIForm.Designer.cs">
+      <DependentUpon>IMEIForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LinkAnalysisForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LinkAnalysisForm.Designer.cs">
+      <DependentUpon>LinkAnalysisForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LocationDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LocationDetailsForm.Designer.cs">
+      <DependentUpon>LocationDetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LocationSummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LocationSummary.Designer.cs">
+      <DependentUpon>LocationSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MissingDatesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MissingDatesForm.Designer.cs">
+      <DependentUpon>MissingDatesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MsgBo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MsgBo.Designer.cs">
+      <DependentUpon>MsgBo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NewNumbersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NewNumbersForm.Designer.cs">
+      <DependentUpon>NewNumbersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RelationGraphForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RelationGraphForm.Designer.cs">
+      <DependentUpon>RelationGraphForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ShowCaseProjectDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ShowCaseProjectDetailsForm.Designer.cs">
+      <DependentUpon>ShowCaseProjectDetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SilentOrPurgedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SilentOrPurgedForm.Designer.cs">
+      <DependentUpon>SilentOrPurgedForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SubInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubInfoForm.Designer.cs">
+      <DependentUpon>SubInfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\GetA_Num.cs" />
+    <Compile Include="Classes\GetBasicConversation.cs" />
+    <Compile Include="Classes\getLatLngForMap.cs" />
+    <Compile Include="Classes\GetSqlDRAndConn.cs" />
+    <Compile Include="Classes\imeiUsedDate.cs" />
+    <Compile Include="Classes\JazzCDR.cs" />
+    <Compile Include="Classes\LacCellID.cs" />
+    <Compile Include="Forms\SubscriberSearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubscriberSearchForm.Designer.cs">
+      <DependentUpon>SubscriberSearchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SubSearchForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubSearchForm.Designer.cs">
+      <DependentUpon>SubSearchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TimeLineForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TimeLineForm.Designer.cs">
+      <DependentUpon>TimeLineForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Program.cs" />
+    <Compile Include="Classes\ProjectCase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="scfDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>scfDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="scfDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>scfDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="scfDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>scfDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="scfDataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>scfDataSet3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="scfDataSet4.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>scfDataSet4.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\SilentPurgedLocationDate.cs" />
+    <Compile Include="Classes\SPDateLoc.cs" />
+    <Compile Include="Classes\StanderizedCDR.cs" />
+    <Compile Include="Classes\SubInfo.cs" />
+    <Compile Include="Classes\TopB_NumCallSec.cs" />
+    <Compile Include="Classes\TopB_NumCount.cs" />
+    <Compile Include="Classes\TopLocations.cs" />
+    <EmbeddedResource Include="Forms\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BTSAnalyzer.resx">
+      <DependentUpon>BTSAnalyzer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BtsCDRSummaryDetailsForm.resx">
+      <DependentUpon>BtsCDRSummaryDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BtsIncidentForm.resx">
+      <DependentUpon>BtsIncidentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CallsCountForm.resx">
+      <DependentUpon>CallsCountForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CallSecCountForm.resx">
+      <DependentUpon>CallSecCountForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CDRAnalyzer.resx">
+      <DependentUpon>CDRAnalyzer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BasicConversationInfoForm.resx">
+      <DependentUpon>BasicConversationInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CDRFormatForm.resx">
+      <DependentUpon>CDRFormatForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CDRSummaryDetailsForm.resx">
+      <DependentUpon>CDRSummaryDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CDRSummaryForm.resx">
+      <DependentUpon>CDRSummaryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DLSearchForm.resx">
+      <DependentUpon>DLSearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GMapForm.resx">
+      <DependentUpon>GMapForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\IMEIForm.resx">
+      <DependentUpon>IMEIForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LinkAnalysisForm.resx">
+      <DependentUpon>LinkAnalysisForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LocationDetailsForm.resx">
+      <DependentUpon>LocationDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LocationSummary.resx">
+      <DependentUpon>LocationSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MissingDatesForm.resx">
+      <DependentUpon>MissingDatesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MsgBo.resx">
+      <DependentUpon>MsgBo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NewNumbersForm.resx">
+      <DependentUpon>NewNumbersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RelationGraphForm.resx">
+      <DependentUpon>RelationGraphForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ShowCaseProjectDetailsForm.resx">
+      <DependentUpon>ShowCaseProjectDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SilentOrPurgedForm.resx">
+      <DependentUpon>SilentOrPurgedForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SubInfoForm.resx">
+      <DependentUpon>SubInfoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SubscriberSearchForm.resx">
+      <DependentUpon>SubscriberSearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SubSearchForm.resx">
+      <DependentUpon>SubSearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TimeLineForm.resx">
+      <DependentUpon>TimeLineForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="CDRAnalyzerDataSet.xsc">
+      <DependentUpon>CDRAnalyzerDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="CDRAnalyzerDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CDRAnalyzerDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CDRAnalyzerDataSet.xss">
+      <DependentUpon>CDRAnalyzerDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="CDRAnalyzerDataSet1.xsc">
+      <DependentUpon>CDRAnalyzerDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="CDRAnalyzerDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CDRAnalyzerDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CDRAnalyzerDataSet1.xss">
+      <DependentUpon>CDRAnalyzerDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\ReadExcelApp.Classes.BtsStandCDR.datasource" />
+    <None Include="Properties\DataSources\ReadExcelApp.Classes.BTSSummary.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="ReadExcelApp_TemporaryKey.pfx" />
+    <None Include="scfDataSet.xsc">
+      <DependentUpon>scfDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="scfDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>scfDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="scfDataSet.xss">
+      <DependentUpon>scfDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="scfDataSet1.xsc">
+      <DependentUpon>scfDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="scfDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>scfDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="scfDataSet1.xss">
+      <DependentUpon>scfDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="scfDataSet2.xsc">
+      <DependentUpon>scfDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="scfDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>scfDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="scfDataSet2.xss">
+      <DependentUpon>scfDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="scfDataSet3.xsc">
+      <DependentUpon>scfDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="scfDataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>scfDataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="scfDataSet3.xss">
+      <DependentUpon>scfDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="scfDataSet4.xsc">
+      <DependentUpon>scfDataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="scfDataSet4.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>scfDataSet4.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="scfDataSet4.xss">
+      <DependentUpon>scfDataSet4.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxMapWinGIS">
+      <Guid>{C368D713-CC5F-40ED-9F53-F84FE197B96A}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>2</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="MapWinGIS">
+      <Guid>{C368D713-CC5F-40ED-9F53-F84FE197B96A}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>2</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cdrsum.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cdrsumm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cdrsumm1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ctd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ca.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ma.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\min.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\case-study.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="cdranalyzer.ico" />
+    <None Include="Resources\eye_white.png" />
+    <None Include="Resources\eye_grey.png" />
+    <None Include="Resources\magnifier1.png" />
+    <None Include="Resources\magnifier.png" />
+    <None Include="Resources\fingerprint1.png" />
+    <None Include="Resources\fingerprint.png" />
+    <None Include="Resources\information1.png" />
+    <None Include="Resources\information.png" />
+    <None Include="Resources\details.png" />
+    <None Include="Resources\bo-kaap.png" />
+    <None Include="Resources\police-cap.png" />
+    <None Include="Resources\sections.png" />
+    <None Include="Resources\calendar.png" />
+    <None Include="Resources\information-button.png" />
+    <None Include="Resources\contract11.png" />
+    <None Include="Resources\call1.png" />
+    <None Include="Resources\phone-call1.png" />
+    <None Include="Resources\barcode-product1.png" />
+    <None Include="Resources\no-sound11.png" />
+    <None Include="Resources\chat1.png" />
+    <None Include="Resources\pin1.png" />
+    <None Include="Resources\contract1.png" />
+    <None Include="Resources\analytics1.png" />
+    <None Include="Resources\map11.png" />
+    <None Include="Resources\messenger1.png" />
+    <None Include="Resources\briefcase1.png" />
+    <None Include="Resources\call.png" />
+    <None Include="Resources\phone-call.png" />
+    <None Include="Resources\barcode-product.png" />
+    <None Include="Resources\no-sound1.png" />
+    <None Include="Resources\chat.png" />
+    <None Include="Resources\pin.png" />
+    <None Include="Resources\contract.png" />
+    <None Include="Resources\analytics.png" />
+    <None Include="Resources\map1.png" />
+    <None Include="Resources\briefcase.png" />
+    <None Include="Resources\messenger.png" />
+    <None Include="Resources\case-study1.png" />
+    <None Include="Resources\addcase.png" />
+    <None Include="Resources\serverip.png" />
+    <None Include="Resources\padlock.png" />
+    <None Include="Resources\user.png" />
+    <None Include="Resources\distance.png" />
+    <None Include="Resources\zoom.png" />
+    <None Include="Resources\placeholde.png" />
+    <None Include="Resources\destination.png" />
+    <None Include="Resources\magnifying-glass.png" />
+    <None Include="Resources\zoom-in.png" />
+    <None Include="Resources\search.png" />
+    <None Include="Resources\printer.png" />
+    <None Include="Resources\exportEXCEL.png" />
+    <None Include="Resources\exportPDF.png" />
+    <None Include="Resources\phone.png" />
+    <None Include="Resources\telephone.png" />
+    <None Include="Resources\barcode.png" />
+    <None Include="Resources\no-sound.png" />
+    <None Include="Resources\map.png" />
+    <None Include="Resources\placeholder.png" />
+    <None Include="Resources\dashboard.png" />
+    <None Include="Resources\next-week.png" />
+    <None Include="Resources\graph.png" />
+    <None Include="Resources\infoBAS.png" />
+    <None Include="Resources\info.png" />
+    <None Include="Resources\stadistics %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+</Project>

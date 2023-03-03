@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadExcelApp", "ReadExcelApp\ReadExcelApp.csproj", "{82BFBEC7-7355-4CCC-9C2B-1B8080E80A30}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "CDRAnalyzer", "CDRAnalyzer\CDRAnalyzer.vdproj", "{86E9F2D1-D90D-4361-B6F5-6998A57CB19D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateAnalyzer", "UpdateAnalyzer\UpdateAnalyzer.csproj", "{432A69F3-0E8A-4CC7-B66D-D7C132BABC13}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82BFBEC7-7355-4CCC-9C2B-1B8080E80A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82BFBEC7-7355-4CCC-9C2B-1B8080E80A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82BFBEC7-7355-4CCC-9C2B-1B8080E80A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82BFBEC7-7355-4CCC-9C2B-1B8080E80A30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86E9F2D1-D90D-4361-B6F5-6998A57CB19D}.Debug|Any CPU.ActiveCfg = Debug
+		{86E9F2D1-D90D-4361-B6F5-6998A57CB19D}.Release|Any CPU.ActiveCfg = Release
+		{432A69F3-0E8A-4CC7-B66D-D7C132BABC13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{432A69F3-0E8A-4CC7-B66D-D7C132BABC13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{432A69F3-0E8A-4CC7-B66D-D7C132BABC13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{432A69F3-0E8A-4CC7-B66D-D7C132BABC13}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6EBFB54B-5057-41E6-A70B-E0B5B7634FF8}
+	EndGlobalSection
+EndGlobal
