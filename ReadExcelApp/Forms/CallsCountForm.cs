@@ -1,11 +1,14 @@
-﻿using LiveCharts;
+﻿using Bunifu.Charts.WinForms;
+using LiveCharts;
 using LiveCharts.Wpf;
 using ReadExcelApp.Classes;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Markup;
 
 namespace ReadExcelApp.Forms
 {
@@ -83,6 +86,9 @@ namespace ReadExcelApp.Forms
                     lbListSize.Text = callsInOutlst.Count.ToString();
 
                     SeriesCollection series = new SeriesCollection();
+
+                    //List<double> data = new List<double>();
+
                     if (callsInOutlst.Count > 5)
                     {
                         foreach (var bc in callsInOutlst.GetRange(0, 5))
@@ -96,7 +102,39 @@ namespace ReadExcelApp.Forms
                                 LabelPoint = labelPoint
                             });
                             pcCallsInOut.Series = series;
+
+                            /*data.Add(bc.B_NumCount);
+
+                            bunifuPolarAreaChart.Data = data;
+
+                            bunifuPolarAreaChart.TargetCanvas = bunifuChartCanvas;
+
+                            *//*
+                            * Hide grid lines
+                            *//*
+                            bunifuChartCanvas.XAxesGridLines = false;
+                            bunifuChartCanvas.YAxesGridLines = false;
+
+                            *//*
+                            * For this example we will use random numbers
+                            *//*
+                            var r = new Random();
+
+                            *//*
+                            * Beautify the chart by sepcifying the colors
+                            * Color count should correspond to data count
+                            *//*
+                            List<Color> bgColors = new List<Color>();
+                            for (int i = 0; i < data.Count; i++)
+                            {
+                                bgColors.Add(Color.FromArgb(r.Next(256), r.Next(256), r.Next(256)));
+
+                            }
+
+                            bunifuPolarAreaChart.BackgroundColor = bgColors;*/
+
                         }
+                        
                     }
                     else
                     {

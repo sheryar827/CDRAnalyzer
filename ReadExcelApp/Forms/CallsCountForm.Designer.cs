@@ -36,8 +36,6 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.gvCallsInOut = new Bunifu.UI.WinForms.BunifuDataGridView();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.pcCallsInOut = new LiveCharts.WinForms.PieChart();
             this.panel5 = new System.Windows.Forms.Panel();
             this.btnExportPDF = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -63,12 +61,12 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuElipse2 = new Bunifu.Framework.UI.BunifuElipse(this.components);
-            this.bunifuElipse3 = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.pcCallsInOut = new LiveCharts.WinForms.PieChart();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvCallsInOut)).BeginInit();
-            this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -76,6 +74,7 @@
             this.panelDT.SuspendLayout();
             this.flpTime.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -173,26 +172,6 @@
             this.gvCallsInOut.TabIndex = 0;
             this.gvCallsInOut.Theme = Bunifu.UI.WinForms.BunifuDataGridView.PresetThemes.Teal;
             this.gvCallsInOut.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvCallsInOut_CellClick);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.pcCallsInOut);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(385, 154);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(10);
-            this.panel2.Size = new System.Drawing.Size(864, 599);
-            this.panel2.TabIndex = 1;
-            // 
-            // pcCallsInOut
-            // 
-            this.pcCallsInOut.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(223)))), ((int)(((byte)(223)))));
-            this.pcCallsInOut.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pcCallsInOut.Location = new System.Drawing.Point(10, 10);
-            this.pcCallsInOut.Name = "pcCallsInOut";
-            this.pcCallsInOut.Size = new System.Drawing.Size(844, 579);
-            this.pcCallsInOut.TabIndex = 0;
-            this.pcCallsInOut.Text = "pieChart1";
             // 
             // panel5
             // 
@@ -479,10 +458,25 @@
             this.bunifuElipse2.ElipseRadius = 15;
             this.bunifuElipse2.TargetControl = this.gvCallsInOut;
             // 
-            // bunifuElipse3
+            // pcCallsInOut
             // 
-            this.bunifuElipse3.ElipseRadius = 15;
-            this.bunifuElipse3.TargetControl = this.pcCallsInOut;
+            this.pcCallsInOut.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(223)))), ((int)(((byte)(223)))));
+            this.pcCallsInOut.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pcCallsInOut.Location = new System.Drawing.Point(10, 10);
+            this.pcCallsInOut.Name = "pcCallsInOut";
+            this.pcCallsInOut.Size = new System.Drawing.Size(844, 579);
+            this.pcCallsInOut.TabIndex = 0;
+            this.pcCallsInOut.Text = "pieChart1";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.pcCallsInOut);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(385, 154);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(10);
+            this.panel2.Size = new System.Drawing.Size(864, 599);
+            this.panel2.TabIndex = 1;
             // 
             // CallsCountForm
             // 
@@ -501,7 +495,6 @@
             this.panel4.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvCallsInOut)).EndInit();
-            this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
@@ -512,6 +505,7 @@
             this.flpTime.ResumeLayout(false);
             this.flpTime.PerformLayout();
             this.panel3.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -520,8 +514,6 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.Panel panel2;
-        private LiveCharts.WinForms.PieChart pcCallsInOut;
         private System.Windows.Forms.Panel panel4;
         private Bunifu.UI.WinForms.BunifuDataGridView gvCallsInOut;
         private System.Windows.Forms.Panel panel5;
@@ -549,6 +541,7 @@
         private System.Windows.Forms.Panel panel3;
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse2;
-        private Bunifu.Framework.UI.BunifuElipse bunifuElipse3;
+        private LiveCharts.WinForms.PieChart pcCallsInOut;
+        private System.Windows.Forms.Panel panel2;
     }
 }

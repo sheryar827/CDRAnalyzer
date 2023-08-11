@@ -202,10 +202,7 @@ namespace ReadExcelApp.Forms
 
         }
 
-        private void lbExit_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        
 
         private void txtPassword_KeyDown(object sender, KeyEventArgs e)
         {
@@ -415,6 +412,11 @@ namespace ReadExcelApp.Forms
             }
 
             return alreadyExist;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         /*private String Get_Version_From_My_FTP_Server()
