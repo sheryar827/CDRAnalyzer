@@ -182,6 +182,7 @@ namespace ReadExcelApp.Forms
             this.txtMSISDN.Name = "txtMSISDN";
             this.txtMSISDN.Size = new System.Drawing.Size(161, 29);
             this.txtMSISDN.TabIndex = 0;
+           
             this.txtMSISDN.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMSISDN_KeyDown);
             // 
             // btnSearch
@@ -215,11 +216,13 @@ namespace ReadExcelApp.Forms
             this.btnSearch.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Pressed;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(74)))), ((int)(((byte)(86)))));
+            this.btnSearch.IconLeft = null;
             this.btnSearch.IconLeftAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSearch.IconLeftCursor = System.Windows.Forms.Cursors.Default;
             this.btnSearch.IconLeftPadding = new System.Windows.Forms.Padding(11, 3, 3, 3);
             this.btnSearch.IconMarginLeft = 11;
             this.btnSearch.IconPadding = 10;
+            this.btnSearch.IconRight = null;
             this.btnSearch.IconRightAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSearch.IconRightCursor = System.Windows.Forms.Cursors.Default;
             this.btnSearch.IconRightPadding = new System.Windows.Forms.Padding(3, 3, 7, 3);
@@ -305,11 +308,13 @@ namespace ReadExcelApp.Forms
             this.btnBrowseSearchFile.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Pressed;
             this.btnBrowseSearchFile.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBrowseSearchFile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(74)))), ((int)(((byte)(86)))));
+            this.btnBrowseSearchFile.IconLeft = null;
             this.btnBrowseSearchFile.IconLeftAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBrowseSearchFile.IconLeftCursor = System.Windows.Forms.Cursors.Default;
             this.btnBrowseSearchFile.IconLeftPadding = new System.Windows.Forms.Padding(11, 3, 3, 3);
             this.btnBrowseSearchFile.IconMarginLeft = 11;
             this.btnBrowseSearchFile.IconPadding = 10;
+            this.btnBrowseSearchFile.IconRight = null;
             this.btnBrowseSearchFile.IconRightAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBrowseSearchFile.IconRightCursor = System.Windows.Forms.Cursors.Default;
             this.btnBrowseSearchFile.IconRightPadding = new System.Windows.Forms.Padding(3, 3, 7, 3);

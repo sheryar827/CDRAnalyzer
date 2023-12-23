@@ -120,7 +120,7 @@
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 20);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(205, 1000);
+            this.panelMenu.Size = new System.Drawing.Size(205, 688);
             this.panelMenu.TabIndex = 0;
             // 
             // panelMenuButtons
@@ -1939,7 +1939,7 @@
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitleBar.Location = new System.Drawing.Point(0, 0);
             this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(1442, 80);
+            this.panelTitleBar.Size = new System.Drawing.Size(1386, 80);
             this.panelTitleBar.TabIndex = 1;
             this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
             // 
@@ -1964,7 +1964,7 @@
             this.btnMaimize.ImageSize = new System.Drawing.Size(10, 10);
             this.btnMaimize.ImageZoomSize = new System.Drawing.Size(30, 30);
             this.btnMaimize.InitialImage = ((System.Drawing.Image)(resources.GetObject("btnMaimize.InitialImage")));
-            this.btnMaimize.Location = new System.Drawing.Point(1344, 12);
+            this.btnMaimize.Location = new System.Drawing.Point(1288, 12);
             this.btnMaimize.Name = "btnMaimize";
             this.btnMaimize.Rotation = 0;
             this.btnMaimize.ShowActiveImage = true;
@@ -2000,7 +2000,7 @@
             this.btnMinimize.ImageSize = new System.Drawing.Size(10, 10);
             this.btnMinimize.ImageZoomSize = new System.Drawing.Size(30, 30);
             this.btnMinimize.InitialImage = ((System.Drawing.Image)(resources.GetObject("btnMinimize.InitialImage")));
-            this.btnMinimize.Location = new System.Drawing.Point(1298, 12);
+            this.btnMinimize.Location = new System.Drawing.Point(1242, 12);
             this.btnMinimize.Name = "btnMinimize";
             this.btnMinimize.Rotation = 0;
             this.btnMinimize.ShowActiveImage = true;
@@ -2036,7 +2036,7 @@
             this.btnClose.ImageSize = new System.Drawing.Size(10, 10);
             this.btnClose.ImageZoomSize = new System.Drawing.Size(30, 30);
             this.btnClose.InitialImage = ((System.Drawing.Image)(resources.GetObject("btnClose.InitialImage")));
-            this.btnClose.Location = new System.Drawing.Point(1390, 12);
+            this.btnClose.Location = new System.Drawing.Point(1334, 12);
             this.btnClose.Name = "btnClose";
             this.btnClose.Rotation = 0;
             this.btnClose.ShowActiveImage = true;
@@ -2058,7 +2058,7 @@
             this.btnAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAbout.Font = new System.Drawing.Font("Montserrat", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAbout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(231)))), ((int)(((byte)(21)))));
-            this.btnAbout.Location = new System.Drawing.Point(1310, 36);
+            this.btnAbout.Location = new System.Drawing.Point(1254, 36);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(100, 39);
             this.btnAbout.TabIndex = 5;
@@ -2073,7 +2073,7 @@
             this.lbTitle.AutoSize = true;
             this.lbTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(231)))), ((int)(((byte)(21)))));
-            this.lbTitle.Location = new System.Drawing.Point(631, 30);
+            this.lbTitle.Location = new System.Drawing.Point(603, 30);
             this.lbTitle.Name = "lbTitle";
             this.lbTitle.Size = new System.Drawing.Size(96, 37);
             this.lbTitle.TabIndex = 0;
@@ -2105,7 +2105,7 @@
             this.shadowPanelMenu.ShadowDepth = 5;
             this.shadowPanelMenu.ShadowStyle = Bunifu.UI.WinForms.BunifuShadowPanel.ShadowStyles.Surrounded;
             this.shadowPanelMenu.ShadowTopLeftVisible = false;
-            this.shadowPanelMenu.Size = new System.Drawing.Size(225, 1020);
+            this.shadowPanelMenu.Size = new System.Drawing.Size(225, 708);
             this.shadowPanelMenu.Style = Bunifu.UI.WinForms.BunifuShadowPanel.BevelStyles.Flat;
             this.shadowPanelMenu.TabIndex = 1;
             // 
@@ -2286,7 +2286,7 @@
             this.tabAddCase.Location = new System.Drawing.Point(4, 4);
             this.tabAddCase.Name = "tabAddCase";
             this.tabAddCase.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAddCase.Size = new System.Drawing.Size(1209, 994);
+            this.tabAddCase.Size = new System.Drawing.Size(1153, 682);
             this.tabAddCase.TabIndex = 0;
             this.tabAddCase.Text = "Add Case";
             // 
@@ -2321,7 +2321,7 @@
             this.BunifuPages.PageName = "tabAddCase";
             this.BunifuPages.PageTitle = "Add Case";
             this.BunifuPages.SelectedIndex = 0;
-            this.BunifuPages.Size = new System.Drawing.Size(1217, 1020);
+            this.BunifuPages.Size = new System.Drawing.Size(1161, 708);
             this.BunifuPages.TabIndex = 3;
             animation1.AnimateOnlyDifferences = true;
             animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
@@ -2366,13 +2366,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(25)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(1442, 1100);
+            this.ClientSize = new System.Drawing.Size(1386, 788);
             this.Controls.Add(this.BunifuPages);
             this.Controls.Add(this.shadowPanelMenu);
             this.Controls.Add(this.panelTitleBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(1442, 851);
+            this.MinimumSize = new System.Drawing.Size(1364, 726);
             this.Name = "CDRAnalyzer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CDRAnalyzer";

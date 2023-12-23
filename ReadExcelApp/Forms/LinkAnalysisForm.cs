@@ -275,12 +275,12 @@ namespace ReadExcelApp.Forms
                     .AsEnumerable()
                     .Where(a=>a.A_Num.Equals(item))
                     .Select(x => x.B_Num)
-                    .Where(bp => bp.Substring(0, 2).Equals("92") && bp.Length == 12)
+                    //.Where(bp => bp.Substring(0, 2).Equals("92") && bp.Length == 12)
                     .ToList();
 
                 List<string> uniqueB_Numlst = b_numlst
                     .Distinct()
-                    .Where(bp => bp.Substring(0, 2).Equals("92") && bp.Length == 12)
+                    //.Where(bp => bp.Substring(0, 2).Equals("92") && bp.Length == 12)
                     .ToList();
 
                 compB_Numlst.AddRange(uniqueB_Numlst);

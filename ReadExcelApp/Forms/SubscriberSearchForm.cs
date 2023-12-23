@@ -85,6 +85,7 @@ namespace ReadExcelApp.Forms
 
         private void btnExportPDF_Click(object sender, EventArgs e)
         {
+            //Console.WriteLine("Export PDF Click");
             DataTable subInfodt = new DataTable();
             perChart.Series[0].XValueMember = "2020";
             perChart.Series[0].YValueMembers = "2020";
@@ -107,6 +108,7 @@ namespace ReadExcelApp.Forms
 
             if (allRecordsdt.Rows.Count > 0)
             {
+                Console.WriteLine("TEST");
                 string subInfo2020 = allRecordsdt.Select("DB = '2020'").Count().ToString();
                 string subInfo2021 = allRecordsdt.Select("DB = '2021'").Count().ToString();
                 string subPTCL = allRecordsdt.Select("DB = 'PTCL'").Count().ToString();
@@ -341,9 +343,11 @@ namespace ReadExcelApp.Forms
                             if (con.State != ConnectionState.Open)
                                 con.Open();
 
+                            allRecordsdt = new DataTable();
                             //cmd.ExecuteNonQuery();
                             SqlDataReader sdr = cmd.ExecuteReader();
                             subdt.Load(sdr);
+                            //allRecordsdt.Load(sdr);
                             /*foreach (DataColumn col in subdt.Columns) col.ReadOnly = false;
                             foreach (DataRow dr in subdt.Rows)
                             {
@@ -368,6 +372,7 @@ namespace ReadExcelApp.Forms
 
                     //DataTable distinctTable = subdt.DefaultView.ToTable( /*distinct*/ true);
                     gvSearchResult.DataSource = subdt;
+                    //gvSearchResult.DataSource = allRecordsdt;
                     /*foreach (var num in uniqueNumList)
                     {
                         string sp = "exec dbo.CDR_Contact_Num '" + num + "'";

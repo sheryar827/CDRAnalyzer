@@ -63,7 +63,10 @@ namespace ReadExcelApp.Forms
             /*A_Num = null;*/
         }
 
-        private void plotMarkers(string A_Num, string project_Name, List<PointLatLng> _points)
+        private void plotMarkers(string A_Num
+            , string project_Name
+            , List<PointLatLng> _points
+            , Color selectedColor)
         {
             gMap.DragButton = MouseButtons.Left;
             markers = new GMapOverlay("markers");
@@ -86,8 +89,12 @@ namespace ReadExcelApp.Forms
 
                 /*GMapMarker marker = new GMarkerGoogle(point, bmpMarker);*/
 
-                GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red_big_stop);
+                //GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red_big_stop);
                 //marker.IsVisible = true;
+
+                Bitmap markerBitmap = CreateCustomMarkerBitmap(selectedColor, new Size(40, 40)); // Customize size as needed
+
+                GMapMarker marker = new GMarkerGoogle(point, markerBitmap);
 
                 marker.ToolTipMode = MarkerTooltipMode.Always;
                 /* marker.Tag = point.Lat.ToString() + " " + point.Lng.ToString();
@@ -106,6 +113,35 @@ namespace ReadExcelApp.Forms
 
 
             gMap.Overlays.Add(markers);
+        }
+
+
+        private Bitmap CreateCustomMarkerBitmap(Color color, Size size)
+        {
+            Bitmap bmp = new Bitmap(size.Width, size.Height);
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                // Antialiasing to smooth the shape
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+                // Define the size of the circle
+                int circleDiameter = size.Height / 2;
+                Rectangle circleRect = new Rectangle(size.Width / 2 - circleDiameter / 2, 0, circleDiameter, circleDiameter);
+
+                // Draw the circle (head of the marker)
+                g.FillEllipse(new SolidBrush(color), circleRect);
+
+                // Define the points for the triangle (tail of the marker)
+                PointF topPoint = new PointF(size.Width / 2, circleDiameter);
+                PointF leftPoint = new PointF(size.Width / 2 - circleDiameter / 2, size.Height);
+                PointF rightPoint = new PointF(size.Width / 2 + circleDiameter / 2, size.Height);
+
+                PointF[] trianglePoints = { topPoint, leftPoint, rightPoint };
+
+                // Draw the triangle
+                g.FillPolygon(new SolidBrush(color), trianglePoints);
+            }
+            return bmp;
         }
 
         private void GMapForm_Load(object sender, EventArgs e)
@@ -340,8 +376,18 @@ namespace ReadExcelApp.Forms
                 List<PointLatLng> _points = new List<PointLatLng>();
                 string a_numForAnalysis = gvCaseProjectA_Num.Rows[e.RowIndex].Cells[1].Value.ToString();
                 string project_Name = gvCaseProjectA_Num.Rows[e.RowIndex].Cells[0].Value.ToString();
+                Color selectColor = Color.Red;
+                using(ColorDialog colorDialog = new ColorDialog())
+                {
+                    if (colorDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        selectColor = colorDialog.Color;
+                    }
+                }
+               /* ColorPickerDialog colorPicker = new ColorPickerDialog();
+                colorPicker.ShowDialog();
+                Color selectedColor = colorPicker.SelectedColor;*/
 
-                
                 /** 
                  * To Make the row invisible on click
                  * User is unable to click it again
@@ -389,7 +435,7 @@ namespace ReadExcelApp.Forms
 
                 List<PointLatLng> uniquePointLst = _points.Distinct().ToList();
 
-                plotMarkers(a_numForAnalysis, project_Name, uniquePointLst);
+                plotMarkers(a_numForAnalysis, project_Name, uniquePointLst, selectColor);
 
                 allLocRecordA_Num = allLocRecordA_Num.OrderBy(x => x.Date).Distinct().ToList();
 
