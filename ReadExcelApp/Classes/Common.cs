@@ -160,6 +160,17 @@ namespace ReadExcelApp
         ,"IMSI"
         ,"Site"};
 
+        public static List<string> jazzCDR1 = new List<string>(){
+            "CallType"
+            , "Aparty"
+        ,"BParty"
+        ,"Datetime"
+        ,"Duration"
+        ,"cellid"
+        ,"Imei"
+        ,"Imsi"
+        ,"SiteLocation"};
+
         public static List<string> ufoneCDR = new List<string>(){
             "IMEI"
             , "IMSI"

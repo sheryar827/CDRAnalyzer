@@ -82,7 +82,7 @@ namespace ReadExcelApp
                             }
                             catch (IOException excep)
                             {
-
+                                Console.WriteLine("EXCEPTION: "+excep.Message);
                                 CommonMethods.messageDialog(excep.Message);
                             }
                         }
@@ -261,6 +261,153 @@ namespace ReadExcelApp
             catch (Exception ex)
             {
                 CommonMethods.messageDialog(ex.Message);
+            }
+        }
+
+        private void standJazzCDR1()
+        {
+            if (dt != null)
+            {
+                try
+                {
+                    standCDR = new List<StanderizedCDR>();
+                    datetime = new List<DateTime>();
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        StanderizedCDR standerizedCDR = new StanderizedCDR();
+                        standerizedCDR.A_Num = row[Common.jazzCDR1[1]].ToString();
+                        /*getting a-party in string A_Num for later use*/
+                        A_Num = standerizedCDR.A_Num;
+
+                        /*Removing 0 from all contacts in B-Party*/
+                        standerizedCDR.B_Num = row[Common.jazzCDR1[2]].ToString().TrimStart(new Char[] { '0' });
+
+                        //standerizedCDR.B_Num = dt.Rows[i][Common.jazz_B_Num].ToString().Trim();
+
+                        standerizedCDR.B_Num = standerize_B_Party(standerizedCDR.B_Num);
+
+                        string tempIMEI = row[Common.jazzCDR1[6]].ToString();
+
+                        standerizedCDR.IMEI = "";
+                        standerizedCDR.IMEI = !String.IsNullOrWhiteSpace(tempIMEI) && tempIMEI.Length >= 14
+                            ? tempIMEI.Substring(0, 14)
+                            : tempIMEI;
+
+                        //string dtime = row[Common.jazzCDR1[3]].ToString();
+
+
+                        DateTime dtValue = DateTime.Parse(row[Common.jazzCDR1[3]].ToString());
+
+                        datetime.Add(dtValue);
+
+
+                        /*Separating date from dtValue and adding it to Date*/
+                        standerizedCDR.Date = dtValue.ToString(Common.datef);
+
+                        /*Converting Date into Weekdays like sunday, monday etc*/
+                        standerizedCDR.Weekday = Convert.ToDateTime(standerizedCDR.Date).DayOfWeek.ToString();
+
+                        /*Separating time from dtValue and adding it to Time*/
+                        standerizedCDR.Time = dtValue.ToString(Common.timef);
+
+                        standerizedCDR.Call_Dur = row[Common.jazzCDR1[4]].ToString();
+
+                        standerizedCDR.Call_Dir = row[Common.jazzCDR1[0]].ToString().Substring(0, 8).ToLower();
+
+
+                        standerizedCDR.Cell_ID = row[Common.jazzCDR1[5]].ToString();
+
+                        // Get first 4 characters substring from a string
+                        var revLacID = string.Join("", standerizedCDR.Cell_ID.Substring(0, 4).Reverse().ToArray());
+
+                        /* Converting lacId from hex to decimal*/
+                        standerizedCDR.Lac_No = Convert.ToInt32(revLacID.ToString(), 16).ToString();
+                        // Get everything else after 4th position
+                        var revCellID = string.Join("", standerizedCDR.Cell_ID.Substring(4).Reverse().ToArray());
+
+                        /* Converting cellId from hex to decimal*/
+                        standerizedCDR.Cell_ID = Convert.ToInt32(revCellID.ToString(), 16).ToString();
+
+                        //Getting location
+                        standerizedCDR.Loc = row[Common.jazzCDR1[8]].ToString();
+
+                        /*first getting string after first '|' then splitting that string on the basis of '|' 
+                        to get latitude and longitude in string array*/
+                        var matches = ExtractCoordinates(standerizedCDR.Loc);
+                        //string[] latlng = standerizedCDR.Loc.Substring(standerizedCDR.Loc.IndexOf('|') + 1).Split('|');
+
+                        if (matches.Count >= 2)
+                        {
+                            standerizedCDR.Lat = matches[0]; // Latitude
+                            standerizedCDR.Lng = matches[1]; // Longitude
+                        }
+                        //getting first element of latlng string array
+                        //standerizedCDR.Lat = latlng.First();
+
+                        //getting last element of latlng string array and removing
+                        //last double quotes from it
+                        //standerizedCDR.Lng = latlng.Last().Remove(latlng.Last().Length - 1, 1);
+
+                        standerizedCDR.Network = Common.jazz_Network;
+
+
+                        // if column call direction cell contains sms then call type is sms else Voice
+                        if (row[Common.jazzCDR1[0]].ToString().ToLower().Contains(Common.sms))
+                        {
+                            standerizedCDR.Call_Type = Common.sms;
+                        }
+                        else
+                        {
+                            standerizedCDR.Call_Type = Common.voice;
+                        }
+
+                        //Console.WriteLine(A_Num + " " + standerizedCDR.B_Num + " " + standerizedCDR.Date + " " + standerizedCDR.Call_Dur);
+                        //bftbErrorHandling.Text = A_Num + " " + standerizedCDR.B_Num + " " + standerizedCDR.Date + " " + standerizedCDR.Call_Dur;
+                        standCDR.Add(standerizedCDR);
+                    }
+
+
+                    // order cdr in ascending order on the basis of date
+                    standCDR = standCDR.OrderBy(d => d.Date).ToList();
+
+                    cDRDBTblBindingSource.DataSource = standCDR;
+
+                    //UniqID();
+                }
+                catch(Exception ex)
+                {
+                    CommonMethods.messageDialog(ex.Message);
+                    if (standCDR.Count >= 2)
+                    {
+                        var secondLastItem = standCDR[standCDR.Count - 2];
+                        var lastItem = standCDR.Last();
+
+                        // Now you can print or use the second last item as needed
+                        tbErrorHandling.Text = $"--Second Last Line--" +
+                                                $"{Environment.NewLine}A_Num: {secondLastItem.A_Num}" +
+                                                $"{Environment.NewLine}B_Num: {secondLastItem.B_Num}" +
+                                                $"{Environment.NewLine}Date: {secondLastItem.Date}" +
+                                                $"{Environment.NewLine}Call_Dur: {secondLastItem.Call_Dur}" +
+                                                $"{Environment.NewLine}{Environment.NewLine}--Last Line--" +
+                                                $"{Environment.NewLine}A_Num: {lastItem.A_Num}" +
+                                                $"{Environment.NewLine}B_Num: {lastItem.B_Num}" +
+                                                $"{Environment.NewLine}Date: {lastItem.Date}" +
+                                                $"{Environment.NewLine}Call_Dur: {lastItem.Call_Dur}";
+                    }
+                    else
+                    {
+                        tbErrorHandling.Multiline = true; // Ensure this property is set
+                        tbErrorHandling.Text = $"--Last Line--" +
+                            $"{Environment.NewLine}A_Num: {A_Num}" +
+                            $"{Environment.NewLine}B_Num: {standCDR.Last().B_Num}" +
+                            $"{Environment.NewLine}Date: {standCDR.Last().Date}" +
+                            $"{Environment.NewLine}Call_Dur: {standCDR.Last().Call_Dur}";
+                    }
+                    
+
+
+                }
+
             }
         }
 
@@ -862,6 +1009,11 @@ namespace ReadExcelApp
                         standJazzCDR();
                     }
                 }
+                else if (Common.jazzCDR1.SequenceEqual(cdrCol))
+                {
+                    CommonMethods.messageDialog("Jazz CDR");
+                    standJazzCDR1();
+                }
                 else if (Common.ufoneCDR.SequenceEqual(cdrCol))
                 {
                     CommonMethods.messageDialog("Ufone CDR");
@@ -908,6 +1060,7 @@ namespace ReadExcelApp
                 // Get the line number from the stack frame
                 var line = frame.GetFileLineNumber();
                 CommonMethods.messageDialog(ex.Message + " " + line);
+                //Console.WriteLine(ex.Message);
                 //CommonMethods.messageDialog(ex.Message);
             }
         }
