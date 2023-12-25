@@ -542,6 +542,12 @@
     <Compile Include="Forms\CDRSummaryForm.Designer.cs">
       <DependentUpon>CDRSummaryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CommonLocDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CommonLocDetailsForm.Designer.cs">
+      <DependentUpon>CommonLocDetailsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DLSearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -730,6 +736,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CDRSummaryForm.resx">
       <DependentUpon>CDRSummaryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CommonLocDetailsForm.resx">
+      <DependentUpon>CommonLocDetailsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DLSearchForm.resx">
       <DependentUpon>DLSearchForm.cs</DependentUpon>

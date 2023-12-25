@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Management;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -216,14 +217,20 @@ namespace ReadExcelApp
 
                         /*first getting string after first '|' then splitting that string on the basis of '|' 
                         to get latitude and longitude in string array*/
-                        string[] latlng = standerizedCDR.Loc.Substring(standerizedCDR.Loc.IndexOf('|') + 1).Split('|');
+                        var matches = ExtractCoordinates(standerizedCDR.Loc);
+                        //string[] latlng = standerizedCDR.Loc.Substring(standerizedCDR.Loc.IndexOf('|') + 1).Split('|');
 
+                        if (matches.Count >= 2)
+                        {
+                            standerizedCDR.Lat = matches[0]; // Latitude
+                            standerizedCDR.Lng = matches[1]; // Longitude
+                        }
                         //getting first element of latlng string array
-                        standerizedCDR.Lat = latlng.First();
+                        //standerizedCDR.Lat = latlng.First();
 
                         //getting last element of latlng string array and removing
                         //last double quotes from it
-                        standerizedCDR.Lng = latlng.Last().Remove(latlng.Last().Length - 1, 1);
+                        //standerizedCDR.Lng = latlng.Last().Remove(latlng.Last().Length - 1, 1);
 
                         standerizedCDR.Network = Common.jazz_Network;
 
@@ -257,6 +264,19 @@ namespace ReadExcelApp
             }
         }
 
+        private List<string> ExtractCoordinates(string text)
+        {
+            var pattern = @"\b\d{2}\.\d+\b";
+            var matches = Regex.Matches(text, pattern);
+            var result = new List<string>();
+
+            foreach (Match match in matches)
+            {
+                result.Add(match.Value);
+            }
+
+            return result;
+        }
 
         // function to standarized Telenor CDR
         private void standTelenorCDR()
@@ -1355,6 +1375,11 @@ namespace ReadExcelApp
             string volumeSerial = dsk["VolumeSerialNumber"].ToString();
 
             Console.WriteLine(volumeSerial + cpuInfo);
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            CommonMethods.exportExcel(gvStandCDR);
         }
 
         

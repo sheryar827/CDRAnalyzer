@@ -1,4 +1,5 @@
-﻿using GMap.NET;
+﻿using ExcelDataReader.Log;
+using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
@@ -29,6 +30,7 @@ namespace ReadExcelApp.Forms
         PointLatLng startPoint;
         PointLatLng endPoint;
         List<AllRecordA_Num> allLocRecordA_Num = new List<AllRecordA_Num>();
+        List<AllRecordA_Num> commonLatLngList = new List<AllRecordA_Num>();
         /*DialogResult locDetDialog = new DialogResult();*/
         /*private bool MarkerWasClicked = false;*/
         GMapOverlay routes;
@@ -377,16 +379,18 @@ namespace ReadExcelApp.Forms
                 string a_numForAnalysis = gvCaseProjectA_Num.Rows[e.RowIndex].Cells[1].Value.ToString();
                 string project_Name = gvCaseProjectA_Num.Rows[e.RowIndex].Cells[0].Value.ToString();
                 Color selectColor = Color.Red;
-                using(ColorDialog colorDialog = new ColorDialog())
-                {
-                    if (colorDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        selectColor = colorDialog.Color;
-                    }
-                }
-               /* ColorPickerDialog colorPicker = new ColorPickerDialog();
-                colorPicker.ShowDialog();
-                Color selectedColor = colorPicker.SelectedColor;*/
+                //using(ColorDialog colorDialog = new ColorDialog())
+                //{
+                //    if (colorDialog.ShowDialog() == DialogResult.OK)
+                //    {
+                //        selectColor = colorDialog.Color;
+                //    }
+                //}
+
+                lbCommonLatLng.Items.Add(gvCaseProjectA_Num.Rows[e.RowIndex].Cells[1].Value.ToString());
+                /* ColorPickerDialog colorPicker = new ColorPickerDialog();
+                 colorPicker.ShowDialog();
+                 Color selectedColor = colorPicker.SelectedColor;*/
 
                 /** 
                  * To Make the row invisible on click
@@ -435,7 +439,7 @@ namespace ReadExcelApp.Forms
 
                 List<PointLatLng> uniquePointLst = _points.Distinct().ToList();
 
-                plotMarkers(a_numForAnalysis, project_Name, uniquePointLst, selectColor);
+                //plotMarkers(a_numForAnalysis, project_Name, uniquePointLst, selectColor);
 
                 allLocRecordA_Num = allLocRecordA_Num.OrderBy(x => x.Date).Distinct().ToList();
 
@@ -718,10 +722,24 @@ namespace ReadExcelApp.Forms
         {
             if (locDetails)
             {
+                /*var latlngRecord = FilterBySpecificCoordinates(commonLatLngList
+                    , item.Position.Lat.ToString()
+                    , item.Position.Lng.ToString());*/
 
-                new Forms.LocationDetailsForm(item.Position, item.ToolTipText, item.Tag.ToString(), allLocRecordA_Num).Show();
+                var matchingRecords = commonLatLngList.Where(r => double.Parse(r.Lat) == item.Position.Lat && double.Parse(r.Lng) == item.Position.Lng).ToList();
 
+                var specificLatLngDT = new ListtoDataTable().ToDataTable(matchingRecords);
+                //Console.WriteLine(latlngRecord.Count);
+                //new Forms.LocationDetailsForm(item.Position, item.ToolTipText, item.Tag.ToString(), allLocRecordA_Num).Show();
+                new Forms.CommonLocDetailsForm(specificLatLngDT).Show();
             }
+        }
+
+        public List<AllRecordA_Num> FilterBySpecificCoordinates(List<AllRecordA_Num> records, string specificLat, string specificLng)
+        {
+            return records
+                .Where(r => r.Lat == specificLat && r.Lng == specificLng)
+                .ToList();
         }
 
         private async void rbGeneralPolice_Click(object sender, EventArgs e)
@@ -763,6 +781,63 @@ namespace ReadExcelApp.Forms
             {
                 CommonMethods.messageDialog("Please first create project!!");
             }
+        }
+
+        private void btnPlotCommonLatLng_Click(object sender, EventArgs e)
+        {
+            commonLatLngList = FindMatchingRecords(allLocRecordA_Num);
+            var points = new List<PointLatLng>();
+            foreach (var record in commonLatLngList)
+            {
+                if (double.TryParse(record.Lat, out double lat) && double.TryParse(record.Lng, out double lng))
+                {
+                    points.Add(new PointLatLng(lat, lng));
+                }
+
+                /*Console.WriteLine($"A_Num: {record.A_Num}, B_Num: {record.B_Num}, IMEI: {record.IMEI}, " +
+                         $"Date: {record.Date}, Time: {record.Time}, Call_Dur: {record.Call_Dur}, " +
+                         $"Call_Dir: {record.Call_Dir}, Call_Type: {record.Call_Type}, Lac_No: {record.Lac_No}, " +
+                         $"Cell_ID: {record.Cell_ID}, Loc: {record.Loc}, Lat: {record.Lat}, Lng: {record.Lng}, " +
+                         $"Network: {record.Network}, Weekday: {record.Weekday}");*/
+            }
+
+           
+
+            List<PointLatLng> uniquePointLst = points.Distinct().ToList();
+
+            plotMarkers("", "common lat lng", uniquePointLst, Color.Red);
+        }
+
+        public List<AllRecordA_Num> FindMatchingRecords(List<AllRecordA_Num> records)
+        {
+            var filteredRecords = records
+                .GroupBy(r => new { r.Date, r.Lat, r.Lng })
+                .Where(g => g.Select(r => r.A_Num).Distinct().Count() > 1)
+                .SelectMany(g => g)
+                // Filter out records with invalid or empty Lat and Lng
+                .Where(r => !string.IsNullOrWhiteSpace(r.Lat) && !string.IsNullOrWhiteSpace(r.Lng) &&
+                    double.TryParse(r.Lat, out double _) && double.TryParse(r.Lng, out double _))
+                .ToList();
+
+
+
+                /*var groupedRecords = filteredRecords
+                                    .GroupBy(r => new { r.Lat, r.Lng, r.Date })
+                                    .ToList();
+
+                // Iterating over each group
+                foreach (var group in groupedRecords)
+                {
+                    Console.WriteLine($"Lat: {group.Key.Lat}, Lng: {group.Key.Lng}, Date: {group.Key.Date}");
+
+                    // Iterating over records within each group
+                    foreach (var record in group)
+                    {
+                        Console.WriteLine($" - A_Num: {record.A_Num}");
+                    }
+                }*/
+
+            return filteredRecords;
         }
     }
 }
