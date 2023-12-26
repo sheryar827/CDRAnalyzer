@@ -17,7 +17,7 @@ namespace ReadExcelApp.Forms
 {
 
 
-    public partial class GMapForm : Form
+    public partial class CGMapForm : Form
     {
         /*private List<PointLatLng> _points;*/
         /*private List<GMapMarker> lMarks;*/
@@ -47,7 +47,7 @@ namespace ReadExcelApp.Forms
 
 
         //private List<GetLatLngForMap> _points;
-        public GMapForm()
+        public CGMapForm()
         {
             InitializeComponent();
             /*_points = new List<PointLatLng>();*/
@@ -372,22 +372,22 @@ namespace ReadExcelApp.Forms
 
             //string a_numForAnalysis = gvCaseProjectA_Num.Rows[e.RowIndex].Cells[1].Value.ToString();
             //string project_Name = gvCaseProjectA_Num.Rows[e.RowIndex].Cells[0].Value.ToString();
-            
+
             if (e.RowIndex >= 0)
             {
                 List<PointLatLng> _points = new List<PointLatLng>();
                 string a_numForAnalysis = gvCaseProjectA_Num.Rows[e.RowIndex].Cells[1].Value.ToString();
                 string project_Name = gvCaseProjectA_Num.Rows[e.RowIndex].Cells[0].Value.ToString();
                 Color selectColor = Color.Red;
-                using(ColorDialog colorDialog = new ColorDialog())
-                {
-                    if (colorDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        selectColor = colorDialog.Color;
-                    }
-                }
+                //using(ColorDialog colorDialog = new ColorDialog())
+                //{
+                //    if (colorDialog.ShowDialog() == DialogResult.OK)
+                //    {
+                //        selectColor = colorDialog.Color;
+                //    }
+                //}
 
-                //lbCommonLatLng.Items.Add(gvCaseProjectA_Num.Rows[e.RowIndex].Cells[1].Value.ToString());
+                lbCommonLatLng.Items.Add(gvCaseProjectA_Num.Rows[e.RowIndex].Cells[1].Value.ToString());
                 /* ColorPickerDialog colorPicker = new ColorPickerDialog();
                  colorPicker.ShowDialog();
                  Color selectedColor = colorPicker.SelectedColor;*/
@@ -427,7 +427,7 @@ namespace ReadExcelApp.Forms
                     allRecordA_Num.Lng = dt.Rows[i][Common.LNG].ToString();
                     allRecordA_Num.Network = dt.Rows[i][Common.Network].ToString();
                     allRecordA_Num.Weekday = dt.Rows[i][Common.Weekday].ToString();
-                   
+
                     allLocRecordA_Num.Add(allRecordA_Num);
 
                     Double.TryParse(allRecordA_Num.Lng, out lng);
@@ -439,7 +439,7 @@ namespace ReadExcelApp.Forms
 
                 List<PointLatLng> uniquePointLst = _points.Distinct().ToList();
 
-                plotMarkers(a_numForAnalysis, project_Name, uniquePointLst, selectColor);
+                //plotMarkers(a_numForAnalysis, project_Name, uniquePointLst, selectColor);
 
                 allLocRecordA_Num = allLocRecordA_Num.OrderBy(x => x.Date).Distinct().ToList();
 
@@ -726,12 +726,12 @@ namespace ReadExcelApp.Forms
                     , item.Position.Lat.ToString()
                     , item.Position.Lng.ToString());*/
 
-                //var matchingRecords = commonLatLngList.Where(r => double.Parse(r.Lat) == item.Position.Lat && double.Parse(r.Lng) == item.Position.Lng).ToList();
+                var matchingRecords = commonLatLngList.Where(r => double.Parse(r.Lat) == item.Position.Lat && double.Parse(r.Lng) == item.Position.Lng).ToList();
 
-                //var specificLatLngDT = new ListtoDataTable().ToDataTable(matchingRecords);
+                var specificLatLngDT = new ListtoDataTable().ToDataTable(matchingRecords);
                 //Console.WriteLine(latlngRecord.Count);
-                new Forms.LocationDetailsForm(item.Position, item.ToolTipText, item.Tag.ToString(), allLocRecordA_Num).Show();
-                //new Forms.CommonLocDetailsForm(specificLatLngDT).Show();
+                //new Forms.LocationDetailsForm(item.Position, item.ToolTipText, item.Tag.ToString(), allLocRecordA_Num).Show();
+                new Forms.CommonLocDetailsForm(specificLatLngDT).Show();
             }
         }
 
@@ -801,7 +801,7 @@ namespace ReadExcelApp.Forms
                          $"Network: {record.Network}, Weekday: {record.Weekday}");*/
             }
 
-           
+
 
             List<PointLatLng> uniquePointLst = points.Distinct().ToList();
 
@@ -821,23 +821,25 @@ namespace ReadExcelApp.Forms
 
 
 
-                /*var groupedRecords = filteredRecords
-                                    .GroupBy(r => new { r.Lat, r.Lng, r.Date })
-                                    .ToList();
+            /*var groupedRecords = filteredRecords
+                                .GroupBy(r => new { r.Lat, r.Lng, r.Date })
+                                .ToList();
 
-                // Iterating over each group
-                foreach (var group in groupedRecords)
+            // Iterating over each group
+            foreach (var group in groupedRecords)
+            {
+                Console.WriteLine($"Lat: {group.Key.Lat}, Lng: {group.Key.Lng}, Date: {group.Key.Date}");
+
+                // Iterating over records within each group
+                foreach (var record in group)
                 {
-                    Console.WriteLine($"Lat: {group.Key.Lat}, Lng: {group.Key.Lng}, Date: {group.Key.Date}");
-
-                    // Iterating over records within each group
-                    foreach (var record in group)
-                    {
-                        Console.WriteLine($" - A_Num: {record.A_Num}");
-                    }
-                }*/
+                    Console.WriteLine($" - A_Num: {record.A_Num}");
+                }
+            }*/
 
             return filteredRecords;
         }
+
+        
     }
 }

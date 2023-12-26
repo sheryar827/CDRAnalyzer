@@ -29,12 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GMapForm));
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges2 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.btnPlotCommonLatLng = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
+            this.lbCommonLatLng = new System.Windows.Forms.ListBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.txtA_Num = new System.Windows.Forms.TextBox();
             this.txtID = new System.Windows.Forms.TextBox();
             this.gvCaseProjectA_Num = new Bunifu.UI.WinForms.BunifuDataGridView();
@@ -43,7 +46,10 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnEndPoint = new System.Windows.Forms.Button();
             this.btnStartPoint = new System.Windows.Forms.Button();
+            this.btnGetRoute = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnZoomIn = new System.Windows.Forms.Button();
+            this.btnDistance = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.rbGeneralPolice = new System.Windows.Forms.RadioButton();
             this.rbProject = new System.Windows.Forms.RadioButton();
@@ -58,12 +64,6 @@
             this.bunifuElipse7 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuElipse8 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuElipse9 = new Bunifu.Framework.UI.BunifuElipse(this.components);
-            this.lbCommonLatLng = new System.Windows.Forms.ListBox();
-            this.btnPlotCommonLatLng = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.btnGetRoute = new System.Windows.Forms.Button();
-            this.btnZoomIn = new System.Windows.Forms.Button();
-            this.btnDistance = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvCaseProjectA_Num)).BeginInit();
             this.panel4.SuspendLayout();
@@ -87,48 +87,159 @@
             this.panelMenu.Controls.Add(this.panel3);
             this.panelMenu.Controls.Add(this.panel2);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelMenu.Location = new System.Drawing.Point(1351, 0);
-            this.panelMenu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelMenu.Location = new System.Drawing.Point(1013, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
-            this.panelMenu.Size = new System.Drawing.Size(397, 1193);
+            this.panelMenu.Padding = new System.Windows.Forms.Padding(15, 16, 15, 16);
+            this.panelMenu.Size = new System.Drawing.Size(298, 894);
             this.panelMenu.TabIndex = 1;
+            // 
+            // btnPlotCommonLatLng
+            // 
+            this.btnPlotCommonLatLng.AllowAnimations = true;
+            this.btnPlotCommonLatLng.AllowMouseEffects = true;
+            this.btnPlotCommonLatLng.AllowToggling = false;
+            this.btnPlotCommonLatLng.AnimationSpeed = 200;
+            this.btnPlotCommonLatLng.AutoGenerateColors = false;
+            this.btnPlotCommonLatLng.AutoRoundBorders = false;
+            this.btnPlotCommonLatLng.AutoSizeLeftIcon = true;
+            this.btnPlotCommonLatLng.AutoSizeRightIcon = true;
+            this.btnPlotCommonLatLng.BackColor = System.Drawing.Color.Transparent;
+            this.btnPlotCommonLatLng.BackColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(122)))), ((int)(((byte)(183)))));
+            this.btnPlotCommonLatLng.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPlotCommonLatLng.BackgroundImage")));
+            this.btnPlotCommonLatLng.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.btnPlotCommonLatLng.ButtonText = "Plot Common LAT LNG";
+            this.btnPlotCommonLatLng.ButtonTextMarginLeft = 0;
+            this.btnPlotCommonLatLng.ColorContrastOnClick = 45;
+            this.btnPlotCommonLatLng.ColorContrastOnHover = 45;
+            this.btnPlotCommonLatLng.Cursor = System.Windows.Forms.Cursors.Default;
+            borderEdges2.BottomLeft = true;
+            borderEdges2.BottomRight = true;
+            borderEdges2.TopLeft = true;
+            borderEdges2.TopRight = true;
+            this.btnPlotCommonLatLng.CustomizableEdges = borderEdges2;
+            this.btnPlotCommonLatLng.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btnPlotCommonLatLng.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
+            this.btnPlotCommonLatLng.DisabledFillColor = System.Drawing.Color.Empty;
+            this.btnPlotCommonLatLng.DisabledForecolor = System.Drawing.Color.Empty;
+            this.btnPlotCommonLatLng.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Pressed;
+            this.btnPlotCommonLatLng.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnPlotCommonLatLng.ForeColor = System.Drawing.Color.White;
+            this.btnPlotCommonLatLng.IconLeft = null;
+            this.btnPlotCommonLatLng.IconLeftAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPlotCommonLatLng.IconLeftCursor = System.Windows.Forms.Cursors.Default;
+            this.btnPlotCommonLatLng.IconLeftPadding = new System.Windows.Forms.Padding(11, 3, 3, 3);
+            this.btnPlotCommonLatLng.IconMarginLeft = 11;
+            this.btnPlotCommonLatLng.IconPadding = 10;
+            this.btnPlotCommonLatLng.IconRight = null;
+            this.btnPlotCommonLatLng.IconRightAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPlotCommonLatLng.IconRightCursor = System.Windows.Forms.Cursors.Default;
+            this.btnPlotCommonLatLng.IconRightPadding = new System.Windows.Forms.Padding(3, 3, 7, 3);
+            this.btnPlotCommonLatLng.IconSize = 25;
+            this.btnPlotCommonLatLng.IdleBorderColor = System.Drawing.Color.Empty;
+            this.btnPlotCommonLatLng.IdleBorderRadius = 0;
+            this.btnPlotCommonLatLng.IdleBorderThickness = 0;
+            this.btnPlotCommonLatLng.IdleFillColor = System.Drawing.Color.Empty;
+            this.btnPlotCommonLatLng.IdleIconLeftImage = null;
+            this.btnPlotCommonLatLng.IdleIconRightImage = null;
+            this.btnPlotCommonLatLng.IndicateFocus = false;
+            this.btnPlotCommonLatLng.Location = new System.Drawing.Point(18, 748);
+            this.btnPlotCommonLatLng.Margin = new System.Windows.Forms.Padding(2);
+            this.btnPlotCommonLatLng.Name = "btnPlotCommonLatLng";
+            this.btnPlotCommonLatLng.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
+            this.btnPlotCommonLatLng.OnDisabledState.BorderRadius = 1;
+            this.btnPlotCommonLatLng.OnDisabledState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.btnPlotCommonLatLng.OnDisabledState.BorderThickness = 1;
+            this.btnPlotCommonLatLng.OnDisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.btnPlotCommonLatLng.OnDisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
+            this.btnPlotCommonLatLng.OnDisabledState.IconLeftImage = null;
+            this.btnPlotCommonLatLng.OnDisabledState.IconRightImage = null;
+            this.btnPlotCommonLatLng.onHoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
+            this.btnPlotCommonLatLng.onHoverState.BorderRadius = 1;
+            this.btnPlotCommonLatLng.onHoverState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.btnPlotCommonLatLng.onHoverState.BorderThickness = 1;
+            this.btnPlotCommonLatLng.onHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
+            this.btnPlotCommonLatLng.onHoverState.ForeColor = System.Drawing.Color.White;
+            this.btnPlotCommonLatLng.onHoverState.IconLeftImage = null;
+            this.btnPlotCommonLatLng.onHoverState.IconRightImage = null;
+            this.btnPlotCommonLatLng.OnIdleState.BorderColor = System.Drawing.Color.DodgerBlue;
+            this.btnPlotCommonLatLng.OnIdleState.BorderRadius = 1;
+            this.btnPlotCommonLatLng.OnIdleState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.btnPlotCommonLatLng.OnIdleState.BorderThickness = 1;
+            this.btnPlotCommonLatLng.OnIdleState.FillColor = System.Drawing.Color.DodgerBlue;
+            this.btnPlotCommonLatLng.OnIdleState.ForeColor = System.Drawing.Color.White;
+            this.btnPlotCommonLatLng.OnIdleState.IconLeftImage = null;
+            this.btnPlotCommonLatLng.OnIdleState.IconRightImage = null;
+            this.btnPlotCommonLatLng.OnPressedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(96)))), ((int)(((byte)(144)))));
+            this.btnPlotCommonLatLng.OnPressedState.BorderRadius = 1;
+            this.btnPlotCommonLatLng.OnPressedState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.btnPlotCommonLatLng.OnPressedState.BorderThickness = 1;
+            this.btnPlotCommonLatLng.OnPressedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(96)))), ((int)(((byte)(144)))));
+            this.btnPlotCommonLatLng.OnPressedState.ForeColor = System.Drawing.Color.White;
+            this.btnPlotCommonLatLng.OnPressedState.IconLeftImage = null;
+            this.btnPlotCommonLatLng.OnPressedState.IconRightImage = null;
+            this.btnPlotCommonLatLng.Size = new System.Drawing.Size(263, 46);
+            this.btnPlotCommonLatLng.TabIndex = 19;
+            this.btnPlotCommonLatLng.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnPlotCommonLatLng.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            this.btnPlotCommonLatLng.TextMarginLeft = 0;
+            this.btnPlotCommonLatLng.TextPadding = new System.Windows.Forms.Padding(0);
+            this.btnPlotCommonLatLng.UseDefaultRadiusAndThickness = true;
+            this.btnPlotCommonLatLng.Click += new System.EventHandler(this.btnPlotCommonLatLng_Click);
+            // 
+            // lbCommonLatLng
+            // 
+            this.lbCommonLatLng.FormattingEnabled = true;
+            this.lbCommonLatLng.Location = new System.Drawing.Point(18, 574);
+            this.lbCommonLatLng.Margin = new System.Windows.Forms.Padding(2);
+            this.lbCommonLatLng.Name = "lbCommonLatLng";
+            this.lbCommonLatLng.Size = new System.Drawing.Size(263, 160);
+            this.lbCommonLatLng.TabIndex = 18;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.FlatAppearance.BorderSize = 0;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Image = global::ReadExcelApp.Properties.Resources.analytics1;
+            this.btnSearch.Location = new System.Drawing.Point(230, 461);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(56, 40);
+            this.btnSearch.TabIndex = 17;
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtA_Num
             // 
-            this.txtA_Num.Location = new System.Drawing.Point(165, 581);
-            this.txtA_Num.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtA_Num.Location = new System.Drawing.Point(124, 472);
             this.txtA_Num.Name = "txtA_Num";
-            this.txtA_Num.Size = new System.Drawing.Size(132, 22);
+            this.txtA_Num.Size = new System.Drawing.Size(100, 20);
             this.txtA_Num.TabIndex = 16;
             // 
             // txtID
             // 
-            this.txtID.Location = new System.Drawing.Point(24, 581);
-            this.txtID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtID.Location = new System.Drawing.Point(18, 472);
             this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(132, 22);
+            this.txtID.Size = new System.Drawing.Size(100, 20);
             this.txtID.TabIndex = 15;
             // 
             // gvCaseProjectA_Num
             // 
             this.gvCaseProjectA_Num.AllowCustomTheming = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(232)))), ((int)(((byte)(191)))));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            this.gvCaseProjectA_Num.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(232)))), ((int)(((byte)(191)))));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            this.gvCaseProjectA_Num.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.gvCaseProjectA_Num.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gvCaseProjectA_Num.BackgroundColor = System.Drawing.Color.White;
             this.gvCaseProjectA_Num.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gvCaseProjectA_Num.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.gvCaseProjectA_Num.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 11.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(132)))), ((int)(((byte)(0)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gvCaseProjectA_Num.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Orange;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI Semibold", 11.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(132)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.gvCaseProjectA_Num.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.gvCaseProjectA_Num.ColumnHeadersHeight = 40;
             this.gvCaseProjectA_Num.CurrentTheme.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(232)))), ((int)(((byte)(191)))));
             this.gvCaseProjectA_Num.CurrentTheme.AlternatingRowsStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
@@ -148,28 +259,27 @@
             this.gvCaseProjectA_Num.CurrentTheme.RowsStyle.ForeColor = System.Drawing.Color.Black;
             this.gvCaseProjectA_Num.CurrentTheme.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(201)))), ((int)(((byte)(102)))));
             this.gvCaseProjectA_Num.CurrentTheme.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(237)))), ((int)(((byte)(204)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(201)))), ((int)(((byte)(102)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gvCaseProjectA_Num.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(237)))), ((int)(((byte)(204)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(201)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gvCaseProjectA_Num.DefaultCellStyle = dataGridViewCellStyle6;
             this.gvCaseProjectA_Num.Dock = System.Windows.Forms.DockStyle.Top;
             this.gvCaseProjectA_Num.EnableHeadersVisualStyles = false;
             this.gvCaseProjectA_Num.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(226)))), ((int)(((byte)(173)))));
             this.gvCaseProjectA_Num.HeaderBackColor = System.Drawing.Color.Orange;
             this.gvCaseProjectA_Num.HeaderBgColor = System.Drawing.Color.Empty;
             this.gvCaseProjectA_Num.HeaderForeColor = System.Drawing.Color.White;
-            this.gvCaseProjectA_Num.Location = new System.Drawing.Point(20, 376);
-            this.gvCaseProjectA_Num.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gvCaseProjectA_Num.Location = new System.Drawing.Point(15, 305);
             this.gvCaseProjectA_Num.Name = "gvCaseProjectA_Num";
             this.gvCaseProjectA_Num.RowHeadersVisible = false;
             this.gvCaseProjectA_Num.RowHeadersWidth = 51;
             this.gvCaseProjectA_Num.RowTemplate.Height = 40;
             this.gvCaseProjectA_Num.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvCaseProjectA_Num.Size = new System.Drawing.Size(357, 185);
+            this.gvCaseProjectA_Num.Size = new System.Drawing.Size(268, 150);
             this.gvCaseProjectA_Num.TabIndex = 1;
             this.gvCaseProjectA_Num.Theme = Bunifu.UI.WinForms.BunifuDataGridView.PresetThemes.Orange;
             this.gvCaseProjectA_Num.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvCaseProjectA_Num_CellClick);
@@ -182,10 +292,9 @@
             this.btnLocDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLocDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLocDetails.ForeColor = System.Drawing.Color.White;
-            this.btnLocDetails.Location = new System.Drawing.Point(24, 636);
-            this.btnLocDetails.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLocDetails.Location = new System.Drawing.Point(18, 517);
             this.btnLocDetails.Name = "btnLocDetails";
-            this.btnLocDetails.Size = new System.Drawing.Size(353, 53);
+            this.btnLocDetails.Size = new System.Drawing.Size(265, 43);
             this.btnLocDetails.TabIndex = 14;
             this.btnLocDetails.Text = "Location Details";
             this.btnLocDetails.UseVisualStyleBackColor = false;
@@ -198,10 +307,9 @@
             this.lbDistance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbDistance.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbDistance.ForeColor = System.Drawing.Color.Black;
-            this.lbDistance.Location = new System.Drawing.Point(108, 1080);
-            this.lbDistance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbDistance.Location = new System.Drawing.Point(81, 841);
             this.lbDistance.Name = "lbDistance";
-            this.lbDistance.Size = new System.Drawing.Size(152, 41);
+            this.lbDistance.Size = new System.Drawing.Size(123, 33);
             this.lbDistance.TabIndex = 13;
             this.lbDistance.Text = "Distance";
             // 
@@ -211,11 +319,10 @@
             this.panel4.Controls.Add(this.btnStartPoint);
             this.panel4.Controls.Add(this.btnGetRoute);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(20, 243);
-            this.panel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel4.Location = new System.Drawing.Point(15, 197);
             this.panel4.Name = "panel4";
-            this.panel4.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
-            this.panel4.Size = new System.Drawing.Size(357, 133);
+            this.panel4.Padding = new System.Windows.Forms.Padding(10);
+            this.panel4.Size = new System.Drawing.Size(268, 108);
             this.panel4.TabIndex = 12;
             // 
             // btnEndPoint
@@ -226,10 +333,9 @@
             this.btnEndPoint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEndPoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEndPoint.ForeColor = System.Drawing.Color.White;
-            this.btnEndPoint.Location = new System.Drawing.Point(150, 67);
-            this.btnEndPoint.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEndPoint.Location = new System.Drawing.Point(113, 54);
             this.btnEndPoint.Name = "btnEndPoint";
-            this.btnEndPoint.Size = new System.Drawing.Size(194, 54);
+            this.btnEndPoint.Size = new System.Drawing.Size(145, 44);
             this.btnEndPoint.TabIndex = 12;
             this.btnEndPoint.Text = "End Point";
             this.btnEndPoint.UseVisualStyleBackColor = false;
@@ -243,37 +349,79 @@
             this.btnStartPoint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStartPoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStartPoint.ForeColor = System.Drawing.Color.White;
-            this.btnStartPoint.Location = new System.Drawing.Point(150, 12);
-            this.btnStartPoint.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStartPoint.Location = new System.Drawing.Point(113, 10);
             this.btnStartPoint.Name = "btnStartPoint";
-            this.btnStartPoint.Size = new System.Drawing.Size(194, 54);
+            this.btnStartPoint.Size = new System.Drawing.Size(145, 44);
             this.btnStartPoint.TabIndex = 11;
             this.btnStartPoint.Text = "Start Point";
             this.btnStartPoint.UseVisualStyleBackColor = false;
             this.btnStartPoint.Click += new System.EventHandler(this.btnStartPoint_Click);
+            // 
+            // btnGetRoute
+            // 
+            this.btnGetRoute.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(74)))), ((int)(((byte)(86)))));
+            this.btnGetRoute.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnGetRoute.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnGetRoute.FlatAppearance.BorderSize = 0;
+            this.btnGetRoute.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGetRoute.Image = global::ReadExcelApp.Properties.Resources.placeholde;
+            this.btnGetRoute.Location = new System.Drawing.Point(10, 10);
+            this.btnGetRoute.Name = "btnGetRoute";
+            this.btnGetRoute.Size = new System.Drawing.Size(103, 88);
+            this.btnGetRoute.TabIndex = 10;
+            this.btnGetRoute.UseVisualStyleBackColor = false;
+            this.btnGetRoute.Click += new System.EventHandler(this.btnGetRoute_Click);
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.btnZoomIn);
             this.panel3.Controls.Add(this.btnDistance);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(20, 120);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Location = new System.Drawing.Point(15, 97);
             this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
-            this.panel3.Size = new System.Drawing.Size(357, 123);
+            this.panel3.Padding = new System.Windows.Forms.Padding(10);
+            this.panel3.Size = new System.Drawing.Size(268, 100);
             this.panel3.TabIndex = 11;
+            // 
+            // btnZoomIn
+            // 
+            this.btnZoomIn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(74)))), ((int)(((byte)(86)))));
+            this.btnZoomIn.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnZoomIn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnZoomIn.FlatAppearance.BorderSize = 0;
+            this.btnZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZoomIn.Image = global::ReadExcelApp.Properties.Resources.zoom;
+            this.btnZoomIn.Location = new System.Drawing.Point(10, 10);
+            this.btnZoomIn.Name = "btnZoomIn";
+            this.btnZoomIn.Size = new System.Drawing.Size(75, 80);
+            this.btnZoomIn.TabIndex = 8;
+            this.btnZoomIn.UseVisualStyleBackColor = false;
+            this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
+            // 
+            // btnDistance
+            // 
+            this.btnDistance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(74)))), ((int)(((byte)(86)))));
+            this.btnDistance.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnDistance.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnDistance.FlatAppearance.BorderSize = 0;
+            this.btnDistance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDistance.Image = global::ReadExcelApp.Properties.Resources.distance;
+            this.btnDistance.Location = new System.Drawing.Point(183, 10);
+            this.btnDistance.Name = "btnDistance";
+            this.btnDistance.Size = new System.Drawing.Size(75, 80);
+            this.btnDistance.TabIndex = 9;
+            this.btnDistance.UseVisualStyleBackColor = false;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.rbGeneralPolice);
             this.panel2.Controls.Add(this.rbProject);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(20, 20);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel2.Location = new System.Drawing.Point(15, 16);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
-            this.panel2.Size = new System.Drawing.Size(357, 100);
+            this.panel2.Padding = new System.Windows.Forms.Padding(15, 16, 15, 16);
+            this.panel2.Size = new System.Drawing.Size(268, 81);
             this.panel2.TabIndex = 6;
             // 
             // rbGeneralPolice
@@ -284,12 +432,11 @@
             this.rbGeneralPolice.FlatAppearance.BorderSize = 0;
             this.rbGeneralPolice.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rbGeneralPolice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(74)))), ((int)(((byte)(86)))));
-            this.rbGeneralPolice.Location = new System.Drawing.Point(20, 20);
-            this.rbGeneralPolice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rbGeneralPolice.Location = new System.Drawing.Point(15, 16);
+            this.rbGeneralPolice.Margin = new System.Windows.Forms.Padding(2);
             this.rbGeneralPolice.Name = "rbGeneralPolice";
-            this.rbGeneralPolice.Size = new System.Drawing.Size(162, 60);
+            this.rbGeneralPolice.Size = new System.Drawing.Size(131, 49);
             this.rbGeneralPolice.TabIndex = 4;
-            this.rbGeneralPolice.TabStop = true;
             this.rbGeneralPolice.Text = "General Police";
             this.rbGeneralPolice.UseVisualStyleBackColor = true;
             this.rbGeneralPolice.Click += new System.EventHandler(this.rbGeneralPolice_Click);
@@ -302,12 +449,11 @@
             this.rbProject.FlatAppearance.BorderSize = 0;
             this.rbProject.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.rbProject.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(74)))), ((int)(((byte)(86)))));
-            this.rbProject.Location = new System.Drawing.Point(241, 20);
-            this.rbProject.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rbProject.Location = new System.Drawing.Point(173, 16);
+            this.rbProject.Margin = new System.Windows.Forms.Padding(2);
             this.rbProject.Name = "rbProject";
-            this.rbProject.Size = new System.Drawing.Size(96, 60);
+            this.rbProject.Size = new System.Drawing.Size(80, 49);
             this.rbProject.TabIndex = 5;
-            this.rbProject.TabStop = true;
             this.rbProject.Text = "Project";
             this.rbProject.UseVisualStyleBackColor = true;
             this.rbProject.Click += new System.EventHandler(this.rbProject_Click);
@@ -317,9 +463,8 @@
             this.panel1.Controls.Add(this.gMap);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1351, 1193);
+            this.panel1.Size = new System.Drawing.Size(1013, 894);
             this.panel1.TabIndex = 2;
             // 
             // gMap
@@ -333,7 +478,6 @@
             this.gMap.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.gMap.LevelsKeepInMemory = 5;
             this.gMap.Location = new System.Drawing.Point(0, 0);
-            this.gMap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gMap.MarkersEnabled = true;
             this.gMap.MaxZoom = 2;
             this.gMap.MinZoom = 2;
@@ -347,7 +491,7 @@
             this.gMap.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMap.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMap.ShowTileGridLines = false;
-            this.gMap.Size = new System.Drawing.Size(1351, 1193);
+            this.gMap.Size = new System.Drawing.Size(1013, 894);
             this.gMap.TabIndex = 0;
             this.gMap.Zoom = 0D;
             this.gMap.OnMarkerClick += new GMap.NET.WindowsForms.MarkerClick(this.gMap_OnMarkerClick);
@@ -399,177 +543,15 @@
             this.bunifuElipse9.ElipseRadius = 15;
             this.bunifuElipse9.TargetControl = this.panel1;
             // 
-            // lbCommonLatLng
-            // 
-            this.lbCommonLatLng.FormattingEnabled = true;
-            this.lbCommonLatLng.ItemHeight = 16;
-            this.lbCommonLatLng.Location = new System.Drawing.Point(23, 711);
-            this.lbCommonLatLng.Name = "lbCommonLatLng";
-            this.lbCommonLatLng.Size = new System.Drawing.Size(548, 260);
-            this.lbCommonLatLng.TabIndex = 18;
-            // 
-            // btnPlotCommonLatLng
-            // 
-            this.btnPlotCommonLatLng.AllowAnimations = true;
-            this.btnPlotCommonLatLng.AllowMouseEffects = true;
-            this.btnPlotCommonLatLng.AllowToggling = false;
-            this.btnPlotCommonLatLng.AnimationSpeed = 200;
-            this.btnPlotCommonLatLng.AutoGenerateColors = false;
-            this.btnPlotCommonLatLng.AutoRoundBorders = false;
-            this.btnPlotCommonLatLng.AutoSizeLeftIcon = true;
-            this.btnPlotCommonLatLng.AutoSizeRightIcon = true;
-            this.btnPlotCommonLatLng.BackColor = System.Drawing.Color.Transparent;
-            this.btnPlotCommonLatLng.BackColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(122)))), ((int)(((byte)(183)))));
-            this.btnPlotCommonLatLng.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPlotCommonLatLng.BackgroundImage")));
-            this.btnPlotCommonLatLng.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
-            this.btnPlotCommonLatLng.ButtonText = "Plot Common LAT LNG";
-            this.btnPlotCommonLatLng.ButtonTextMarginLeft = 0;
-            this.btnPlotCommonLatLng.ColorContrastOnClick = 45;
-            this.btnPlotCommonLatLng.ColorContrastOnHover = 45;
-            this.btnPlotCommonLatLng.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges1.BottomLeft = true;
-            borderEdges1.BottomRight = true;
-            borderEdges1.TopLeft = true;
-            borderEdges1.TopRight = true;
-            this.btnPlotCommonLatLng.CustomizableEdges = borderEdges1;
-            this.btnPlotCommonLatLng.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.btnPlotCommonLatLng.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
-            this.btnPlotCommonLatLng.DisabledFillColor = System.Drawing.Color.Empty;
-            this.btnPlotCommonLatLng.DisabledForecolor = System.Drawing.Color.Empty;
-            this.btnPlotCommonLatLng.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Pressed;
-            this.btnPlotCommonLatLng.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnPlotCommonLatLng.ForeColor = System.Drawing.Color.White;
-            this.btnPlotCommonLatLng.IconLeft = null;
-            this.btnPlotCommonLatLng.IconLeftAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPlotCommonLatLng.IconLeftCursor = System.Windows.Forms.Cursors.Default;
-            this.btnPlotCommonLatLng.IconLeftPadding = new System.Windows.Forms.Padding(11, 3, 3, 3);
-            this.btnPlotCommonLatLng.IconMarginLeft = 11;
-            this.btnPlotCommonLatLng.IconPadding = 10;
-            this.btnPlotCommonLatLng.IconRight = null;
-            this.btnPlotCommonLatLng.IconRightAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPlotCommonLatLng.IconRightCursor = System.Windows.Forms.Cursors.Default;
-            this.btnPlotCommonLatLng.IconRightPadding = new System.Windows.Forms.Padding(3, 3, 7, 3);
-            this.btnPlotCommonLatLng.IconSize = 25;
-            this.btnPlotCommonLatLng.IdleBorderColor = System.Drawing.Color.Empty;
-            this.btnPlotCommonLatLng.IdleBorderRadius = 0;
-            this.btnPlotCommonLatLng.IdleBorderThickness = 0;
-            this.btnPlotCommonLatLng.IdleFillColor = System.Drawing.Color.Empty;
-            this.btnPlotCommonLatLng.IdleIconLeftImage = null;
-            this.btnPlotCommonLatLng.IdleIconRightImage = null;
-            this.btnPlotCommonLatLng.IndicateFocus = false;
-            this.btnPlotCommonLatLng.Location = new System.Drawing.Point(24, 940);
-            this.btnPlotCommonLatLng.Name = "btnPlotCommonLatLng";
-            this.btnPlotCommonLatLng.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
-            this.btnPlotCommonLatLng.OnDisabledState.BorderRadius = 1;
-            this.btnPlotCommonLatLng.OnDisabledState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
-            this.btnPlotCommonLatLng.OnDisabledState.BorderThickness = 1;
-            this.btnPlotCommonLatLng.OnDisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.btnPlotCommonLatLng.OnDisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
-            this.btnPlotCommonLatLng.OnDisabledState.IconLeftImage = null;
-            this.btnPlotCommonLatLng.OnDisabledState.IconRightImage = null;
-            this.btnPlotCommonLatLng.onHoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
-            this.btnPlotCommonLatLng.onHoverState.BorderRadius = 1;
-            this.btnPlotCommonLatLng.onHoverState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
-            this.btnPlotCommonLatLng.onHoverState.BorderThickness = 1;
-            this.btnPlotCommonLatLng.onHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(150)))), ((int)(((byte)(255)))));
-            this.btnPlotCommonLatLng.onHoverState.ForeColor = System.Drawing.Color.White;
-            this.btnPlotCommonLatLng.onHoverState.IconLeftImage = null;
-            this.btnPlotCommonLatLng.onHoverState.IconRightImage = null;
-            this.btnPlotCommonLatLng.OnIdleState.BorderColor = System.Drawing.Color.DodgerBlue;
-            this.btnPlotCommonLatLng.OnIdleState.BorderRadius = 1;
-            this.btnPlotCommonLatLng.OnIdleState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
-            this.btnPlotCommonLatLng.OnIdleState.BorderThickness = 1;
-            this.btnPlotCommonLatLng.OnIdleState.FillColor = System.Drawing.Color.DodgerBlue;
-            this.btnPlotCommonLatLng.OnIdleState.ForeColor = System.Drawing.Color.White;
-            this.btnPlotCommonLatLng.OnIdleState.IconLeftImage = null;
-            this.btnPlotCommonLatLng.OnIdleState.IconRightImage = null;
-            this.btnPlotCommonLatLng.OnPressedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(96)))), ((int)(((byte)(144)))));
-            this.btnPlotCommonLatLng.OnPressedState.BorderRadius = 1;
-            this.btnPlotCommonLatLng.OnPressedState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
-            this.btnPlotCommonLatLng.OnPressedState.BorderThickness = 1;
-            this.btnPlotCommonLatLng.OnPressedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(96)))), ((int)(((byte)(144)))));
-            this.btnPlotCommonLatLng.OnPressedState.ForeColor = System.Drawing.Color.White;
-            this.btnPlotCommonLatLng.OnPressedState.IconLeftImage = null;
-            this.btnPlotCommonLatLng.OnPressedState.IconRightImage = null;
-            this.btnPlotCommonLatLng.Size = new System.Drawing.Size(349, 57);
-            this.btnPlotCommonLatLng.TabIndex = 19;
-            this.btnPlotCommonLatLng.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnPlotCommonLatLng.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
-            this.btnPlotCommonLatLng.TextMarginLeft = 0;
-            this.btnPlotCommonLatLng.TextPadding = new System.Windows.Forms.Padding(0);
-            this.btnPlotCommonLatLng.UseDefaultRadiusAndThickness = true;
-            this.btnPlotCommonLatLng.Click += new System.EventHandler(this.btnPlotCommonLatLng_Click);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.FlatAppearance.BorderSize = 0;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Image = global::ReadExcelApp.Properties.Resources.analytics1;
-            this.btnSearch.Location = new System.Drawing.Point(307, 567);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 49);
-            this.btnSearch.TabIndex = 17;
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // btnGetRoute
-            // 
-            this.btnGetRoute.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(74)))), ((int)(((byte)(86)))));
-            this.btnGetRoute.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnGetRoute.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnGetRoute.FlatAppearance.BorderSize = 0;
-            this.btnGetRoute.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGetRoute.Image = global::ReadExcelApp.Properties.Resources.placeholde;
-            this.btnGetRoute.Location = new System.Drawing.Point(13, 12);
-            this.btnGetRoute.Margin = new System.Windows.Forms.Padding(4);
-            this.btnGetRoute.Name = "btnGetRoute";
-            this.btnGetRoute.Size = new System.Drawing.Size(137, 109);
-            this.btnGetRoute.TabIndex = 10;
-            this.btnGetRoute.UseVisualStyleBackColor = false;
-            this.btnGetRoute.Click += new System.EventHandler(this.btnGetRoute_Click);
-            // 
-            // btnZoomIn
-            // 
-            this.btnZoomIn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(74)))), ((int)(((byte)(86)))));
-            this.btnZoomIn.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnZoomIn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnZoomIn.FlatAppearance.BorderSize = 0;
-            this.btnZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnZoomIn.Image = global::ReadExcelApp.Properties.Resources.zoom;
-            this.btnZoomIn.Location = new System.Drawing.Point(13, 12);
-            this.btnZoomIn.Margin = new System.Windows.Forms.Padding(4);
-            this.btnZoomIn.Name = "btnZoomIn";
-            this.btnZoomIn.Size = new System.Drawing.Size(100, 99);
-            this.btnZoomIn.TabIndex = 8;
-            this.btnZoomIn.UseVisualStyleBackColor = false;
-            this.btnZoomIn.Click += new System.EventHandler(this.btnZoomIn_Click);
-            // 
-            // btnDistance
-            // 
-            this.btnDistance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(74)))), ((int)(((byte)(86)))));
-            this.btnDistance.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnDistance.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnDistance.FlatAppearance.BorderSize = 0;
-            this.btnDistance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDistance.Image = global::ReadExcelApp.Properties.Resources.distance;
-            this.btnDistance.Location = new System.Drawing.Point(244, 12);
-            this.btnDistance.Margin = new System.Windows.Forms.Padding(4);
-            this.btnDistance.Name = "btnDistance";
-            this.btnDistance.Size = new System.Drawing.Size(100, 99);
-            this.btnDistance.TabIndex = 9;
-            this.btnDistance.UseVisualStyleBackColor = false;
-            // 
             // GMapForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
-            this.ClientSize = new System.Drawing.Size(1748, 1193);
+            this.ClientSize = new System.Drawing.Size(1311, 894);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "GMapForm";
             this.Text = "GMAP";
             this.Load += new System.EventHandler(this.GMapForm_Load);

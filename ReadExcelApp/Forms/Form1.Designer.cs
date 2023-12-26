@@ -38,9 +38,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges2 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.cDRStanderizedTableBindingSource5 = new System.Windows.Forms.BindingSource(this.components);
             this.scfDataSet = new ReadExcelApp.scfDataSet();
             this.cDRStanderizedTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -89,6 +89,7 @@
             this.panelShowA_Num = new System.Windows.Forms.Panel();
             this.gvCDRA_Num = new Zuby.ADGV.AdvancedDataGridView();
             this.panelButtons = new System.Windows.Forms.Panel();
+            this.tbErrorHandling = new System.Windows.Forms.TextBox();
             this.btnExport = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -100,7 +101,7 @@
             this.bunifuElipse2 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuElipse3 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
-            this.tbErrorHandling = new System.Windows.Forms.TextBox();
+            this.bflbErrorExcelSheet = new Bunifu.UI.WinForms.BunifuLabel();
             ((System.ComponentModel.ISupportInitialize)(this.cDRStanderizedTableBindingSource5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scfDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cDRStanderizedTableBindingSource)).BeginInit();
@@ -263,7 +264,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.panel2.Padding = new System.Windows.Forms.Padding(10);
             this.panel2.Size = new System.Drawing.Size(1087, 613);
             this.panel2.TabIndex = 36;
             // 
@@ -272,9 +273,9 @@
             this.panel5.Controls.Add(this.gvStandCDR);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(10, 219);
-            this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
-            this.panel5.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.panel5.Padding = new System.Windows.Forms.Padding(8);
             this.panel5.Size = new System.Drawing.Size(1067, 384);
             this.panel5.TabIndex = 9;
             // 
@@ -480,9 +481,9 @@
             this.panel4.Controls.Add(this.panelShowA_Num);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(10, 10);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
-            this.panel4.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.panel4.Padding = new System.Windows.Forms.Padding(8);
             this.panel4.Size = new System.Drawing.Size(1067, 209);
             this.panel4.TabIndex = 8;
             // 
@@ -543,9 +544,9 @@
             this.panelShowA_Num.Controls.Add(this.gvCDRA_Num);
             this.panelShowA_Num.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelShowA_Num.Location = new System.Drawing.Point(785, 8);
-            this.panelShowA_Num.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelShowA_Num.Margin = new System.Windows.Forms.Padding(2);
             this.panelShowA_Num.Name = "panelShowA_Num";
-            this.panelShowA_Num.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.panelShowA_Num.Padding = new System.Windows.Forms.Padding(8);
             this.panelShowA_Num.Size = new System.Drawing.Size(274, 193);
             this.panelShowA_Num.TabIndex = 1;
             // 
@@ -597,6 +598,7 @@
             // 
             // panelButtons
             // 
+            this.panelButtons.Controls.Add(this.bflbErrorExcelSheet);
             this.panelButtons.Controls.Add(this.tbErrorHandling);
             this.panelButtons.Controls.Add(this.btnExport);
             this.panelButtons.Controls.Add(this.progressBar);
@@ -606,9 +608,17 @@
             this.panelButtons.ForeColor = System.Drawing.Color.White;
             this.panelButtons.Location = new System.Drawing.Point(1087, 0);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Padding = new System.Windows.Forms.Padding(15, 15, 15, 15);
+            this.panelButtons.Padding = new System.Windows.Forms.Padding(15);
             this.panelButtons.Size = new System.Drawing.Size(240, 613);
             this.panelButtons.TabIndex = 35;
+            // 
+            // tbErrorHandling
+            // 
+            this.tbErrorHandling.Location = new System.Drawing.Point(18, 342);
+            this.tbErrorHandling.Multiline = true;
+            this.tbErrorHandling.Name = "tbErrorHandling";
+            this.tbErrorHandling.Size = new System.Drawing.Size(207, 212);
+            this.tbErrorHandling.TabIndex = 13;
             // 
             // btnExport
             // 
@@ -660,7 +670,7 @@
             this.btnExport.IdleIconRightImage = null;
             this.btnExport.IndicateFocus = false;
             this.btnExport.Location = new System.Drawing.Point(68, 227);
-            this.btnExport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(2);
             this.btnExport.Name = "btnExport";
             this.btnExport.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnExport.OnDisabledState.BorderRadius = 1;
@@ -716,7 +726,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(15, 68);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            this.panel1.Padding = new System.Windows.Forms.Padding(10);
             this.panel1.Size = new System.Drawing.Size(210, 71);
             this.panel1.TabIndex = 10;
             // 
@@ -848,13 +858,22 @@
             this.bunifuElipse1.ElipseRadius = 15;
             this.bunifuElipse1.TargetControl = this.gvShowCaseProject;
             // 
-            // tbErrorHandling
+            // bflbErrorExcelSheet
             // 
-            this.tbErrorHandling.Location = new System.Drawing.Point(18, 342);
-            this.tbErrorHandling.Multiline = true;
-            this.tbErrorHandling.Name = "tbErrorHandling";
-            this.tbErrorHandling.Size = new System.Drawing.Size(207, 212);
-            this.tbErrorHandling.TabIndex = 13;
+            this.bflbErrorExcelSheet.AllowParentOverrides = false;
+            this.bflbErrorExcelSheet.AutoEllipsis = false;
+            this.bflbErrorExcelSheet.AutoSize = false;
+            this.bflbErrorExcelSheet.CursorType = null;
+            this.bflbErrorExcelSheet.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.bflbErrorExcelSheet.ForeColor = System.Drawing.Color.Red;
+            this.bflbErrorExcelSheet.Location = new System.Drawing.Point(18, 560);
+            this.bflbErrorExcelSheet.Name = "bflbErrorExcelSheet";
+            this.bflbErrorExcelSheet.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bflbErrorExcelSheet.Size = new System.Drawing.Size(207, 21);
+            this.bflbErrorExcelSheet.TabIndex = 14;
+            this.bflbErrorExcelSheet.Text = "Excel Sheet Error";
+            this.bflbErrorExcelSheet.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.bflbErrorExcelSheet.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
             // 
             // Form1
             // 
@@ -965,6 +984,7 @@
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnExport;
         private System.Windows.Forms.TextBox tbErrorHandling;
+        private Bunifu.UI.WinForms.BunifuLabel bflbErrorExcelSheet;
     }
 }
 

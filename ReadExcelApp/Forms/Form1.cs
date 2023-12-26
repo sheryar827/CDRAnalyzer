@@ -377,37 +377,44 @@ namespace ReadExcelApp
                 catch(Exception ex)
                 {
                     CommonMethods.messageDialog(ex.Message);
-                    if (standCDR.Count >= 2)
-                    {
-                        var secondLastItem = standCDR[standCDR.Count - 2];
-                        var lastItem = standCDR.Last();
 
-                        // Now you can print or use the second last item as needed
-                        tbErrorHandling.Text = $"--Second Last Line--" +
-                                                $"{Environment.NewLine}A_Num: {secondLastItem.A_Num}" +
-                                                $"{Environment.NewLine}B_Num: {secondLastItem.B_Num}" +
-                                                $"{Environment.NewLine}Date: {secondLastItem.Date}" +
-                                                $"{Environment.NewLine}Call_Dur: {secondLastItem.Call_Dur}" +
-                                                $"{Environment.NewLine}{Environment.NewLine}--Last Line--" +
-                                                $"{Environment.NewLine}A_Num: {lastItem.A_Num}" +
-                                                $"{Environment.NewLine}B_Num: {lastItem.B_Num}" +
-                                                $"{Environment.NewLine}Date: {lastItem.Date}" +
-                                                $"{Environment.NewLine}Call_Dur: {lastItem.Call_Dur}";
-                    }
-                    else
-                    {
-                        tbErrorHandling.Multiline = true; // Ensure this property is set
-                        tbErrorHandling.Text = $"--Last Line--" +
-                            $"{Environment.NewLine}A_Num: {A_Num}" +
-                            $"{Environment.NewLine}B_Num: {standCDR.Last().B_Num}" +
-                            $"{Environment.NewLine}Date: {standCDR.Last().Date}" +
-                            $"{Environment.NewLine}Call_Dur: {standCDR.Last().Call_Dur}";
-                    }
-                    
-
-
+                    UpdateErrorHandlingText(standCDR);
                 }
 
+            }
+        }
+
+        public void UpdateErrorHandlingText(List<StanderizedCDR> standCDR)
+        {
+            //Here we plus 2 because 1 line is header
+            bflbErrorExcelSheet.Text = $"{standCDR.Count + 2}";
+
+            if (standCDR.Count >= 2)
+            {
+                var secondLastItem = standCDR[standCDR.Count - 2];
+                var lastItem = standCDR.Last();
+
+                tbErrorHandling.Text = $"--Second Last Line--" +
+                                       $"{Environment.NewLine}A_Num: {secondLastItem.A_Num}" +
+                                       $"{Environment.NewLine}B_Num: {secondLastItem.B_Num}" +
+                                       $"{Environment.NewLine}Date: {secondLastItem.Date}" +
+                                       $"{Environment.NewLine}Call_Dur: {secondLastItem.Call_Dur}" +
+                                       $"{Environment.NewLine}{Environment.NewLine}--Last Line--" +
+                                       $"{Environment.NewLine}A_Num: {lastItem.A_Num}" +
+                                       $"{Environment.NewLine}B_Num: {lastItem.B_Num}" +
+                                       $"{Environment.NewLine}Date: {lastItem.Date}" +
+                                       $"{Environment.NewLine}Call_Dur: {lastItem.Call_Dur}";
+            }
+            else
+            {
+                tbErrorHandling.Multiline = true; // Ensure this property is set
+                var lastItem = standCDR.LastOrDefault();
+
+                tbErrorHandling.Text = $"--Last Line--" +
+                                       $"{Environment.NewLine}A_Num: {lastItem?.A_Num}" +
+                                       $"{Environment.NewLine}B_Num: {lastItem?.B_Num}" +
+                                       $"{Environment.NewLine}Date: {lastItem?.Date}" +
+                                       $"{Environment.NewLine}Call_Dur: {lastItem?.Call_Dur}";
             }
         }
 
@@ -545,13 +552,14 @@ namespace ReadExcelApp
             catch (Exception ex)
             {
                 // Get stack trace for the exception with source file information
-                var st = new StackTrace(ex, true);
+                //var st = new StackTrace(ex, true);
                 // Get the top stack frame
-                var frame = st.GetFrame(0);
+                //var frame = st.GetFrame(0);
                 // Get the line number from the stack frame
-                var line = frame.GetFileLineNumber();
-                CommonMethods.messageDialog(ex.Message + " " + line);
+                //var line = frame.GetFileLineNumber();
+                CommonMethods.messageDialog(ex.Message);
                 //CommonMethods.messageDialog(ex.Message);
+                UpdateErrorHandlingText(standCDR);
             }
         }
 
@@ -637,6 +645,7 @@ namespace ReadExcelApp
             catch (Exception ex)
             {
                 CommonMethods.messageDialog(ex.Message);
+                UpdateErrorHandlingText(standCDR);
             }
         }
 
@@ -759,11 +768,13 @@ namespace ReadExcelApp
                 // Get stack trace for the exception with source file information
                 var st = new StackTrace(ex, true);
                 // Get the top stack frame
-                var frame = st.GetFrame(0);
+                //var frame = st.GetFrame(0);
                 // Get the line number from the stack frame
-                var line = frame.GetFileLineNumber();
-                CommonMethods.messageDialog(ex.Message + " " + line);
+                //var line = frame.GetFileLineNumber();
+                //CommonMethods.messageDialog(ex.Message + " " + line);
+                CommonMethods.messageDialog(ex.Message);
                 //CommonMethods.messageDialog(ex.Message);
+                UpdateErrorHandlingText(standCDR);
             }
         }
 
@@ -872,6 +883,7 @@ namespace ReadExcelApp
             catch (Exception ex)
             {
                 CommonMethods.messageDialog(ex.Message);
+                UpdateErrorHandlingText(standCDR);
             }
         }
 
@@ -962,12 +974,14 @@ namespace ReadExcelApp
             catch (Exception ex)
             {
                 // Get stack trace for the exception with source file information
-                var st = new StackTrace(ex, true);
+                //var st = new StackTrace(ex, true);
                 // Get the top stack frame
-                var frame = st.GetFrame(0);
+                //var frame = st.GetFrame(0);
                 // Get the line number from the stack frame
-                var line = frame.GetFileLineNumber();
-                CommonMethods.messageDialog(ex.Message + " " + line);
+                //var line = frame.GetFileLineNumber();
+                //CommonMethods.messageDialog(ex.Message + " " + line);
+                CommonMethods.messageDialog(ex.Message);
+                UpdateErrorHandlingText(standCDR);
             }
         }
 

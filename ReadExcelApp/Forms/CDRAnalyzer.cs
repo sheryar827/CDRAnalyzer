@@ -487,6 +487,11 @@ namespace ReadExcelApp
             }
         }
 
-        
+        private void bfbtnCommonLatLng_Click(object sender, EventArgs e)
+        {
+            indicator.Top = ((Control)sender).Top;
+            BunifuPages.SetPage("GMap");
+            openChildFormPage(new Forms.CGMapForm(), sender, tabGMap);
+        }
     }
 }
