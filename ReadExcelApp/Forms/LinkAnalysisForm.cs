@@ -149,6 +149,8 @@ namespace ReadExcelApp.Forms
                     allRecordsA_Num.Add(allRecordA_Num);
                 }
             }
+
+            //Console.WriteLine($"{allRecordsA_Num.Count}");
         }
 
         /*private void commonB_Num()
@@ -270,18 +272,24 @@ namespace ReadExcelApp.Forms
                 drB_Num.Close();
                 getSqlDRAndConn.sqlConn.Close();*/
 
-                List<string> b_numlst = new List<string>();
+                /*List<string> b_numlst = new List<string>();
                 b_numlst = allRecordsA_Num
                     .AsEnumerable()
                     .Where(a=>a.A_Num.Equals(item))
                     .Select(x => x.B_Num)
                     //.Where(bp => bp.Substring(0, 2).Equals("92") && bp.Length == 12)
-                    .ToList();
+                    .ToList();*/
+
+                List<string> b_numlst = allRecordsA_Num
+                                        .Where(a => a.A_Num.Equals(item) && a.B_Num.StartsWith("92"))
+                                        .Select(x => x.B_Num)
+                                        .ToList();
 
                 List<string> uniqueB_Numlst = b_numlst
                     .Distinct()
                     //.Where(bp => bp.Substring(0, 2).Equals("92") && bp.Length == 12)
                     .ToList();
+
 
                 compB_Numlst.AddRange(uniqueB_Numlst);
 
@@ -353,6 +361,7 @@ namespace ReadExcelApp.Forms
                 {
                     string getB_NumQry = "select Count(*) from CDR_DB_Tbl where A_Num = '" + gvCDRA_Num.Columns[i].HeaderText.ToString() + "' and B_Num = '" + b_num + "'";
                     string bnc = CommonMethods.getCount(getB_NumQry).ToString();
+                    //string bnc = CountMatchingRecords(allRecordsA_Num, gvCDRA_Num.Columns[i].HeaderText, b_num).ToString();
                     gvCDRA_Num.Rows[count].Cells[i].Value = bnc;
                     Edge edge = graph.AddEdge(b_num, gvCDRA_Num.Columns[i].HeaderText.ToString());
                     edge.LabelText = bnc;
@@ -372,6 +381,11 @@ namespace ReadExcelApp.Forms
 
             /*lbCaseProjectA_Num.DataSource = duplicates.Distinct().ToList();*/
 
+        }
+
+        private static int CountMatchingRecords(List<AllRecordA_Num> records, string aNum, string bNum)
+        {
+            return records.Count(record => record.A_Num == aNum && record.B_Num == bNum);
         }
 
         private void btnComIMEI_Click(object sender, EventArgs e)

@@ -163,7 +163,7 @@ namespace ReadExcelApp
             }*/
         }
 
-        public static async Task<List<CDRSummary>> cdrSummary(string A_Num, string project_Name, string Lat, string Lng)
+        public static async Task<List<CDRSummary>> cdrSummary(string A_Num, string project_Name, double Lat, double Lng)
         {
             List<CDRSummary> csByTotalInOut = new List<CDRSummary>();
             string aParty = A_Num.Substring(0, A_Num.IndexOf(" "));

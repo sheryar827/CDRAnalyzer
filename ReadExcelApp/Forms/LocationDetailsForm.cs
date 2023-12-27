@@ -13,7 +13,7 @@ namespace ReadExcelApp.Forms
     public partial class LocationDetailsForm : Form
     {
         ToolTip ttBtn;
-        string locLat, locLng;
+        double locLat, locLng;
         //string aParty = null;
         string a_num = null;
         string project_name = null;
@@ -41,8 +41,8 @@ namespace ReadExcelApp.Forms
 
             gvLocationDetails.DataSource = dt;*/
             this.list = list;
-            locLat = pointLatLng.Lat.ToString();
-            locLng = pointLatLng.Lng.ToString();
+            locLat = pointLatLng.Lat;
+            locLng = pointLatLng.Lng;
             a_num = A_Num;
             project_name = project_Name;
 
@@ -67,6 +67,9 @@ namespace ReadExcelApp.Forms
             
             string bParty = gvLocationDetails.Rows[e.RowIndex].Cells[2].Value.ToString();
             string columnType = gvLocationDetails.Columns[e.ColumnIndex].HeaderText;
+
+            //Console.WriteLine($"{bParty} {columnType}");
+
             getDetailedRecords(bParty, locLat, locLng, columnType);
             
             //Console.WriteLine(aParty);
@@ -134,11 +137,33 @@ namespace ReadExcelApp.Forms
             ttBtn.SetToolTip(this.btnClose, "Click To Close!");
         }
 
-        private void getDetailedRecords(string bParty, string lat, string lng, string columnType)
+        bool IsValidLatLong(string lat, string lng)
+        {
+            // Check if the strings are not null or empty
+            if (string.IsNullOrWhiteSpace(lat) || string.IsNullOrWhiteSpace(lng))
+            {
+                return false;
+            }
+
+            // Try parsing the strings to double
+            if (double.TryParse(lat, out double latitude) && double.TryParse(lng, out double longitude))
+            {
+                // Check if the values are within valid ranges
+                return latitude >= -90 && latitude <= 90 && longitude >= -180 && longitude <= 180;
+            }
+
+            return false;
+        }
+
+        private void getDetailedRecords(string bParty, double lat, double lng, string columnType)
         {
             try
             {
-                var lookup = list.ToLookup(i => i.B_Num, j => new { j.Call_Dur, j.Call_Dir, j.Call_Type, j.Date, j.Time, j.Loc, j.Lat, j.Lng });
+                // Assuming 'list' is your original list and 'Item' is the type of items in the list
+                // and 'Item' has properties like B_Num, Lat, Lng, etc.
+                var filteredList = list.Where(item => IsValidLatLong(item.Lat, item.Lng));
+
+                var lookup = filteredList.ToLookup(i => i.B_Num, j => new { j.Call_Dur, j.Call_Dir, j.Call_Type, j.Date, j.Time, j.Loc, j.Lat, j.Lng });
 
                 switch (columnType)
                 {
@@ -149,11 +174,16 @@ namespace ReadExcelApp.Forms
                         {
                             if (item.Key.Equals(bParty))
                             {
+                                
                                 var sd = item.Where(i => i.Call_Dir.Equals(Common.incoming) 
-                                && i.Lat.Equals(lat) && i.Lng.Equals(lng) 
+                                && double.Parse(i.Lat) == lat && double.Parse(i.Lng) == lng
                                 && i.Call_Type.Equals(Common.voice));
+
+                                
+
                                 foreach (var i in sd)
                                 {
+                                    
                                     CDRSummaryDetail summaryDetail = new CDRSummaryDetail();
                                     summaryDetail.B_Num = bParty;
                                     summaryDetail.Duration = TimeSpan.FromSeconds(Double.Parse(i.Call_Dur)).ToString();
@@ -178,7 +208,7 @@ namespace ReadExcelApp.Forms
                             if (item.Key.Equals(bParty))
                             {
                                 var sd = item.Where(i => i.Call_Dir.Equals(Common.outgoing)
-                                && i.Lat.Equals(lat) && i.Lng.Equals(lng)
+                                && double.Parse(i.Lat) == lat && double.Parse(i.Lng) == lng
                                 && i.Call_Type.Equals(Common.voice));
                                 foreach (var i in sd)
                                 {
@@ -207,7 +237,7 @@ namespace ReadExcelApp.Forms
                             if (item.Key.Equals(bParty))
                             {
                                 var sd = item.Where(i => i.Call_Dir.Equals(Common.incoming)
-                                && i.Lat.Equals(lat) && i.Lng.Equals(lng)
+                                && double.Parse(i.Lat) == lat && double.Parse(i.Lng) == lng
                                 && i.Call_Type.Equals(Common.sms));
                                 foreach (var i in sd)
                                 {
@@ -235,7 +265,7 @@ namespace ReadExcelApp.Forms
                             if (item.Key.Equals(bParty))
                             {
                                 var sd = item.Where(i => i.Call_Dir.Equals(Common.outgoing)
-                                && i.Lat.Equals(lat) && i.Lng.Equals(lng)
+                                && double.Parse(i.Lat) == lat && double.Parse(i.Lng) == lng
                                 && i.Call_Type.Equals(Common.sms));
                                 foreach (var i in sd)
                                 {
@@ -262,10 +292,18 @@ namespace ReadExcelApp.Forms
                         {
                             if (item.Key.Equals(bParty))
                             {
-                                var sd = item.Where(i=> i.Lat.Equals(lat) && i.Lng.Equals(lng));
+                                var sd = item.Where(i=> double.Parse(i.Lat) == lat && double.Parse(i.Lng) == lng);
                                 
                                 foreach (var i in sd)
                                 {
+
+                                    /*Console.WriteLine($"B_Party: {bParty}" +
+                                        $"Call_Dur: {i.Call_Dur} " +
+                                        $"Call_Dir: {i.Call_Dir}" +
+                                        $"Call_Type: {i.Call_Type} " +
+                                        $"Call_Date: {i.Date}" +
+                                        $"Call_Loc: {i.Loc}");*/
+
                                     CDRSummaryDetail summaryDetail = new CDRSummaryDetail();
                                     summaryDetail.B_Num = bParty;
                                     summaryDetail.Duration = TimeSpan.FromSeconds(Double.Parse(i.Call_Dur)).ToString();

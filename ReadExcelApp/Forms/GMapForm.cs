@@ -435,9 +435,13 @@ namespace ReadExcelApp.Forms
 
                     PointLatLng getLatLngForMap = new PointLatLng(lat, lng);
                     _points.Add(getLatLngForMap);
+                    //Console.WriteLine(getLatLngForMap.Lat + " " + getLatLngForMap.Lng);
                 }
 
                 List<PointLatLng> uniquePointLst = _points.Distinct().ToList();
+                
+                // Filter out invalid points. Define your own criteria for invalidity
+                uniquePointLst = uniquePointLst.Where(p => IsValidPoint(p)).ToList();
 
                 plotMarkers(a_numForAnalysis, project_Name, uniquePointLst, selectColor);
 
@@ -447,6 +451,12 @@ namespace ReadExcelApp.Forms
 
                 //CommonMethods.messageDialog(Common.a_numForAnalysis + " With " + Common.allRecordA_Nums.Count() + " Records Is Selected For Analysis");
             }
+        }
+
+        private static bool IsValidPoint(PointLatLng point)
+        {
+            // Example criteria: point is invalid if both latitude and longitude are 0
+            return !(point.Lat == 0 && point.Lng == 0);
         }
 
         private void gMap_MouseClick(object sender, MouseEventArgs e)
@@ -722,6 +732,7 @@ namespace ReadExcelApp.Forms
         {
             if (locDetails)
             {
+                //Console.WriteLine($"{item.Position.Lat} {item.Position.Lng}");
                 /*var latlngRecord = FilterBySpecificCoordinates(commonLatLngList
                     , item.Position.Lat.ToString()
                     , item.Position.Lng.ToString());*/
