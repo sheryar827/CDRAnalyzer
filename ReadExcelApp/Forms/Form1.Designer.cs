@@ -38,9 +38,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges2 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.cDRStanderizedTableBindingSource5 = new System.Windows.Forms.BindingSource(this.components);
             this.scfDataSet = new ReadExcelApp.scfDataSet();
             this.cDRStanderizedTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -89,6 +89,7 @@
             this.panelShowA_Num = new System.Windows.Forms.Panel();
             this.gvCDRA_Num = new Zuby.ADGV.AdvancedDataGridView();
             this.panelButtons = new System.Windows.Forms.Panel();
+            this.bflbErrorExcelSheet = new Bunifu.UI.WinForms.BunifuLabel();
             this.tbErrorHandling = new System.Windows.Forms.TextBox();
             this.btnExport = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.progressBar = new System.Windows.Forms.ProgressBar();
@@ -101,7 +102,6 @@
             this.bunifuElipse2 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuElipse3 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
-            this.bflbErrorExcelSheet = new Bunifu.UI.WinForms.BunifuLabel();
             ((System.ComponentModel.ISupportInitialize)(this.cDRStanderizedTableBindingSource5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scfDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cDRStanderizedTableBindingSource)).BeginInit();
@@ -612,6 +612,23 @@
             this.panelButtons.Size = new System.Drawing.Size(240, 613);
             this.panelButtons.TabIndex = 35;
             // 
+            // bflbErrorExcelSheet
+            // 
+            this.bflbErrorExcelSheet.AllowParentOverrides = false;
+            this.bflbErrorExcelSheet.AutoEllipsis = false;
+            this.bflbErrorExcelSheet.AutoSize = false;
+            this.bflbErrorExcelSheet.CursorType = null;
+            this.bflbErrorExcelSheet.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.bflbErrorExcelSheet.ForeColor = System.Drawing.Color.Red;
+            this.bflbErrorExcelSheet.Location = new System.Drawing.Point(18, 560);
+            this.bflbErrorExcelSheet.Name = "bflbErrorExcelSheet";
+            this.bflbErrorExcelSheet.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bflbErrorExcelSheet.Size = new System.Drawing.Size(207, 21);
+            this.bflbErrorExcelSheet.TabIndex = 14;
+            this.bflbErrorExcelSheet.Text = "Excel Sheet Error";
+            this.bflbErrorExcelSheet.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.bflbErrorExcelSheet.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
             // tbErrorHandling
             // 
             this.tbErrorHandling.Location = new System.Drawing.Point(18, 342);
@@ -857,23 +874,6 @@
             // 
             this.bunifuElipse1.ElipseRadius = 15;
             this.bunifuElipse1.TargetControl = this.gvShowCaseProject;
-            // 
-            // bflbErrorExcelSheet
-            // 
-            this.bflbErrorExcelSheet.AllowParentOverrides = false;
-            this.bflbErrorExcelSheet.AutoEllipsis = false;
-            this.bflbErrorExcelSheet.AutoSize = false;
-            this.bflbErrorExcelSheet.CursorType = null;
-            this.bflbErrorExcelSheet.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.bflbErrorExcelSheet.ForeColor = System.Drawing.Color.Red;
-            this.bflbErrorExcelSheet.Location = new System.Drawing.Point(18, 560);
-            this.bflbErrorExcelSheet.Name = "bflbErrorExcelSheet";
-            this.bflbErrorExcelSheet.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bflbErrorExcelSheet.Size = new System.Drawing.Size(207, 21);
-            this.bflbErrorExcelSheet.TabIndex = 14;
-            this.bflbErrorExcelSheet.Text = "Excel Sheet Error";
-            this.bflbErrorExcelSheet.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.bflbErrorExcelSheet.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
             // 
             // Form1
             // 

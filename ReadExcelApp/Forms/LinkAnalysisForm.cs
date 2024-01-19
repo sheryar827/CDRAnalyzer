@@ -359,9 +359,9 @@ namespace ReadExcelApp.Forms
 
                 for (int i = 1; i < gvCDRA_Num.ColumnCount; i++)
                 {
-                    string getB_NumQry = "select Count(*) from CDR_DB_Tbl where A_Num = '" + gvCDRA_Num.Columns[i].HeaderText.ToString() + "' and B_Num = '" + b_num + "'";
-                    string bnc = CommonMethods.getCount(getB_NumQry).ToString();
-                    //string bnc = CountMatchingRecords(allRecordsA_Num, gvCDRA_Num.Columns[i].HeaderText, b_num).ToString();
+                    //string getB_NumQry = "select Count(*) from CDR_DB_Tbl where A_Num = '" + gvCDRA_Num.Columns[i].HeaderText.ToString() + "' and B_Num = '" + b_num + "'";
+                    //string bnc = CommonMethods.getCount(getB_NumQry).ToString();
+                    string bnc = CountMatchingRecords(allRecordsA_Num, gvCDRA_Num.Columns[i].HeaderText, b_num).ToString();
                     gvCDRA_Num.Rows[count].Cells[i].Value = bnc;
                     Edge edge = graph.AddEdge(b_num, gvCDRA_Num.Columns[i].HeaderText.ToString());
                     edge.LabelText = bnc;
@@ -399,7 +399,7 @@ namespace ReadExcelApp.Forms
             List<String> b_numC = new List<string>();
             Dictionary<string, HashSet<string>> dictionaryIMEI = new Dictionary<string, HashSet<string>>();
             gvCDRA_Num.Columns.Add("IMEI", "IMEI");
-            foreach (var item in lbCaseProjectA_Num.Items)
+            /*foreach (var item in lbCaseProjectA_Num.Items)
             {
                 string getIMEIQry = "select IMEI from CDR_DB_Tbl where A_Num = '" + item + "'";
                 GetSqlDRAndConn getSqlDRAndConn = CommonMethods.getvalues(getIMEIQry);
@@ -424,9 +424,32 @@ namespace ReadExcelApp.Forms
                 getSqlDRAndConn.sqlConn.Close();
                 dictionaryIMEI.Add(item.ToString(), imeilst.ToHashSet());
                 //gvCDRA_Num.Columns.Add(item.ToString(), item.ToString());
+            }*/
+
+
+
+            foreach (var item in lbCaseProjectA_Num.Items)
+            {
+                // Extract IMEI values for the specific A_Num
+                List<string> imeiList = allRecordsA_Num
+                .Where(record => record.A_Num == item.ToString())
+                .Select(record => record.IMEI)
+                .ToList();
+
+                List<string> uniqueIMEIlst = imeiList.Distinct().ToList();
+                dictionaryIMEI.Add(item.ToString(), uniqueIMEIlst.ToHashSet());
+                compIMEIlst.AddRange(uniqueIMEIlst);
+                //gvCDRA_Num.Columns.Add(item.ToString(), item.ToString());
             }
 
+            // Print the contents of the dictionary
+            /*foreach (var kvp in dictionaryIMEI)
+            {
+                Console.WriteLine($"Key: {kvp.Key}, IMEIs: [{string.Join(", ", kvp.Value)}]");
+            }*/
+
             var result = new Dictionary<string, List<string>>();
+
             foreach (var kvp in dictionaryIMEI)
             {
                 // kvp.Key is the key ("a", "b", etc)
@@ -451,7 +474,6 @@ namespace ReadExcelApp.Forms
 
             result = result.Where(x => x.Value.Count > 1).ToDictionary(x => x.Key, x => x.Value);
 
-
             HashSet<string> commonIMEI = new HashSet<string>();
 
             foreach (var kvp in result)
@@ -463,6 +485,7 @@ namespace ReadExcelApp.Forms
                 }
             }
 
+
             foreach (var cimei in commonIMEI)
             {
                 gvCDRA_Num.Columns.Add(cimei, cimei);
@@ -471,6 +494,12 @@ namespace ReadExcelApp.Forms
             //Getting common numbers from b parties of A_Num selected
             IEnumerable<String> duplicates = compIMEIlst.GroupBy(x => x)
                                         .SelectMany(g => g.Skip(1));
+
+            // Print duplicates
+            /*foreach (var imei in duplicates)
+            {
+                Console.WriteLine(imei);
+            }*/
 
             /*List<B_NumCount> imeiCount = new List<B_NumCount>();*/
             /*for (int i = 0; i < duplicates.Distinct().ToList().Count; i++)
@@ -488,8 +517,9 @@ namespace ReadExcelApp.Forms
 
                 for (int i = 1; i < gvCDRA_Num.ColumnCount; i++)
                 {
-                    string getIMEIQry = "select Count(*) from CDR_DB_Tbl where A_Num = '" + gvCDRA_Num.Columns[i].HeaderText.ToString() + "' and IMEI = '" + imei + "'";
-                    string bnc = CommonMethods.getCount(getIMEIQry).ToString();
+                    //string getIMEIQry = "select Count(*) from CDR_DB_Tbl where A_Num = '" + gvCDRA_Num.Columns[i].HeaderText.ToString() + "' and IMEI = '" + imei + "'";
+                    //string bnc = CommonMethods.getCount(getIMEIQry).ToString();
+                    string bnc = CountMatchingIMEIRecords(allRecordsA_Num, gvCDRA_Num.Columns[i].HeaderText, imei).ToString();
                     gvCDRA_Num.Rows[count].Cells[i].Value = bnc;
                     Edge edge = graph.AddEdge(imei, gvCDRA_Num.Columns[i].HeaderText.ToString());
                     edge.LabelText = bnc;
@@ -505,10 +535,15 @@ namespace ReadExcelApp.Forms
 
         }
 
-       /* private void btnCommon_Click(object sender, EventArgs e)
+        private static int CountMatchingIMEIRecords(List<AllRecordA_Num> records, string aNum, string imei)
         {
-            commonB_Num();
-        }*/
+            return records.Count(record => record.A_Num == aNum && record.IMEI == imei);
+        }
+
+        /* private void btnCommon_Click(object sender, EventArgs e)
+         {
+             commonB_Num();
+         }*/
 
         private void LinkAnalysisForm_Load(object sender, EventArgs e)
         {
@@ -698,8 +733,13 @@ namespace ReadExcelApp.Forms
 
         private void btnRemoveBnum_Click(object sender, EventArgs e)
         {
-            if(lbCaseProjectA_Num.SelectedIndex > -1)
-            lbCaseProjectA_Num.Items.Remove(lbCaseProjectA_Num.SelectedItem);
+            if (lbCaseProjectA_Num.SelectedIndex > -1)
+            {
+                lbCaseProjectA_Num.Items.Remove(lbCaseProjectA_Num.SelectedItem);
+
+                // Remove all records with the specific A_Num
+                allRecordsA_Num.RemoveAll(record => record.A_Num == lbCaseProjectA_Num.SelectedItem);
+            }
             else
             {
                 MessageBox.Show("Please select A-Party to remove");

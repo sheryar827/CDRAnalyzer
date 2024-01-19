@@ -275,11 +275,13 @@
             this.btnSubInfo.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Pressed;
             this.btnSubInfo.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(74)))), ((int)(((byte)(86)))));
+            this.btnSubInfo.IconLeft = null;
             this.btnSubInfo.IconLeftAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSubInfo.IconLeftCursor = System.Windows.Forms.Cursors.Default;
             this.btnSubInfo.IconLeftPadding = new System.Windows.Forms.Padding(11, 3, 3, 3);
             this.btnSubInfo.IconMarginLeft = 11;
             this.btnSubInfo.IconPadding = 10;
+            this.btnSubInfo.IconRight = null;
             this.btnSubInfo.IconRightAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSubInfo.IconRightCursor = System.Windows.Forms.Cursors.Default;
             this.btnSubInfo.IconRightPadding = new System.Windows.Forms.Padding(3, 3, 7, 3);

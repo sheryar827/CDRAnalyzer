@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Management;
@@ -132,6 +133,21 @@ namespace ReadExcelApp
             return b_num;
         }
 
+        // Method to sort a list of StanderizedCDR objects by Date
+        void SortCDRListByDate(List<StanderizedCDR> cdrList)
+        {
+            // Use the Sort method with a custom comparison function
+            cdrList.Sort((x, y) =>
+            {
+                // Parse the Date string into a DateTime object for accurate comparison
+                DateTime dateX = DateTime.ParseExact(x.Date, "MM-dd-yyyy", CultureInfo.InvariantCulture);
+                DateTime dateY = DateTime.ParseExact(y.Date, "MM-dd-yyyy", CultureInfo.InvariantCulture);
+
+                // Compare the DateTime objects
+                return dateX.CompareTo(dateY);
+            });
+        }
+
         // function to standarized Jazz CDR
         private void standJazzCDR()
         {
@@ -250,7 +266,16 @@ namespace ReadExcelApp
                     }
 
                     // order cdr in ascending order on the basis of date
-                    standCDR = standCDR.OrderBy(d => d.Date).ToList();
+                    //standCDR = standCDR.OrderBy(d => d.Date).ToList();
+
+                    // Call the method to sort the list by the Date property
+                    SortCDRListByDate(standCDR);
+
+                    // Display the sorted list
+                    /*foreach (var cdr in standCDR)
+                    {
+                        Console.WriteLine(cdr.Date);
+                    }*/
 
                     cDRDBTblBindingSource.DataSource = standCDR;
 
@@ -368,7 +393,16 @@ namespace ReadExcelApp
 
 
                     // order cdr in ascending order on the basis of date
-                    standCDR = standCDR.OrderBy(d => d.Date).ToList();
+                    //standCDR = standCDR.OrderBy(d => d.Date).ToList();
+
+                    // Call the method to sort the list by the Date property
+                    SortCDRListByDate(standCDR);
+
+                    /*// Display the sorted list
+                    foreach (var cdr in standCDR)
+                    {
+                        Console.WriteLine(cdr.Date);
+                    }*/
 
                     cDRDBTblBindingSource.DataSource = standCDR;
 
@@ -544,7 +578,10 @@ namespace ReadExcelApp
                     }
 
                     // order cdr in ascending order on the basis of date
-                    standCDR = standCDR.OrderBy(d => d.Date).ToList();
+                    //standCDR = standCDR.OrderBy(d => d.Date).ToList();
+
+                    // Call the method to sort the list by the Date property
+                    SortCDRListByDate(standCDR);
 
                     cDRDBTblBindingSource.DataSource = standCDR;
                 }
@@ -637,7 +674,10 @@ namespace ReadExcelApp
                     }
 
                     // order cdr in ascending order on the basis of date
-                    standCDR = standCDR.OrderBy(d => d.Date).ToList();
+                    //standCDR = standCDR.OrderBy(d => d.Date).ToList();
+
+                    // Call the method to sort the list by the Date property
+                    SortCDRListByDate(standCDR);
 
                     cDRDBTblBindingSource.DataSource = standCDR;
                 }
@@ -758,7 +798,10 @@ namespace ReadExcelApp
                     }
 
                     // order cdr in ascending order on the basis of date
-                    standCDR = standCDR.OrderBy(d => d.Date).ToList();
+                    //standCDR = standCDR.OrderBy(d => d.Date).ToList();
+
+                    // Call the method to sort the list by the Date property
+                    SortCDRListByDate(standCDR);
 
                     cDRDBTblBindingSource.DataSource = standCDR;
                 }
@@ -850,13 +893,22 @@ namespace ReadExcelApp
 
                         /*first getting string after first '|' then splitting that string on the basis of '|' 
                         to get latitude and longitude in string array*/
-                        string[] latlng = standerizedCDR.Loc.Substring(standerizedCDR.Loc.IndexOf("|") + 1).Split('|');
+                        //string[] latlng = standerizedCDR.Loc.Substring(standerizedCDR.Loc.IndexOf("|") + 1).Split('|');
 
                         //getting first element of latlng string array
-                        standerizedCDR.Lat = latlng.First();
+                        //standerizedCDR.Lat = latlng.First();
 
                         //getting last element of latlng string array
-                        standerizedCDR.Lng = latlng.Last();
+                        //standerizedCDR.Lng = latlng.Last();
+
+                        var matches = ExtractCoordinates(standerizedCDR.Loc);
+                        //string[] latlng = standerizedCDR.Loc.Substring(standerizedCDR.Loc.IndexOf('|') + 1).Split('|');
+
+                        if (matches.Count >= 2)
+                        {
+                            standerizedCDR.Lat = matches[0]; // Latitude
+                            standerizedCDR.Lng = matches[1]; // Longitude
+                        }
 
                         standerizedCDR.Network = Common.warid_network;
 
@@ -875,7 +927,10 @@ namespace ReadExcelApp
                     }
 
                     // order cdr in ascending order on the basis of date
-                    standCDR = standCDR.OrderBy(d => d.Date).ToList();
+                    //standCDR = standCDR.OrderBy(d => d.Date).ToList();
+
+                    // Call the method to sort the list by the Date property
+                    SortCDRListByDate(standCDR);
 
                     cDRDBTblBindingSource.DataSource = standCDR;
                 }
@@ -963,7 +1018,10 @@ namespace ReadExcelApp
                     }
 
                     // order cdr in ascending order on the basis of date
-                    standCDR = standCDR.OrderBy(d => d.Date).ToList();
+                    //standCDR = standCDR.OrderBy(d => d.Date).ToList();
+
+                    // Call the method to sort the list by the Date property
+                    SortCDRListByDate(standCDR);
 
                     cDRDBTblBindingSource.DataSource = standCDR;
 
@@ -1059,8 +1117,9 @@ namespace ReadExcelApp
             try
             {
                 // this is very important sorting the datetime in ascending order
-                datetime = datetime.OrderBy(d => d).ToList();
-
+                //datetime = datetime.OrderBy(d => d).ToList();
+                datetime.Sort();
+                //Console.WriteLine($"{datetime.First().ToString()} {datetime.Last().ToString()}");
                 Common.startDate = datetime.First().ToString();
                 Common.endDate = datetime.Last().ToString();
                 Common.AParty = A_Num;
@@ -1413,7 +1472,7 @@ namespace ReadExcelApp
                     allRecordA_Num.Weekday = dt.Rows[i][Common.Weekday].ToString();
                     Common.allRecordA_Nums.Add(allRecordA_Num);
                 }
-                Common.allRecordA_Nums = Common.allRecordA_Nums.OrderBy(x => x.Date).ToList();
+                //Common.allRecordA_Nums = Common.allRecordA_Nums.OrderBy(x => x.Date).ToList();
                 CommonMethods.messageDialog(Common.a_numForAnalysis + " With " + Common.allRecordA_Nums.Count() + " Records Is Selected For Analysis");
             }
         }

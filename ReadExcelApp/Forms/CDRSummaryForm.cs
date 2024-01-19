@@ -600,6 +600,7 @@ namespace ReadExcelApp.Forms
 
         }
 
+        
         private void getAllSummary(List<AllRecordA_Num> list)
         {
             if (list.Count() > 0)

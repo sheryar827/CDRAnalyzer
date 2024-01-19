@@ -284,7 +284,7 @@ namespace ReadExcelApp
                             Font fntHeader = new Font(btnColumnHeader, 10);
 
                             //A_Num info
-                            Paragraph prgA_Num = new Paragraph();
+                            /*Paragraph prgA_Num = new Paragraph();
                             BaseFont btnA_Num = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
                             Font fntA_Num = new Font(btnColumnHeader, 8);
                             prgA_Num.Alignment = Element.ALIGN_LEFT;
@@ -293,7 +293,7 @@ namespace ReadExcelApp
                             prgA_Num.Add(new Chunk("\nA-Party : 923335773646", fntA_Num));
                             prgA_Num.Add(new Chunk("\nSubscriber's Name : Aheen Akhtar", fntA_Num));
                             prgA_Num.Add(new Chunk("\nSubscriber's CNIC : 6110117910848", fntA_Num));
-                            prgA_Num.Add(new Chunk("\nSubscriber's Address : House No NE - 2669 Street No 21", fntA_Num));
+                            prgA_Num.Add(new Chunk("\nSubscriber's Address : House No NE - 2669 Street No 21", fntA_Num));*/
 
 
 
@@ -344,7 +344,7 @@ namespace ReadExcelApp
                                 pdfDoc.Add(ps);
 
                                 //A_Num
-                                pdfDoc.Add(prgA_Num);
+                                //pdfDoc.Add(prgA_Num);
 
 
                                 //Add a line separation

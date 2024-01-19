@@ -61,7 +61,7 @@ namespace ReadExcelApp.Forms
             /*string sp = "exec dbo.CDR_A_Num '" + Common.a_numForAnalysis + "', '" + Common.project_Name + "'";
             DataTable dt = await CommonMethods.getRecords(sp);*/
             List<string> uniqueList = Common.allRecordA_Nums.AsEnumerable().Select(x => x.B_Num.ToString()).Distinct()
-                .Where(bp => bp.Substring(0, 2).Equals("92") && bp.Length == 12).ToList();
+                .Where(bp => bp.StartsWith("92") && bp.Length == 12).ToList();
 
             /*System.Windows.Forms.Form form = new System.Windows.Forms.Form();*/
             //create a viewer object 

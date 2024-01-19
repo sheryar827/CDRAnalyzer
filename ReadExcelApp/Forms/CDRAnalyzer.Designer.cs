@@ -237,7 +237,7 @@
             this.bfbtnCommonLatLng.OnPressedState.BorderThickness = 1;
             this.bfbtnCommonLatLng.OnPressedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(245)))), ((int)(((byte)(244)))));
             this.bfbtnCommonLatLng.OnPressedState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(74)))), ((int)(((byte)(86)))));
-            this.bfbtnCommonLatLng.OnPressedState.IconLeftImage = ((System.Drawing.Image)(resources.GetObject("bunifuButton1.OnPressedState.IconLeftImage")));
+            this.bfbtnCommonLatLng.OnPressedState.IconLeftImage = global::ReadExcelApp.Properties.Resources.map11;
             this.bfbtnCommonLatLng.OnPressedState.IconRightImage = null;
             this.bfbtnCommonLatLng.Size = new System.Drawing.Size(188, 60);
             this.bfbtnCommonLatLng.TabIndex = 22;
