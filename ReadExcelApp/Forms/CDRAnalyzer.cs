@@ -14,7 +14,13 @@ namespace ReadExcelApp
         {
             InitializeComponent();
             shadowPanelMenu.VerticalScroll.Visible = true;
-            
+
+            //Form
+            this.Text = string.Empty;
+            this.ControlBox = false;
+            this.DoubleBuffered = true;
+            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+
             /*btnCloseChildForm.Visible = false;*/
             /* this.Text = string.Empty;
              this.ControlBox = false;

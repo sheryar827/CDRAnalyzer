@@ -2466,7 +2466,6 @@
             this.Controls.Add(this.BunifuPages);
             this.Controls.Add(this.shadowPanelMenu);
             this.Controls.Add(this.panelTitleBar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1364, 726);
             this.Name = "CDRAnalyzer";

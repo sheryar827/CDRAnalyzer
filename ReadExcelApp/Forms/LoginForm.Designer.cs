@@ -364,8 +364,8 @@
             stateProperties4.ForeColor = System.Drawing.Color.White;
             stateProperties4.PlaceholderForeColor = System.Drawing.Color.Empty;
             this.txtPassword.OnIdleState = stateProperties4;
-            this.txtPassword.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.txtPassword.PasswordChar = '\0';
+            this.txtPassword.Padding = new System.Windows.Forms.Padding(3);
+            this.txtPassword.PasswordChar = '*';
             this.txtPassword.PlaceholderForeColor = System.Drawing.Color.Silver;
             this.txtPassword.PlaceholderText = "Enter Password";
             this.txtPassword.ReadOnly = false;
@@ -445,7 +445,7 @@
             stateProperties8.ForeColor = System.Drawing.Color.White;
             stateProperties8.PlaceholderForeColor = System.Drawing.Color.Empty;
             this.txtUserName.OnIdleState = stateProperties8;
-            this.txtUserName.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.txtUserName.Padding = new System.Windows.Forms.Padding(3);
             this.txtUserName.PasswordChar = '\0';
             this.txtUserName.PlaceholderForeColor = System.Drawing.Color.Silver;
             this.txtUserName.PlaceholderText = "Enter Name";
@@ -546,8 +546,8 @@
             stateProperties12.ForeColor = System.Drawing.Color.White;
             stateProperties12.PlaceholderForeColor = System.Drawing.Color.Empty;
             this.txtRegRePassword.OnIdleState = stateProperties12;
-            this.txtRegRePassword.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.txtRegRePassword.PasswordChar = '\0';
+            this.txtRegRePassword.Padding = new System.Windows.Forms.Padding(3);
+            this.txtRegRePassword.PasswordChar = '*';
             this.txtRegRePassword.PlaceholderForeColor = System.Drawing.Color.Silver;
             this.txtRegRePassword.PlaceholderText = "Reenter Password";
             this.txtRegRePassword.ReadOnly = false;
@@ -809,8 +809,8 @@
             stateProperties16.ForeColor = System.Drawing.Color.White;
             stateProperties16.PlaceholderForeColor = System.Drawing.Color.Empty;
             this.txtRegPassword.OnIdleState = stateProperties16;
-            this.txtRegPassword.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.txtRegPassword.PasswordChar = '\0';
+            this.txtRegPassword.Padding = new System.Windows.Forms.Padding(3);
+            this.txtRegPassword.PasswordChar = '*';
             this.txtRegPassword.PlaceholderForeColor = System.Drawing.Color.Silver;
             this.txtRegPassword.PlaceholderText = "Enter Password";
             this.txtRegPassword.ReadOnly = false;
@@ -888,7 +888,7 @@
             stateProperties20.ForeColor = System.Drawing.Color.White;
             stateProperties20.PlaceholderForeColor = System.Drawing.Color.Empty;
             this.txtRegUserName.OnIdleState = stateProperties20;
-            this.txtRegUserName.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.txtRegUserName.Padding = new System.Windows.Forms.Padding(3);
             this.txtRegUserName.PasswordChar = '\0';
             this.txtRegUserName.PlaceholderForeColor = System.Drawing.Color.Silver;
             this.txtRegUserName.PlaceholderText = "Enter Name";
