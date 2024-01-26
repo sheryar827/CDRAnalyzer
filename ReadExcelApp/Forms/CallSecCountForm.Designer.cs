@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CallSecCountForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
@@ -83,7 +84,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(10);
-            this.panel1.Size = new System.Drawing.Size(385, 772);
+            this.panel1.Size = new System.Drawing.Size(308, 598);
             this.panel1.TabIndex = 1;
             // 
             // panel4
@@ -93,7 +94,7 @@
             this.panel4.Location = new System.Drawing.Point(10, 10);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(10);
-            this.panel4.Size = new System.Drawing.Size(365, 752);
+            this.panel4.Size = new System.Drawing.Size(288, 578);
             this.panel4.TabIndex = 25;
             // 
             // groupBox8
@@ -105,7 +106,7 @@
             this.groupBox8.Location = new System.Drawing.Point(10, 10);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Padding = new System.Windows.Forms.Padding(5);
-            this.groupBox8.Size = new System.Drawing.Size(345, 732);
+            this.groupBox8.Size = new System.Drawing.Size(268, 558);
             this.groupBox8.TabIndex = 23;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Calls Sec Count";
@@ -167,7 +168,7 @@
             this.gvCallsSecCount.RowHeadersVisible = false;
             this.gvCallsSecCount.RowTemplate.Height = 40;
             this.gvCallsSecCount.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gvCallsSecCount.Size = new System.Drawing.Size(335, 702);
+            this.gvCallsSecCount.Size = new System.Drawing.Size(258, 528);
             this.gvCallsSecCount.TabIndex = 0;
             this.gvCallsSecCount.Theme = Bunifu.UI.WinForms.BunifuDataGridView.PresetThemes.DarkSlateGray;
             // 
@@ -176,10 +177,10 @@
             this.panel2.Controls.Add(this.panel8);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(385, 0);
+            this.panel2.Location = new System.Drawing.Point(308, 0);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(10);
-            this.panel2.Size = new System.Drawing.Size(915, 772);
+            this.panel2.Size = new System.Drawing.Size(793, 598);
             this.panel2.TabIndex = 2;
             // 
             // panel8
@@ -189,7 +190,7 @@
             this.panel8.Location = new System.Drawing.Point(10, 164);
             this.panel8.Name = "panel8";
             this.panel8.Padding = new System.Windows.Forms.Padding(10);
-            this.panel8.Size = new System.Drawing.Size(895, 598);
+            this.panel8.Size = new System.Drawing.Size(773, 424);
             this.panel8.TabIndex = 26;
             // 
             // pcCallsSecCount
@@ -198,7 +199,7 @@
             this.pcCallsSecCount.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pcCallsSecCount.Location = new System.Drawing.Point(10, 10);
             this.pcCallsSecCount.Name = "pcCallsSecCount";
-            this.pcCallsSecCount.Size = new System.Drawing.Size(875, 578);
+            this.pcCallsSecCount.Size = new System.Drawing.Size(753, 404);
             this.pcCallsSecCount.TabIndex = 0;
             this.pcCallsSecCount.Text = "pieChart1";
             // 
@@ -213,7 +214,7 @@
             this.panel3.Location = new System.Drawing.Point(10, 10);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(10);
-            this.panel3.Size = new System.Drawing.Size(895, 154);
+            this.panel3.Size = new System.Drawing.Size(773, 154);
             this.panel3.TabIndex = 25;
             // 
             // panel7
@@ -227,7 +228,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(10, 10);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(713, 134);
+            this.panel7.Size = new System.Drawing.Size(591, 134);
             this.panel7.TabIndex = 32;
             // 
             // panelDateTime
@@ -237,7 +238,7 @@
             this.panelDateTime.Controls.Add(this.btnSearch);
             this.panelDateTime.Controls.Add(this.rbAllData);
             this.panelDateTime.Controls.Add(this.rbSelected);
-            this.panelDateTime.Location = new System.Drawing.Point(235, 8);
+            this.panelDateTime.Location = new System.Drawing.Point(174, 8);
             this.panelDateTime.Name = "panelDateTime";
             this.panelDateTime.Size = new System.Drawing.Size(435, 82);
             this.panelDateTime.TabIndex = 44;
@@ -302,7 +303,7 @@
             this.btnSearch.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnSearch.FlatAppearance.BorderSize = 0;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Image = global::ReadExcelApp.Properties.Resources.search;
+            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.Location = new System.Drawing.Point(360, 0);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 82);
@@ -435,7 +436,7 @@
             // 
             this.panel6.Controls.Add(this.btnExportExcel);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(723, 10);
+            this.panel6.Location = new System.Drawing.Point(601, 10);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(5);
             this.panel6.Size = new System.Drawing.Size(81, 134);
@@ -446,7 +447,7 @@
             this.btnExportExcel.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnExportExcel.FlatAppearance.BorderSize = 0;
             this.btnExportExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExportExcel.Image = global::ReadExcelApp.Properties.Resources.exportEXCEL;
+            this.btnExportExcel.Image = ((System.Drawing.Image)(resources.GetObject("btnExportExcel.Image")));
             this.btnExportExcel.Location = new System.Drawing.Point(1, 5);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(75, 124);
@@ -458,7 +459,7 @@
             // 
             this.panel5.Controls.Add(this.btnExportPDF);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel5.Location = new System.Drawing.Point(804, 10);
+            this.panel5.Location = new System.Drawing.Point(682, 10);
             this.panel5.Name = "panel5";
             this.panel5.Padding = new System.Windows.Forms.Padding(5);
             this.panel5.Size = new System.Drawing.Size(81, 134);
@@ -469,7 +470,7 @@
             this.btnExportPDF.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnExportPDF.FlatAppearance.BorderSize = 0;
             this.btnExportPDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExportPDF.Image = global::ReadExcelApp.Properties.Resources.exportPDF;
+            this.btnExportPDF.Image = ((System.Drawing.Image)(resources.GetObject("btnExportPDF.Image")));
             this.btnExportPDF.Location = new System.Drawing.Point(1, 5);
             this.btnExportPDF.Name = "btnExportPDF";
             this.btnExportPDF.Size = new System.Drawing.Size(75, 124);
@@ -482,7 +483,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(245)))), ((int)(((byte)(244)))));
-            this.ClientSize = new System.Drawing.Size(1300, 772);
+            this.ClientSize = new System.Drawing.Size(1101, 598);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "CallSecCountForm";
