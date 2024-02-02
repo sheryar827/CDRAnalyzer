@@ -416,7 +416,7 @@
             this.btnSearch.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnSearch.FlatAppearance.BorderSize = 0;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Image = global::ReadExcelApp.Properties.Resources.search;
+            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.Location = new System.Drawing.Point(360, 0);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 82);
@@ -455,7 +455,7 @@
             this.btnExportExcel.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnExportExcel.FlatAppearance.BorderSize = 0;
             this.btnExportExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExportExcel.Image = global::ReadExcelApp.Properties.Resources.exportEXCEL;
+            this.btnExportExcel.Image = ((System.Drawing.Image)(resources.GetObject("btnExportExcel.Image")));
             this.btnExportExcel.Location = new System.Drawing.Point(810, 0);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(75, 159);
@@ -468,7 +468,7 @@
             this.btnExportPDF.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnExportPDF.FlatAppearance.BorderSize = 0;
             this.btnExportPDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExportPDF.Image = global::ReadExcelApp.Properties.Resources.exportPDF;
+            this.btnExportPDF.Image = ((System.Drawing.Image)(resources.GetObject("btnExportPDF.Image")));
             this.btnExportPDF.Location = new System.Drawing.Point(885, 0);
             this.btnExportPDF.Name = "btnExportPDF";
             this.btnExportPDF.Size = new System.Drawing.Size(75, 159);

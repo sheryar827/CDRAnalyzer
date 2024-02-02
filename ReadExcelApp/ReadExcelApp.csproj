@@ -28,7 +28,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -573,6 +573,7 @@
     <Compile Include="Classes\HWID.cs" />
     <Compile Include="Classes\ListtoDataTable.cs" />
     <Compile Include="Classes\TimeLine.cs" />
+    <Compile Include="Classes\TimeOverLap.cs" />
     <Compile Include="Classes\YearMonthDay.cs" />
     <Compile Include="Classes\YearMonthNewBNum.cs" />
     <Compile Include="Classes\YearMonths.cs" />

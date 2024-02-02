@@ -102,6 +102,7 @@
             this.bunifuElipse2 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuElipse3 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.bunifuLoader = new Bunifu.UI.WinForms.BunifuLoader();
             ((System.ComponentModel.ISupportInitialize)(this.cDRStanderizedTableBindingSource5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scfDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cDRStanderizedTableBindingSource)).BeginInit();
@@ -270,6 +271,7 @@
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.bunifuLoader);
             this.panel5.Controls.Add(this.gvStandCDR);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(10, 219);
@@ -875,6 +877,33 @@
             this.bunifuElipse1.ElipseRadius = 15;
             this.bunifuElipse1.TargetControl = this.gvShowCaseProject;
             // 
+            // bunifuLoader
+            // 
+            this.bunifuLoader.AllowStylePresets = true;
+            this.bunifuLoader.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.bunifuLoader.BackColor = System.Drawing.Color.Transparent;
+            this.bunifuLoader.CapStyle = Bunifu.UI.WinForms.BunifuLoader.CapStyles.Round;
+            this.bunifuLoader.Color = System.Drawing.Color.DodgerBlue;
+            this.bunifuLoader.Colors = new Bunifu.UI.WinForms.Bloom[0];
+            this.bunifuLoader.Customization = "";
+            this.bunifuLoader.DashWidth = 0.5F;
+            this.bunifuLoader.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.bunifuLoader.Image = null;
+            this.bunifuLoader.Location = new System.Drawing.Point(441, 150);
+            this.bunifuLoader.Name = "bunifuLoader";
+            this.bunifuLoader.NoRounding = false;
+            this.bunifuLoader.Preset = Bunifu.UI.WinForms.BunifuLoader.StylePresets.Solid;
+            this.bunifuLoader.RingStyle = Bunifu.UI.WinForms.BunifuLoader.RingStyles.Solid;
+            this.bunifuLoader.ShowText = false;
+            this.bunifuLoader.Size = new System.Drawing.Size(185, 185);
+            this.bunifuLoader.Speed = 7;
+            this.bunifuLoader.TabIndex = 9;
+            this.bunifuLoader.Text = "bunifuLoader1";
+            this.bunifuLoader.TextPadding = new System.Windows.Forms.Padding(0);
+            this.bunifuLoader.Thickness = 6;
+            this.bunifuLoader.Transparent = true;
+            this.bunifuLoader.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -985,6 +1014,7 @@
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnExport;
         private System.Windows.Forms.TextBox tbErrorHandling;
         private Bunifu.UI.WinForms.BunifuLabel bflbErrorExcelSheet;
+        private Bunifu.UI.WinForms.BunifuLoader bunifuLoader;
     }
 }
 

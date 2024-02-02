@@ -728,10 +728,34 @@ namespace ReadExcelApp.Forms
 
                 var matchingRecords = commonLatLngList.Where(r => double.Parse(r.Lat) == item.Position.Lat && double.Parse(r.Lng) == item.Position.Lng).ToList();
 
-                var specificLatLngDT = new ListtoDataTable().ToDataTable(matchingRecords);
+
+                var groupedData = matchingRecords.GroupBy(
+                    n => new { n.A_Num, n.Date, LatLong = new { n.Lat, n.Lng } }
+                    ).Select(g => new
+                    {
+                        g.Key.A_Num,
+                        g.Key.Date,
+                        g.Key.LatLong,
+                        StartTime = g.Min(n => n.Time),
+                        EndTime = g.Max(n => n.Time),
+                        Duration = g.Max(n => TimeSpan.Parse(n.Time)) - g.Min(n => TimeSpan.Parse(n.Time)) // Calculate the duration
+                    });
+
+                var timeOverLap = new List<TimeOverLap>();
+
+                foreach (var group in groupedData)
+                {
+                    var to = new TimeOverLap(group.A_Num, group.Date, group.StartTime, group.EndTime, group.Duration.ToString(), Double.Parse(group.LatLong.Lat), Double.Parse(group.LatLong.Lng));
+
+                    timeOverLap.Add(to);
+                    //Console.WriteLine($"Number: {group.Number}, LatLong: ({group.LatLong.Latitude}, {group.LatLong.Longitude}), Start Time: {group.StartTime}, End Time: {group.EndTime}");
+                }
+
+
+                var specificLatLngDT = new ListtoDataTable().ToDataTable(timeOverLap);
                 //Console.WriteLine(latlngRecord.Count);
                 //new Forms.LocationDetailsForm(item.Position, item.ToolTipText, item.Tag.ToString(), allLocRecordA_Num).Show();
-                new Forms.CommonLocDetailsForm(specificLatLngDT).Show();
+                new CommonLocDetailsForm(specificLatLngDT, matchingRecords).Show();
             }
         }
 
