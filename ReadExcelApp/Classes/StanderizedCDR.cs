@@ -15,8 +15,8 @@
         public string Lac_No { get; set; } = string.Empty;
         public string Cell_ID { get; set; } = string.Empty;
         public string Loc { get; set; } = string.Empty;
-        public string Lat { get; set; } = string.Empty;
-        public string Lng { get; set; } = string.Empty;
+        public string Lat { get; set; } = "0";
+        public string Lng { get; set; } = "0";
         public string Network { get; set; } = string.Empty;
 
         public string Weekday { get; set; } = string.Empty;

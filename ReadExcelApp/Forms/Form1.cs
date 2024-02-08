@@ -14,6 +14,7 @@ using System.Linq;
 using System.Management;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -1441,7 +1442,8 @@ namespace ReadExcelApp
 
         private async void gvCDRA_Num_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            Console.WriteLine(e.ColumnIndex);
+            if (e.RowIndex >= 0 && e.ColumnIndex < 4)
             {
                 Common.a_numForAnalysis = gvCDRA_Num.Rows[e.RowIndex].Cells[2].Value.ToString();
                 Common.project_Name = gvCDRA_Num.Rows[e.RowIndex].Cells[1].Value.ToString();
@@ -1474,6 +1476,54 @@ namespace ReadExcelApp
                 }
                 //Common.allRecordA_Nums = Common.allRecordA_Nums.OrderBy(x => x.Date).ToList();
                 CommonMethods.messageDialog(Common.a_numForAnalysis + " With " + Common.allRecordA_Nums.Count() + " Records Is Selected For Analysis");
+            }
+            // columnindex is 3 because column 0 is id which is hidden
+            else if (e.RowIndex >= 0 && e.ColumnIndex == 4)
+            {
+                Common.a_numForAnalysis = gvCDRA_Num.Rows[e.RowIndex].Cells[2].Value.ToString();
+                Common.project_Name = gvCDRA_Num.Rows[e.RowIndex].Cells[1].Value.ToString();
+                projectId = (int)gvCDRA_Num.Rows[e.RowIndex].Cells[0].Value;
+                DialogResult result = MessageBox.Show("Are you confirm to Delete?", "Warning", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    bunifuLoader.Visible = true;
+                    bool deletionSuccess = await deleteRecordA_Num(Common.a_numForAnalysis, Common.project_Name, projectId);
+                    // Create progress reporter
+                    this.Invoke(new Action(() =>
+                    {
+                        // Hide progress bar when records are deleted successfully
+                        bunifuLoader.Visible = false;
+
+                        if (deletionSuccess)
+                        {
+                            MessageBox.Show("Records deleted successfully");
+                            getProjectA_Num();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to delete records");
+                        }
+                    }));
+
+                    // Call the asynchronous method
+
+                    /*if (deleteNumberRecords(Common.numForAnalysis, Common.project_Name, projectId))
+                    {
+                        //deleteRecordA_Num(Common.numForAnalysis, Common.project_Name);
+                        MessageBox.Show("Record Deleted Successfull.");
+                        getProjectNumber();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Unable to Delete Records");
+                    }*/
+                }
+                else if (result == DialogResult.No)
+                {
+                    bunifuLoader.Visible = false;
+                    return;
+                }
             }
         }
 
@@ -1532,43 +1582,46 @@ namespace ReadExcelApp
             }
         }
 
-        private void gvCDRA_Num_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private async Task<bool> deleteRecordA_Num(string numToDel, string proName, int proId)
         {
-            // columnindex is 3 because column 0 is id which is hidden
-            if (e.ColumnIndex == 3)
+            bool success = false;
+            await Task.Run(() =>
             {
-                Common.a_numForAnalysis = gvCDRA_Num.Rows[e.RowIndex].Cells[1].Value.ToString();
-                Common.project_Name = gvCDRA_Num.Rows[e.RowIndex].Cells[0].Value.ToString();
-                DialogResult result = MessageBox.Show("Are you confirm to Delete?", "Warning", MessageBoxButtons.YesNo);
-
-                if (result == DialogResult.Yes)
+                using (SqlConnection con = new SqlConnection(AppConnection.GetConnectionString()))
                 {
-                    deleteRecordA_Num(Common.a_numForAnalysis, Common.project_Name);
-                    MessageBox.Show("Record Deleted Successfull.");
-                    getProjectA_Num();
-                }
-                else if (result == DialogResult.No)
-                {
-                    return;
-                }
-            }
-        }
+                    using (SqlCommand cmd = new SqlCommand("delete_Selected_Number_Records", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-        private void deleteRecordA_Num(string a_num, string project)
-        {
-            String qry = "delete from ProjectsTableA_Num where A_Num = '" + a_num + "' and project = '" + project + "'";
-            SqlConnection sqlcon = new SqlConnection(AppConnection.GetConnectionString());
-            try
-            {
-                SqlCommand sqlcmnd = new SqlCommand(qry, sqlcon);
-                sqlcon.Open();
-                sqlcmnd.ExecuteScalar();
-                sqlcon.Close();
-            }
-            catch (Exception ex)
-            {
-                CommonMethods.messageDialog(ex.Message);
-            }
+                        cmd.Parameters.AddWithValue("@Number", numToDel);
+                        cmd.Parameters.AddWithValue("@ProjectId", proId);
+                        cmd.Parameters.AddWithValue("@Project", proName);
+
+                        try
+                        {
+                            if (con.State != ConnectionState.Open)
+                                con.Open();
+
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            // If the command executed successfully and rows were affected
+                            if (rowsAffected > 0)
+                            {
+                                success = true;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            // Handle exception, log error, or throw further if necessary
+                            Console.WriteLine("Error executing command: " + ex.Message);
+                        }
+                    }
+                }
+            });
+            // Report progress
+            //progress.Report(success);
+
+            return success;
         }
 
         public void clearGridView()
