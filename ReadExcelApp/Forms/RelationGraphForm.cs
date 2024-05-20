@@ -60,8 +60,14 @@ namespace ReadExcelApp.Forms
         {
             /*string sp = "exec dbo.CDR_A_Num '" + Common.a_numForAnalysis + "', '" + Common.project_Name + "'";
             DataTable dt = await CommonMethods.getRecords(sp);*/
-            List<string> uniqueList = Common.allRecordA_Nums.AsEnumerable().Select(x => x.B_Num.ToString()).Distinct()
+            List<string> uniqueList = Common.allRecordA_Nums.AsEnumerable().Select(x => x.B_Num.ToString())
                 .Where(bp => bp.StartsWith("92") && bp.Length == 12).ToList();
+
+            // Count occurrences of each B_Num value
+            var bNumCounts = uniqueList.GroupBy(x => x)
+                                       .Select(group => new { B_Num = group.Key, Count = group.Count() })
+                                       .OrderByDescending(item => item.Count)
+                                       .Take(5);
 
             /*System.Windows.Forms.Form form = new System.Windows.Forms.Form();*/
             //create a viewer object 
@@ -69,13 +75,13 @@ namespace ReadExcelApp.Forms
             //create a graph object 
             Graph graph = new Graph("graph");
 
-            foreach (string num in uniqueList)
+            foreach (var item in bNumCounts)
             {
-                if (num.Length >= 10)
+                if (item.B_Num.Length >= 10)
                 {
-                    Microsoft.Msagl.Drawing.Edge e = graph.AddEdge(Common.a_numForAnalysis, num);
+                    Edge e = graph.AddEdge(Common.a_numForAnalysis, item.B_Num);
                     //e.Attr.LineWidth = dt.Select("B_Num = '"+num+"'").Count();
-                    e.LabelText = Common.allRecordA_Nums.Where(x => x.B_Num.Equals(num)).Count().ToString();
+                    e.LabelText = Common.allRecordA_Nums.Where(x => x.B_Num.Equals(item.B_Num)).Count().ToString();
                 }
 
             }

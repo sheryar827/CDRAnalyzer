@@ -12,7 +12,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Management;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -84,7 +83,7 @@ namespace ReadExcelApp
                             }
                             catch (IOException excep)
                             {
-                                Console.WriteLine("EXCEPTION: "+excep.Message);
+                                Console.WriteLine("EXCEPTION: " + excep.Message);
                                 CommonMethods.messageDialog(excep.Message);
                             }
                         }
@@ -165,17 +164,20 @@ namespace ReadExcelApp
                         StanderizedCDR standerizedCDR = new StanderizedCDR();
 
 
-                        standerizedCDR.A_Num = dt.Rows[i][Common.jazz_A_Num].ToString();
+                        standerizedCDR.A_Num = string.IsNullOrWhiteSpace(dt.Rows[i][Common.jazz_A_Num]?.ToString()) ? "0" : dt.Rows[i][Common.jazz_A_Num].ToString();
+
 
                         /*getting a-party in string A_Num for later use*/
                         A_Num = standerizedCDR.A_Num;
 
                         /*Removing 0 from all contacts in B-Party*/
-                        //standerizedCDR.B_Num = dt.Rows[i][Common.jazz_B_Num].ToString().TrimStart(new Char[] { '0' });
+                        //string value = dt.Rows[i][Common.jazz_B_Num].ToString().TrimStart(new Char[] { '0' });
 
-                        standerizedCDR.B_Num = dt.Rows[i][Common.jazz_B_Num].ToString().Trim();
+                        standerizedCDR.B_Num = string.IsNullOrWhiteSpace(dt.Rows[i][Common.jazz_B_Num]?.ToString()) ? "0" : dt.Rows[i][Common.jazz_B_Num].ToString().Trim();
+
 
                         standerizedCDR.B_Num = standerize_B_Party(standerizedCDR.B_Num);
+                        
                         /*Adding 92 to contact number whose length is 10*/
                         /*if (standerizedCDR.B_Num.Length >= 10 && standerizedCDR.B_Num.Length <= 12)
                         {
@@ -190,7 +192,7 @@ namespace ReadExcelApp
                         //else
                         string tempIMEI = dt.Rows[i][Common.imei].ToString();
 
-                        standerizedCDR.IMEI = "";
+                        standerizedCDR.IMEI = "0";
                         standerizedCDR.IMEI = !String.IsNullOrWhiteSpace(tempIMEI) && tempIMEI.Length >= 14
                             ? tempIMEI.Substring(0, 14)
                             : tempIMEI;
@@ -198,7 +200,8 @@ namespace ReadExcelApp
                         string dtime = dt.Rows[i][Common.datetime].ToString();
 
 
-                        DateTime dtValue = (DateTime)dt.Rows[i][Common.datetime];
+
+                        DateTime dtValue = string.IsNullOrWhiteSpace(dt.Rows[i][Common.datetime]?.ToString()) ? DateTime.MinValue : DateTime.Parse(dt.Rows[i][Common.datetime].ToString());
                         datetime.Add(dtValue);
 
 
@@ -211,7 +214,8 @@ namespace ReadExcelApp
                         /*Separating time from dtValue and adding it to Time*/
                         standerizedCDR.Time = dtValue.ToString(Common.timef);
 
-                        standerizedCDR.Call_Dur = dt.Rows[i][Common.duration].ToString();
+                        standerizedCDR.Call_Dur = string.IsNullOrWhiteSpace(dt.Rows[i][Common.duration]?.ToString()) ? "0" : dt.Rows[i][Common.duration].ToString();
+
 
                         standerizedCDR.Call_Dir = dt.Rows[i][Common.jazz_Call_Type].ToString().Substring(0, 8).ToLower();
 
@@ -219,29 +223,28 @@ namespace ReadExcelApp
                         standerizedCDR.Cell_ID = dt.Rows[i][Common.jazz_Cell_ID].ToString();
 
                         // Get first 4 characters substring from a string
-                        var revLacID = string.Join("", standerizedCDR.Cell_ID.Substring(0, 4).Reverse().ToArray());
+                        var revLacID = string.IsNullOrWhiteSpace(standerizedCDR.Cell_ID) ? "0" : string.Join("", standerizedCDR.Cell_ID.Substring(0, 4).Reverse().ToArray());
+
 
                         /* Converting lacId from hex to decimal*/
                         standerizedCDR.Lac_No = Convert.ToInt32(revLacID.ToString(), 16).ToString();
                         // Get everything else after 4th position
-                        var revCellID = string.Join("", standerizedCDR.Cell_ID.Substring(4).Reverse().ToArray());
+                        var revCellID = string.IsNullOrWhiteSpace(standerizedCDR.Cell_ID) ? "0" : string.Join("", standerizedCDR.Cell_ID.Substring(4).Reverse().ToArray());
 
                         /* Converting cellId from hex to decimal*/
                         standerizedCDR.Cell_ID = Convert.ToInt32(revCellID.ToString(), 16).ToString();
 
                         //Getting location
-                        standerizedCDR.Loc = dt.Rows[i][Common.jazz_Location].ToString();
+                        standerizedCDR.Loc = string.IsNullOrWhiteSpace(dt.Rows[i][Common.jazz_Location]?.ToString()) ? "Nil" : dt.Rows[i][Common.jazz_Location].ToString();
+
 
                         /*first getting string after first '|' then splitting that string on the basis of '|' 
                         to get latitude and longitude in string array*/
                         var matches = ExtractCoordinates(standerizedCDR.Loc);
                         //string[] latlng = standerizedCDR.Loc.Substring(standerizedCDR.Loc.IndexOf('|') + 1).Split('|');
 
-                        if (matches.Count >= 2)
-                        {
-                            standerizedCDR.Lat = matches[0]; // Latitude
-                            standerizedCDR.Lng = matches[1]; // Longitude
-                        }
+                        standerizedCDR.Lat = matches.Count >= 2 ? matches[0] : "0";
+                        standerizedCDR.Lng = matches.Count >= 2 ? matches[1] : "0";
                         //getting first element of latlng string array
                         //standerizedCDR.Lat = latlng.First();
 
@@ -253,14 +256,8 @@ namespace ReadExcelApp
 
 
                         // if column call direction cell contains sms then call type is sms else Voice
-                        if (dt.Rows[i][Common.jazz_Call_Type].ToString().ToLower().Contains(Common.sms))
-                        {
-                            standerizedCDR.Call_Type = Common.sms;
-                        }
-                        else
-                        {
-                            standerizedCDR.Call_Type = Common.voice;
-                        }
+                        standerizedCDR.Call_Type = dt.Rows[i][Common.jazz_Call_Type].ToString().ToLower().Contains(Common.sms) ? Common.sms : Common.voice;
+
 
 
                         standCDR.Add(standerizedCDR);
@@ -301,12 +298,12 @@ namespace ReadExcelApp
                     foreach (DataRow row in dt.Rows)
                     {
                         StanderizedCDR standerizedCDR = new StanderizedCDR();
-                        standerizedCDR.A_Num = row[Common.jazzCDR1[1]].ToString();
+                        standerizedCDR.A_Num = string.IsNullOrWhiteSpace(row[Common.jazzCDR1[1]].ToString()) ? "0" : row[Common.jazzCDR1[1]].ToString();
                         /*getting a-party in string A_Num for later use*/
                         A_Num = standerizedCDR.A_Num;
 
                         /*Removing 0 from all contacts in B-Party*/
-                        standerizedCDR.B_Num = row[Common.jazzCDR1[2]].ToString().TrimStart(new Char[] { '0' });
+                        standerizedCDR.B_Num = string.IsNullOrWhiteSpace(row[Common.jazzCDR1[2]].ToString()) ? "0" : row[Common.jazzCDR1[2]].ToString().TrimStart('0');
 
                         //standerizedCDR.B_Num = dt.Rows[i][Common.jazz_B_Num].ToString().Trim();
 
@@ -314,7 +311,7 @@ namespace ReadExcelApp
 
                         string tempIMEI = row[Common.jazzCDR1[6]].ToString();
 
-                        standerizedCDR.IMEI = "";
+                        standerizedCDR.IMEI = "0";
                         standerizedCDR.IMEI = !String.IsNullOrWhiteSpace(tempIMEI) && tempIMEI.Length >= 14
                             ? tempIMEI.Substring(0, 14)
                             : tempIMEI;
@@ -322,7 +319,8 @@ namespace ReadExcelApp
                         //string dtime = row[Common.jazzCDR1[3]].ToString();
 
 
-                        DateTime dtValue = DateTime.Parse(row[Common.jazzCDR1[3]].ToString());
+                        DateTime dtValue = string.IsNullOrWhiteSpace(row[Common.jazzCDR1[3]].ToString()) ? DateTime.MinValue : DateTime.Parse(row[Common.jazzCDR1[3]].ToString());
+
 
                         datetime.Add(dtValue);
 
@@ -336,7 +334,8 @@ namespace ReadExcelApp
                         /*Separating time from dtValue and adding it to Time*/
                         standerizedCDR.Time = dtValue.ToString(Common.timef);
 
-                        standerizedCDR.Call_Dur = row[Common.jazzCDR1[4]].ToString();
+                        standerizedCDR.Call_Dur = string.IsNullOrWhiteSpace(row[Common.jazzCDR1[4]].ToString()) ? "0" : row[Common.jazzCDR1[4]].ToString();
+
 
                         standerizedCDR.Call_Dir = row[Common.jazzCDR1[0]].ToString().Substring(0, 8).ToLower();
 
@@ -344,29 +343,31 @@ namespace ReadExcelApp
                         standerizedCDR.Cell_ID = row[Common.jazzCDR1[5]].ToString();
 
                         // Get first 4 characters substring from a string
-                        var revLacID = string.Join("", standerizedCDR.Cell_ID.Substring(0, 4).Reverse().ToArray());
+                        var revLacID = string.IsNullOrWhiteSpace(standerizedCDR.Cell_ID) ? "0" : string.Join("", standerizedCDR.Cell_ID.Substring(0, 4).Reverse().ToArray());
+
 
                         /* Converting lacId from hex to decimal*/
                         standerizedCDR.Lac_No = Convert.ToInt32(revLacID.ToString(), 16).ToString();
+
                         // Get everything else after 4th position
-                        var revCellID = string.Join("", standerizedCDR.Cell_ID.Substring(4).Reverse().ToArray());
+                        var revCellID = string.IsNullOrWhiteSpace(standerizedCDR.Cell_ID) ? "0" : string.Join("", standerizedCDR.Cell_ID.Substring(4).Reverse().ToArray());
+
 
                         /* Converting cellId from hex to decimal*/
                         standerizedCDR.Cell_ID = Convert.ToInt32(revCellID.ToString(), 16).ToString();
 
                         //Getting location
-                        standerizedCDR.Loc = row[Common.jazzCDR1[8]].ToString();
+                        standerizedCDR.Loc = string.IsNullOrWhiteSpace(row[Common.jazzCDR1[8]].ToString()) ? "Nil" : row[Common.jazzCDR1[8]].ToString();
+
 
                         /*first getting string after first '|' then splitting that string on the basis of '|' 
                         to get latitude and longitude in string array*/
                         var matches = ExtractCoordinates(standerizedCDR.Loc);
                         //string[] latlng = standerizedCDR.Loc.Substring(standerizedCDR.Loc.IndexOf('|') + 1).Split('|');
 
-                        if (matches.Count >= 2)
-                        {
-                            standerizedCDR.Lat = matches[0]; // Latitude
-                            standerizedCDR.Lng = matches[1]; // Longitude
-                        }
+                        standerizedCDR.Lat = matches.Count >= 2 ? matches[0] : "0";
+                        standerizedCDR.Lng = matches.Count >= 2 ? matches[1] : "0";
+
                         //getting first element of latlng string array
                         //standerizedCDR.Lat = latlng.First();
 
@@ -378,14 +379,8 @@ namespace ReadExcelApp
 
 
                         // if column call direction cell contains sms then call type is sms else Voice
-                        if (row[Common.jazzCDR1[0]].ToString().ToLower().Contains(Common.sms))
-                        {
-                            standerizedCDR.Call_Type = Common.sms;
-                        }
-                        else
-                        {
-                            standerizedCDR.Call_Type = Common.voice;
-                        }
+                        standerizedCDR.Call_Type = row[Common.jazzCDR1[0]].ToString().ToLower().Contains(Common.sms) ? Common.sms : Common.voice;
+
 
                         //Console.WriteLine(A_Num + " " + standerizedCDR.B_Num + " " + standerizedCDR.Date + " " + standerizedCDR.Call_Dur);
                         //bftbErrorHandling.Text = A_Num + " " + standerizedCDR.B_Num + " " + standerizedCDR.Date + " " + standerizedCDR.Call_Dur;
@@ -409,7 +404,7 @@ namespace ReadExcelApp
 
                     //UniqID();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     CommonMethods.messageDialog(ex.Message);
 
@@ -471,6 +466,7 @@ namespace ReadExcelApp
         private void standTelenorCDR()
         {
             var regexItem = new Regex("[a-zA-Z ]*$");
+            //string dateFormat = "dd-MM-yyyy H:mm"; // Updated date format to match "22-11-2023 23:57"
             try
             {
                 if (dt != null)
@@ -493,14 +489,9 @@ namespace ReadExcelApp
                         var CALL_ORIG_NUM = dt.Rows[i][1].ToString();
                         var CALL_DIALED_NUM = dt.Rows[i][2].ToString();
                         string tempB_Num = "";
-                        if (standerizedCDR.A_Num.Equals(CALL_ORIG_NUM))
-                        {
-                            tempB_Num = CALL_DIALED_NUM;
-                        }
-                        else
-                        {
-                            tempB_Num = CALL_ORIG_NUM;
-                        }
+
+                        tempB_Num = standerizedCDR.A_Num.Equals(CALL_ORIG_NUM) ? CALL_DIALED_NUM : CALL_ORIG_NUM;
+
 
 
                         //Get last 10 digits of B-Party
@@ -519,13 +510,14 @@ namespace ReadExcelApp
                         string tempIMEI = dt.Rows[i][Common.imei].ToString();
 
                         // if null
-                        standerizedCDR.IMEI = "";
+                        standerizedCDR.IMEI = "0";
                         // if not null
                         standerizedCDR.IMEI = !string.IsNullOrWhiteSpace(tempIMEI) && tempIMEI.Length > 14
                             ? tempIMEI.Substring(0, 14)
                             : tempIMEI;
 
-                        DateTime dtValue = Convert.ToDateTime(dt.Rows[i][Common.telenor_date_time].ToString());
+                        DateTime dtValue = !string.IsNullOrWhiteSpace(dt.Rows[i][Common.telenor_date_time]?.ToString()) ? Convert.ToDateTime(dt.Rows[i][Common.telenor_date_time].ToString()) : DateTime.MinValue;
+                        //DateTime dtValue = DateTime.ParseExact(TryParseDateTime(dt.Rows[i][Common.telenor_date_time]?.ToString()), dateFormat, CultureInfo.InvariantCulture);
                         datetime.Add(dtValue);
 
                         /*Separating date from dtValue and adding it to Date*/
@@ -544,35 +536,32 @@ namespace ReadExcelApp
 
 
                         // to get cell id
-                        standerizedCDR.Cell_ID = dt.Rows[i][10].ToString();
+                        standerizedCDR.Cell_ID = string.IsNullOrWhiteSpace(dt.Rows[i][10]?.ToString()) ? "0" : dt.Rows[i][10].ToString();
+
 
 
                         // to get lac id
-                        standerizedCDR.Lac_No = dt.Rows[i][9].ToString();
+                        standerizedCDR.Lac_No = string.IsNullOrWhiteSpace(dt.Rows[i][9]?.ToString()) ? "0" : dt.Rows[i][9].ToString();
+
 
                         //Getting location
-                        standerizedCDR.Loc = dt.Rows[i][Common.loc].ToString();
+                        standerizedCDR.Loc = string.IsNullOrWhiteSpace(dt.Rows[i][Common.loc]?.ToString()) ? "Nil" : dt.Rows[i][Common.loc].ToString();
+
 
                         //getting latitude
                         string tempLat = dt.Rows[i][Common.telenor_Lat].ToString().Trim();
 
-                        standerizedCDR.Lat = !string.IsNullOrWhiteSpace(tempLat) ? tempLat : "";
+                        standerizedCDR.Lat = !string.IsNullOrWhiteSpace(tempLat) ? tempLat : "0";
 
                         //getting longitude
                         string tempLng = dt.Rows[i][Common.telenor_Lng].ToString();
 
-                        standerizedCDR.Lng = !string.IsNullOrWhiteSpace(tempLng) ? tempLng : "";
+                        standerizedCDR.Lng = !string.IsNullOrWhiteSpace(tempLng) ? tempLng : "0";
 
                         standerizedCDR.Network = Common.telenor_Network;
 
-                        if (dt.Rows[i][Common.call_Type].ToString().Equals(Common.telenor_Gsm))
-                        {
-                            standerizedCDR.Call_Type = Common.voice;
-                        }
-                        else
-                        {
-                            standerizedCDR.Call_Type = Common.sms;
-                        }
+                        standerizedCDR.Call_Type = Common.callTypes.Contains(dt.Rows[i][Common.call_Type].ToString().ToUpper()) ? Common.voice : Common.sms;
+
 
 
                         standCDR.Add(standerizedCDR);
@@ -611,16 +600,18 @@ namespace ReadExcelApp
                 {
                     standCDR = new List<StanderizedCDR>();
                     datetime = new List<DateTime>();
+                    //string dateFormat = "dd-MM-yyyy H:mm"; // Updated date format to match "22-11-2023 23:57"
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         StanderizedCDR standerizedCDR = new StanderizedCDR();
-                        standerizedCDR.A_Num = dt.Rows[i][Common.ufone_A_Num].ToString();
+                        standerizedCDR.A_Num = string.IsNullOrWhiteSpace(dt.Rows[i][Common.ufone_A_Num]?.ToString()) ? "0" : dt.Rows[i][Common.ufone_A_Num].ToString();
 
                         /*getting a-party in string A_Num for later use*/
                         A_Num = standerizedCDR.A_Num;
 
                         /*Removing 0 from all contacts in B-Party*/
-                        standerizedCDR.B_Num = dt.Rows[i][Common.ufone_B_Num].ToString().Trim();
+                        standerizedCDR.B_Num = string.IsNullOrWhiteSpace(dt.Rows[i][Common.ufone_B_Num]?.ToString()) ? "0" : dt.Rows[i][Common.ufone_B_Num].ToString().Trim();
+
 
                         /*Adding 92 to contact number whose length is 10*/
                         if (standerizedCDR.B_Num.Length >= 10 && standerizedCDR.B_Num.Length <= 12)
@@ -630,13 +621,22 @@ namespace ReadExcelApp
                             standerizedCDR.B_Num = $"92{standerizedCDR.B_Num}";
                         }
 
-                        if (dt.Rows[i][Common.imei].ToString().Length > 14)
-                            standerizedCDR.IMEI = dt.Rows[i][Common.imei].ToString().Substring(0, 14);
-                        else
-                            standerizedCDR.IMEI = dt.Rows[i][Common.imei].ToString();
+                        string tempIMEI = dt.Rows[i][Common.imei].ToString();
+
+                        // if null
+                        standerizedCDR.IMEI = "0";
+                        // if not null
+                        standerizedCDR.IMEI = !string.IsNullOrWhiteSpace(tempIMEI) && tempIMEI.Length > 14
+                            ? tempIMEI.Substring(0, 14)
+                            : tempIMEI;
+
+                        //standerizedCDR.IMEI = dt.Rows[i][Common.imei].ToString().Length > 14 ? dt.Rows[i][Common.imei].ToString().Substring(0, 14) : dt.Rows[i][Common.imei].ToString();
 
 
-                        DateTime dtValue = Convert.ToDateTime(dt.Rows[i][Common.ufone_Start_Time].ToString());
+
+                        DateTime dtValue = string.IsNullOrWhiteSpace(dt.Rows[i][Common.ufone_Start_Time]?.ToString()) ? DateTime.MinValue : Convert.ToDateTime(dt.Rows[i][Common.ufone_Start_Time].ToString());
+                        //DateTime dtValue = DateTime.ParseExact(TryParseDateTime(dt.Rows[i][Common.ufone_Start_Time]?.ToString()), dateFormat, CultureInfo.InvariantCulture);
+
                         datetime.Add(dtValue);
 
                         /*Separating date from dtValue and adding it to Date*/
@@ -648,28 +648,34 @@ namespace ReadExcelApp
                         /*Separating time from dtValue and adding it to Time*/
                         standerizedCDR.Time = dtValue.ToString(Common.timef);
 
-                        standerizedCDR.Call_Dur = dt.Rows[i][Common.duration].ToString();
+                        standerizedCDR.Call_Dur = string.IsNullOrWhiteSpace(dt.Rows[i][Common.duration]?.ToString()) ? "0" : dt.Rows[i][Common.duration].ToString();
+
 
                         standerizedCDR.Call_Dir = dt.Rows[i][Common.ufone_Call_Dir].ToString().ToLower();
 
                         /*Getting first 5 digits from cdr for LacID*/
-                        standerizedCDR.Lac_No = dt.Rows[i][Common.ufone_Cell_ID].ToString().Substring(0, 5);
+                        // Check if the cellid is null, empty, or consists solely of white-space characters
+                        standerizedCDR.Lac_No = string.IsNullOrWhiteSpace(dt.Rows[i][Common.ufone_Cell_ID].ToString()) ? "0" : dt.Rows[i][Common.ufone_Cell_ID].ToString().Substring(0, 5);
 
-                        /*Getting last 5 digits from cdr for LocID*/
-                        standerizedCDR.Cell_ID = dt.Rows[i][Common.ufone_Cell_ID].ToString().Substring(5);
 
-                        //Getting location
-                        standerizedCDR.Loc = dt.Rows[i][Common.loc].ToString();
+                        standerizedCDR.Cell_ID = string.IsNullOrWhiteSpace(dt.Rows[i][Common.ufone_Cell_ID].ToString()) ? "0" : dt.Rows[i][Common.ufone_Cell_ID].ToString().Substring(5);
 
-                        //getting latitude
-                        standerizedCDR.Lat = dt.Rows[i][Common.ufone_Lat].ToString();
 
-                        //getting longitude
-                        standerizedCDR.Lng = dt.Rows[i][Common.ufone_Lng].ToString();
+                        // Check if the loc is null, empty, or consists solely of white-space characters
+                        standerizedCDR.Loc = string.IsNullOrWhiteSpace(dt.Rows[i][Common.loc].ToString()) ? "Nil" : dt.Rows[i][Common.loc].ToString();
+
+
+                        // Check if the latitude is null, empty, or consists solely of white-space characters
+                        standerizedCDR.Lat = string.IsNullOrWhiteSpace(dt.Rows[i][Common.ufone_Lat].ToString()) ? "0" : dt.Rows[i][Common.ufone_Lat].ToString();
+
+
+                        // Check if the longitude is null, empty, or consists solely of white-space characters
+                        standerizedCDR.Lng = string.IsNullOrWhiteSpace(dt.Rows[i][Common.ufone_Lng].ToString()) ? "0" : dt.Rows[i][Common.ufone_Lng].ToString();
+
 
                         standerizedCDR.Network = Common.ufone_Network;
 
-                        standerizedCDR.Call_Type = dt.Rows[i][Common.ufone_Call_Type].ToString().ToLower();
+                        standerizedCDR.Call_Type = Common.callTypes.Contains(dt.Rows[i][Common.ufone_Call_Type].ToString().ToUpper()) ? Common.voice : Common.sms;
 
                         standCDR.Add(standerizedCDR);
                     }
@@ -699,9 +705,35 @@ namespace ReadExcelApp
                 if (dt != null)
                 {
                     // Removing first 4 rows in Zong CDR
-                    for (int i = 0; i < 4; i++)
+                    /*for (int i = 0; i < 5; i++)
                     {
                         dt.Rows[i].Delete();
+                    }
+                    dt.AcceptChanges();*/
+
+                    
+                    //string[] columnsToInclude = { "CALL_TYPE", "MSISDN_ID", "STRT_TM", "BNUMBER", "MINS", "SECS", "LAC_ID", "CELL_ID", "IMEI", "SITE_ADDRESS", "LNG", "LAT" };
+
+
+                    // Find the index of the header row containing the specified columns
+                    int headerRowIndex = -1;
+                    
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        DataRow row = dt.Rows[i];
+                        if (row[0].Equals(Common.call_Type))
+                        {
+                            headerRowIndex = i;
+                            break;
+                        }
+                        
+                    }
+
+
+                    // Removing first rows in Zong CDR
+                    for (int j = 0; j < headerRowIndex+1; j++)
+                    {
+                        dt.Rows[j].Delete();
                     }
                     dt.AcceptChanges();
 
@@ -725,13 +757,15 @@ namespace ReadExcelApp
                     {
                         StanderizedCDR standerizedCDR = new StanderizedCDR();
 
-                        standerizedCDR.A_Num = dt.Rows[i][Common.zong_A_Num].ToString();
+                        standerizedCDR.A_Num = string.IsNullOrWhiteSpace(dt.Rows[i][Common.zong_A_Num]?.ToString()) ? "0" : dt.Rows[i][Common.zong_A_Num].ToString();
+
 
                         /*getting a-party in string A_Num for later use*/
                         A_Num = standerizedCDR.A_Num;
 
                         /*Getting B - Party*/
-                        standerizedCDR.B_Num = dt.Rows[i][Common.zong_B_Num].ToString().Trim();
+                        standerizedCDR.B_Num = string.IsNullOrWhiteSpace(dt.Rows[i][Common.zong_B_Num]?.ToString()) ? "0" : dt.Rows[i][Common.zong_B_Num].ToString().Trim();
+
 
                         /*Adding 92 to contact number whose length is 10*/
                         if (standerizedCDR.B_Num.Length >= 10 && standerizedCDR.B_Num.Length <= 12)
@@ -741,12 +775,19 @@ namespace ReadExcelApp
                             standerizedCDR.B_Num = $"92{standerizedCDR.B_Num}";
                         }
 
-                        if (dt.Rows[i][Common.imei].ToString().Length > 14)
-                            standerizedCDR.IMEI = dt.Rows[i][Common.imei].ToString().Substring(0, 14);
-                        else
-                            standerizedCDR.IMEI = dt.Rows[i][Common.imei].ToString();
+                        string tempIMEI = dt.Rows[i][Common.imei].ToString();
 
-                        DateTime dtValue = Convert.ToDateTime(dt.Rows[i][Common.zong_date_time].ToString());
+                        // if null
+                        standerizedCDR.IMEI = "0";
+                        // if not null
+                        standerizedCDR.IMEI = !string.IsNullOrWhiteSpace(tempIMEI) && tempIMEI.Length > 14
+                            ? tempIMEI.Substring(0, 14)
+                            : tempIMEI;
+                        //standerizedCDR.IMEI = dt.Rows[i][Common.imei].ToString().Length > 14 ? dt.Rows[i][Common.imei].ToString().Substring(0, 14) : dt.Rows[i][Common.imei].ToString();
+
+
+                        DateTime dtValue = string.IsNullOrWhiteSpace(dt.Rows[i][Common.zong_date_time]?.ToString()) ? DateTime.MinValue : Convert.ToDateTime(dt.Rows[i][Common.zong_date_time].ToString());
+
                         datetime.Add(dtValue);
 
                         /*Separating date from dtValue and adding it to Date*/
@@ -763,37 +804,36 @@ namespace ReadExcelApp
 
                         standerizedCDR.Call_Dur = callDur.ToString();
 
-                        standerizedCDR.Call_Dir = dt.Rows[i][Common.call_Type].ToString().ToLower().Substring(7);
+                        standerizedCDR.Call_Dir = dt.Rows[i][Common.call_Type].ToString().Split('-').Last().ToLower().Trim();
 
                         /*Getting LacID*/
-                        standerizedCDR.Lac_No = dt.Rows[i][Common.zong_lac_no].ToString();
+                        standerizedCDR.Lac_No = string.IsNullOrWhiteSpace(dt.Rows[i][Common.zong_lac_no]?.ToString()) ? "0" : dt.Rows[i][Common.zong_lac_no].ToString();
+
 
                         /*Getting CellID*/
-                        standerizedCDR.Cell_ID = dt.Rows[i][Common.zong_cell_id].ToString();
+                        standerizedCDR.Cell_ID = string.IsNullOrWhiteSpace(dt.Rows[i][Common.zong_cell_id]?.ToString()) ? "0" : dt.Rows[i][Common.zong_cell_id].ToString();
+
 
                         //Getting location
-                        standerizedCDR.Loc = dt.Rows[i][Common.zong_loc].ToString();
+                        standerizedCDR.Loc = string.IsNullOrWhiteSpace(dt.Rows[i][Common.zong_loc]?.ToString()) ? "Nil" : dt.Rows[i][Common.zong_loc].ToString();
+
 
                         //Getting latitude
-                        standerizedCDR.Lat = dt.Rows[i][Common.zong_lat].ToString();
+                        standerizedCDR.Lat = string.IsNullOrWhiteSpace(dt.Rows[i][Common.zong_lat]?.ToString()) ? "0" : dt.Rows[i][Common.zong_lat].ToString();
+
 
                         //Getting longitude
-                        standerizedCDR.Lng = dt.Rows[i][Common.zong_lng].ToString();
+                        standerizedCDR.Lng = string.IsNullOrWhiteSpace(dt.Rows[i][Common.zong_lng]?.ToString()) ? "0" : dt.Rows[i][Common.zong_lng].ToString();
+
 
                         standerizedCDR.Network = Common.zong_network;
 
                         /*Splitting call type and getting first part of Call_Type like SMS or Call*/
-                        string Call_Type = dt.Rows[i][Common.call_Type].ToString().Split('-').First().ToLower();
+                        string Call_Type = dt.Rows[i][Common.call_Type].ToString().Split('-').First().ToUpper().Trim();
 
                         // if column call direction cell contains call then call type is voice else sms
-                        if (Call_Type.Contains(Common.call))
-                        {
-                            standerizedCDR.Call_Type = Common.voice;
-                        }
-                        else
-                        {
-                            standerizedCDR.Call_Type = Common.sms;
-                        }
+                        standerizedCDR.Call_Type = Common.callTypes.Contains(Call_Type) ? Common.voice : Common.sms;
+
 
                         standCDR.Add(standerizedCDR);
                     }
@@ -822,9 +862,147 @@ namespace ReadExcelApp
             }
         }
 
+        private void standWaridCDR()
+        {
+            try
+            {
+                if (dt != null)
+                {
+
+                    standCDR = new List<StanderizedCDR>();
+                    datetime = new List<DateTime>();
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+
+                        StanderizedCDR standerizedCDR = new StanderizedCDR();
+
+
+                        standerizedCDR.A_Num = string.IsNullOrWhiteSpace(dt.Rows[i][Common.jazz_A_Num]?.ToString()) ? "0" : dt.Rows[i][Common.jazz_A_Num].ToString();
+
+
+                        /*getting a-party in string A_Num for later use*/
+                        A_Num = standerizedCDR.A_Num;
+
+                        /*Removing 0 from all contacts in B-Party*/
+                        //standerizedCDR.B_Num = dt.Rows[i][Common.jazz_B_Num].ToString().TrimStart(new Char[] { '0' });
+
+                        string value = string.IsNullOrWhiteSpace(dt.Rows[i][Common.jazz_B_Num]?.ToString()) ? "0" : dt.Rows[i][Common.jazz_B_Num].ToString().Trim();
+
+
+                        standerizedCDR.B_Num = standerize_B_Party(value);
+                        /*Adding 92 to contact number whose length is 10*/
+                        /*if (standerizedCDR.B_Num.Length >= 10 && standerizedCDR.B_Num.Length <= 12)
+                        {
+                            standerizedCDR.B_Num = standerizedCDR.B_Num
+                                .Substring(standerizedCDR.B_Num.Length - 10);
+                            Common.b_num.Add(standerizedCDR.B_Num);
+                            standerizedCDR.B_Num = $"92{standerizedCDR.B_Num}";
+                        }*/
+
+                        //if (dt.Rows[i][Common.imei].ToString().Length > 14)
+                        //  standerizedCDR.IMEI = dt.Rows[i][Common.imei].ToString().Substring(0, 14);
+                        //else
+                        string tempIMEI = dt.Rows[i][Common.imei].ToString();
+
+                        standerizedCDR.IMEI = "0";
+                        standerizedCDR.IMEI = !String.IsNullOrWhiteSpace(tempIMEI) && tempIMEI.Length >= 14
+                            ? tempIMEI.Substring(0, 14)
+                            : tempIMEI;
+
+                        string dtime = dt.Rows[i][Common.datetime].ToString();
+
+
+
+                        DateTime dtValue = string.IsNullOrWhiteSpace(dt.Rows[i][Common.datetime]?.ToString()) ? DateTime.MinValue : DateTime.Parse(dt.Rows[i][Common.datetime].ToString());
+                        datetime.Add(dtValue);
+
+
+                        /*Separating date from dtValue and adding it to Date*/
+                        standerizedCDR.Date = dtValue.ToString(Common.datef);
+
+                        /*Converting Date into Weekdays like sunday, monday etc*/
+                        standerizedCDR.Weekday = Convert.ToDateTime(standerizedCDR.Date).DayOfWeek.ToString();
+
+                        /*Separating time from dtValue and adding it to Time*/
+                        standerizedCDR.Time = dtValue.ToString(Common.timef);
+
+                        standerizedCDR.Call_Dur = string.IsNullOrWhiteSpace(dt.Rows[i][Common.duration]?.ToString()) ? "0" : dt.Rows[i][Common.duration].ToString();
+
+
+                        standerizedCDR.Call_Dir = dt.Rows[i][Common.jazz_Call_Type].ToString().Substring(0, 8).ToLower();
+
+
+                        standerizedCDR.Cell_ID = dt.Rows[i][Common.jazz_Cell_ID].ToString();
+
+                        // Get first 4 characters substring from a string
+                        var revLacID = string.IsNullOrWhiteSpace(standerizedCDR.Cell_ID) ? "0" : string.Join("", standerizedCDR.Cell_ID.Substring(0, 4).Reverse().ToArray());
+
+
+                        /* Converting lacId from hex to decimal*/
+                        standerizedCDR.Lac_No = Convert.ToInt32(revLacID.ToString(), 16).ToString();
+                        // Get everything else after 4th position
+                        var revCellID = string.IsNullOrWhiteSpace(standerizedCDR.Cell_ID) ? "0" : string.Join("", standerizedCDR.Cell_ID.Substring(4).Reverse().ToArray());
+
+                        /* Converting cellId from hex to decimal*/
+                        standerizedCDR.Cell_ID = Convert.ToInt32(revCellID.ToString(), 16).ToString();
+
+                        //Getting location
+                        standerizedCDR.Loc = string.IsNullOrWhiteSpace(dt.Rows[i][Common.jazz_Location]?.ToString()) ? "Nil" : dt.Rows[i][Common.jazz_Location].ToString();
+
+
+                        /*first getting string after first '|' then splitting that string on the basis of '|' 
+                        to get latitude and longitude in string array*/
+                        var matches = ExtractCoordinates(standerizedCDR.Loc);
+                        //string[] latlng = standerizedCDR.Loc.Substring(standerizedCDR.Loc.IndexOf('|') + 1).Split('|');
+
+                        standerizedCDR.Lat = matches.Count >= 2 ? matches[0] : "0";
+                        standerizedCDR.Lng = matches.Count >= 2 ? matches[1] : "0";
+                        //getting first element of latlng string array
+                        //standerizedCDR.Lat = latlng.First();
+
+                        //getting last element of latlng string array and removing
+                        //last double quotes from it
+                        //standerizedCDR.Lng = latlng.Last().Remove(latlng.Last().Length - 1, 1);
+
+                        standerizedCDR.Network = Common.jazz_Network;
+
+
+                        // if column call direction cell contains sms then call type is sms else Voice
+                        standerizedCDR.Call_Type = dt.Rows[i][Common.jazz_Call_Type].ToString().ToLower().Contains(Common.sms) ? Common.sms : Common.voice;
+
+
+
+                        standCDR.Add(standerizedCDR);
+                    }
+
+                    // order cdr in ascending order on the basis of date
+                    //standCDR = standCDR.OrderBy(d => d.Date).ToList();
+
+                    // Call the method to sort the list by the Date property
+                    SortCDRListByDate(standCDR);
+
+                    // Display the sorted list
+                    /*foreach (var cdr in standCDR)
+                    {
+                        Console.WriteLine(cdr.Date);
+                    }*/
+
+                    cDRDBTblBindingSource.DataSource = standCDR;
+
+                    //UniqID();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                CommonMethods.messageDialog(ex.Message);
+                UpdateErrorHandlingText(standCDR);
+            }
+        }
+
 
         // function to standarized Warid CDR
-        private void standWaridCDR()
+        /*private void standWaridCDR()
         {
             try
             {
@@ -840,13 +1018,13 @@ namespace ReadExcelApp
 
                         standerizedCDR.A_Num = dt.Rows[i][Common.jazz_A_Num].ToString();
 
-                        /*getting a-party in string A_Num for later use*/
+                        *//*getting a-party in string A_Num for later use*//*
                         A_Num = standerizedCDR.A_Num;
 
-                        /*Removing 0 from all contacts in B-Party*/
+                        *//*Removing 0 from all contacts in B-Party*//*
                         standerizedCDR.B_Num = dt.Rows[i][Common.jazz_B_Num].ToString().Trim();
 
-                        /*Adding 92 to contact number whose length is 10*/
+                        *//*Adding 92 to contact number whose length is 10*//*
                         if (standerizedCDR.B_Num.Length >= 10 && standerizedCDR.B_Num.Length <= 12)
                         {
                             standerizedCDR.B_Num = standerizedCDR.B_Num
@@ -862,13 +1040,13 @@ namespace ReadExcelApp
                         DateTime dtValue = (DateTime)dt.Rows[i][Common.datetime];
                         datetime.Add(dtValue);
 
-                        /*Separating date from dtValue and adding it to Date*/
+                        *//*Separating date from dtValue and adding it to Date*//*
                         standerizedCDR.Date = dtValue.ToString(Common.datef);
 
-                        /*Converting Date into Weekdays like sunday, monday etc*/
+                        *//*Converting Date into Weekdays like sunday, monday etc*//*
                         standerizedCDR.Weekday = Convert.ToDateTime(standerizedCDR.Date).DayOfWeek.ToString();
 
-                        /*Separating time from dtValue and adding it to Time*/
+                        *//*Separating time from dtValue and adding it to Time*//*
                         standerizedCDR.Time = dtValue.ToString(Common.timef);
 
                         standerizedCDR.Call_Dur = dt.Rows[i][Common.duration].ToString();
@@ -881,19 +1059,19 @@ namespace ReadExcelApp
                         // Get first 4 characters substring from a string
                         var revLacID = string.Join("", standerizedCDR.Cell_ID.Substring(0, 4).Reverse().ToArray());
 
-                        /* Converting lacId from hex to decimal*/
+                        *//* Converting lacId from hex to decimal*//*
                         standerizedCDR.Lac_No = Convert.ToInt32(revLacID.ToString(), 16).ToString();
                         // Get everything else after 4th position
                         var revCellID = string.Join("", standerizedCDR.Cell_ID.Substring(4).Reverse().ToArray());
 
-                        /* Converting cellId from hex to decimal*/
+                        *//* Converting cellId from hex to decimal*//*
                         standerizedCDR.Cell_ID = Convert.ToInt32(revCellID.ToString(), 16).ToString();
 
                         //Getting location
                         standerizedCDR.Loc = dt.Rows[i][Common.jazz_Location].ToString();
 
-                        /*first getting string after first '|' then splitting that string on the basis of '|' 
-                        to get latitude and longitude in string array*/
+                        *//*first getting string after first '|' then splitting that string on the basis of '|' 
+                        to get latitude and longitude in string array*//*
                         //string[] latlng = standerizedCDR.Loc.Substring(standerizedCDR.Loc.IndexOf("|") + 1).Split('|');
 
                         //getting first element of latlng string array
@@ -941,7 +1119,7 @@ namespace ReadExcelApp
                 CommonMethods.messageDialog(ex.Message);
                 UpdateErrorHandlingText(standCDR);
             }
-        }
+        }*/
 
 
         private void standCustomCDR()
@@ -959,26 +1137,30 @@ namespace ReadExcelApp
                         StanderizedCDR standerizedCDR = new StanderizedCDR();
 
 
-                        standerizedCDR.A_Num = dt.Rows[i]["A_Num"].ToString();
+                        standerizedCDR.A_Num = string.IsNullOrWhiteSpace(dt.Rows[i]["A_Num"]?.ToString()) ? "0" : dt.Rows[i]["A_Num"].ToString();
+
 
                         /*getting a-party in string A_Num for later use*/
                         A_Num = standerizedCDR.A_Num;
 
-                        standerizedCDR.B_Num = dt.Rows[i]["B_Num"].ToString().Trim();
+                        standerizedCDR.B_Num = string.IsNullOrWhiteSpace(dt.Rows[i]["B_Num"]?.ToString()) ? "0" : dt.Rows[i]["B_Num"].ToString().Trim();
+
 
                         standerizedCDR.B_Num = standerize_B_Party(standerizedCDR.B_Num);
 
                         string tempIMEI = dt.Rows[i]["IMEI"].ToString();
 
-                        standerizedCDR.IMEI = "";
+                        standerizedCDR.IMEI = "0";
                         standerizedCDR.IMEI = !String.IsNullOrWhiteSpace(tempIMEI) && tempIMEI.Length >= 14
                             ? tempIMEI.Substring(0, 14)
                             : tempIMEI;
 
-                        string dtime = dt.Rows[i][Common.datetime].ToString();
+                        string dtime = string.IsNullOrWhiteSpace(dt.Rows[i][Common.datetime]?.ToString()) ? DateTime.MinValue.ToString() : dt.Rows[i][Common.datetime].ToString();
 
 
-                        DateTime dtValue = Convert.ToDateTime(dt.Rows[i]["Date & Time"]);
+
+                        DateTime dtValue = string.IsNullOrWhiteSpace(dt.Rows[i]["Date & Time"]?.ToString()) ? DateTime.MinValue : Convert.ToDateTime(dt.Rows[i]["Date & Time"]);
+
                         datetime.Add(dtValue);
 
 
@@ -991,27 +1173,34 @@ namespace ReadExcelApp
                         /*Separating time from dtValue and adding it to Time*/
                         standerizedCDR.Time = dtValue.ToString(Common.timef);
 
-                        standerizedCDR.Call_Dur = dt.Rows[i]["Call_Dur"].ToString();
+                        standerizedCDR.Call_Dur = string.IsNullOrWhiteSpace(dt.Rows[i]["Call_Dur"]?.ToString()) ? "0" : dt.Rows[i]["Call_Dur"].ToString();
 
-                        standerizedCDR.Call_Dir = dt.Rows[i]["Call_Dir"].ToString();
 
-                        standerizedCDR.Call_Type = dt.Rows[i]["Call_Type"].ToString();
+                        standerizedCDR.Call_Dir = string.IsNullOrWhiteSpace(dt.Rows[i]["Call_Dir"]?.ToString()) ? "Nil" : dt.Rows[i]["Call_Dir"].ToString();
+
+                        standerizedCDR.Call_Type = string.IsNullOrWhiteSpace(dt.Rows[i]["Call_Type"]?.ToString()) ? "Nil" : dt.Rows[i]["Call_Type"].ToString();
+
 
                         /* Converting lacId from hex to decimal*/
-                        standerizedCDR.Lac_No = dt.Rows[i]["Lac_No"].ToString();
+                        standerizedCDR.Lac_No = string.IsNullOrWhiteSpace(dt.Rows[i]["Lac_No"]?.ToString()) ? "0" : dt.Rows[i]["Lac_No"].ToString();
+
 
                         /* Converting cellId from hex to decimal*/
-                        standerizedCDR.Cell_ID = dt.Rows[i]["Cell_ID"].ToString();
+                        standerizedCDR.Cell_ID = string.IsNullOrWhiteSpace(dt.Rows[i]["Cell_ID"]?.ToString()) ? "0" : dt.Rows[i]["Cell_ID"].ToString();
+
 
                         //Getting location
-                        standerizedCDR.Loc = dt.Rows[i]["Loc"].ToString();
+                        standerizedCDR.Loc = string.IsNullOrWhiteSpace(dt.Rows[i]["Loc"]?.ToString()) ? "Nil" : dt.Rows[i]["Loc"].ToString();
+
 
 
                         //getting first element of latlng string array
-                        standerizedCDR.Lat = dt.Rows[i]["Lat"].ToString();
+                        standerizedCDR.Lat = string.IsNullOrWhiteSpace(dt.Rows[i]["Lat"]?.ToString()) ? "0" : dt.Rows[i]["Lat"].ToString();
+
 
                         //getting last element of latlng string array
-                        standerizedCDR.Lng = dt.Rows[i]["Lng"].ToString();
+                        standerizedCDR.Lng = string.IsNullOrWhiteSpace(dt.Rows[i]["Lng"]?.ToString()) ? "0" : dt.Rows[i]["Lng"].ToString();
+
 
                         standerizedCDR.Network = dt.Rows[i]["Network"].ToString(); ;
 
@@ -1062,10 +1251,12 @@ namespace ReadExcelApp
                     if (!dataColumn.ColumnName.ToLower().Contains("column"))
                     {
                         cdrCol.Add(dataColumn.ColumnName.Trim());
+                        
                     }
+
                 }
 
-                if (Common.jazzCDR.SequenceEqual(cdrCol))
+                if (Common.jazzCDR.SequenceEqual(cdrCol) || Common.jazzCDR2.SequenceEqual(cdrCol))
                 {
                     DataRow row = dt.Rows[0];
                     string r = row["A-Party"].ToString();
@@ -1537,12 +1728,12 @@ namespace ReadExcelApp
             bunifuElipse.ApplyElipse(btnBrowse, 25);
         }
 
-        
+
 
         private async void rbProject_Click(object sender, EventArgs e)
         {
 
-            string proc = "exec dbo.Projects_View_Filter_UserName '"+Common.userName+"'";
+            string proc = "exec dbo.Projects_View_Filter_UserName '" + Common.userName + "'";
             dataTable = await CommonMethods.getRecords(proc);
 
             if (dataTable.Rows.Count > 0)
@@ -1563,7 +1754,7 @@ namespace ReadExcelApp
         private async void rbGeneralPolice_Click(object sender, EventArgs e)
         {
 
-            string proc = "exec dbo.GeneralPoliceTable_View '"+Common.userName+"'";
+            string proc = "exec dbo.GeneralPoliceTable_View '" + Common.userName + "'";
             dataTable = await CommonMethods.getRecords(proc);
 
             if (dataTable.Rows.Count > 0)
@@ -1661,6 +1852,50 @@ namespace ReadExcelApp
             CommonMethods.exportExcel(gvStandCDR);
         }
 
+        private string TryParseDateTime(string dateTimeStr)
+        {
+            var formats = new string[] {
+        // 24-hour formats
+        "dd-MM-yyyy HH:mm:ss", "MM-dd-yyyy HH:mm:ss", "yyyy-MM-dd HH:mm:ss",
+        "dd/MM/yyyy HH:mm:ss", "MM/dd/yyyy HH:mm:ss", "yyyy/MM/dd HH:mm:ss",
+        "dd.MM.yyyy HH:mm:ss", "MM.dd.yyyy HH:mm:ss", "yyyy.MM.dd HH:mm:ss",
+        // 12-hour formats with AM/PM
+        "dd-MM-yyyy hh:mm:ss tt", "MM-dd-yyyy hh:mm:ss tt", "yyyy-MM-dd hh:mm:ss tt",
+        "dd/MM/yyyy hh:mm:ss tt", "MM/dd/yyyy hh:mm:ss tt", "yyyy/MM/dd hh:mm:ss tt",
+        "dd.MM.yyyy hh:mm:ss tt", "MM.dd.yyyy hh:mm:ss tt", "yyyy.MM.dd hh:mm:ss tt",
+        "MM/dd/yyyy H:mm", "dd-MM-yyyy H:mm","MM/dd/yyyy HH:mm",
+        // Variations with different separators
+        "MM-dd-yyyy H:mm",
+        "MM-dd-yyyy HH:mm",
+        "MM.dd.yyyy H:mm",
+        "MM.dd.yyyy HH:mm",
+        "MM/dd/yyyy H:mm:ss",
+        "MM/dd/yyyy HH:mm:ss",
+        "MM-dd-yyyy H:mm:ss",
+        "MM-dd-yyyy HH:mm:ss",
+        "MM.dd.yyyy H:mm:ss",
+        "MM.dd.yyyy HH:mm:ss",
         
+        // 12-hour formats with AM/PM
+        "MM/dd/yyyy h:mm tt",
+        "MM/dd/yyyy hh:mm tt",
+        "MM-dd-yyyy h:mm tt",
+        "MM-dd-yyyy hh:mm tt",
+        "MM.dd.yyyy h:mm tt",
+        "MM.dd.yyyy hh:mm tt",
+
+        // Other common formats can be added here
+    };
+
+            if (DateTime.TryParseExact(dateTimeStr, formats, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+            {
+                return parsedDate.ToString("dd-MM-yyyy h:mm", CultureInfo.InvariantCulture);
+            }
+
+            // If parsing fails, return the original string
+            return dateTimeStr;
+        }
+
+
     }
 }

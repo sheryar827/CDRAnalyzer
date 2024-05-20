@@ -58,6 +58,10 @@ namespace ReadExcelApp
         public const string telenor_Network = "telenor";
         public const string call_Type = "CALL_TYPE";
         public const string telenor_Gsm = "GSM";
+        public static List<String> callTypes = new List<String>()
+        {
+            "CALL", "GPRS", "GSM", "VOICE", "DATA"
+        };
 
         public static string serverIP = null;
 
@@ -149,6 +153,22 @@ namespace ReadExcelApp
         public static List<AllRecordA_Num> allRecordA_Nums = null;
 
         public static List<string> jazzCDR = new List<string>(){
+            "Sr #"
+            , "Call Type"
+        ,"A-Party"
+        ,"B-Party"
+        ,"Date & Time"
+        ,"Duration"
+        ,"Cell ID"
+        ,"IMEI"
+        ,"IMSI"
+        ,"Site"
+        ,"Longitude and Latitude"
+        ,"Node ID"
+        ,"IP"
+        ,"Port"};
+
+        public static List<string> jazzCDR2 = new List<string>(){
             "Sr #"
             , "Call Type"
         ,"A-Party"

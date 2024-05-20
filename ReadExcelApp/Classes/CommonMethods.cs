@@ -1150,6 +1150,7 @@ namespace ReadExcelApp
                         //cmd.ExecuteNonQuery();
                         SqlDataReader sdr = cmd.ExecuteReader();
                         allRecordsDt.Load(sdr);
+                        Console.WriteLine(allRecordsDt.Rows.Count);
 
                     }
                 }
@@ -1162,7 +1163,7 @@ namespace ReadExcelApp
                     {
                         bnumList[i].Name = firstDataRow["Name"].ToString();
                         bnumList[i].CNIC = firstDataRow["CNIC"].ToString();
-                        bnumList[i].Address = firstDataRow["ADDRESS"].ToString();
+                        //bnumList[i].Address = firstDataRow["ADDRESS"].ToString();
 
                         //Console.WriteLine(bnumList[i].BParty, bnumList[i].Name);
                     }
